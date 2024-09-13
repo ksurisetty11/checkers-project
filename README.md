@@ -6,7 +6,7 @@ cookie bytes
 
 Meher Oke - meheroke
 
-[Team member 2 name] - [Team member 2 GitHub username]
+Keerthi Surisetty - ksurisetty11
 
 Nadia Alexander - nalexa3
 
