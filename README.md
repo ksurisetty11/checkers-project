@@ -2,9 +2,9 @@
 
 Developers:
 
-[team name goes here]
+cookie bytes
 
-[Team member 1 name] - [Team member 1 GitHub username]
+Meher Oke - meheroke
 
 [Team member 2 name] - [Team member 2 GitHub username]
 
