@@ -10,7 +10,7 @@ Keerthi Surisetty - ksurisetty11
 
 Nadia Alexander - nalexa3
 
-[Team member 4 name] - [Team member 2 GitHub username]
+Laura Castro Rosales - lcastro58
 
 
 This project should be runnable with JDK17 and Junit 4.
