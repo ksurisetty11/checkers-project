@@ -8,7 +8,7 @@ Meher Oke - meheroke
 
 [Team member 2 name] - [Team member 2 GitHub username]
 
-[Team member 3 name] - [Team member 3 GitHub username]
+Nadia Alexander - nalexa3
 
 [Team member 4 name] - [Team member 2 GitHub username]
 
