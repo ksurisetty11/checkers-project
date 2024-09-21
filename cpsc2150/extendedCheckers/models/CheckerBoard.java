@@ -117,6 +117,17 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Determines if a player has won
+     *
+     * @param player Character representing one of the two players
+     * @return boolean
+     *
+     * @pre [player equals 'x' OR 'o']
+     * @post checkPlayerWin = [true IFF all remaining pieces belong to player, false OW]
+     * AND board = #board AND pieceCount = #pieceCount
+     * AND viableDirection = #viableDirection
+     */
     public boolean checkPlayerWin(Character player) {
         /*
         returns true or false if a player, designated by the player parameter, has won the game of checkers. A player
