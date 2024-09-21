@@ -37,6 +37,12 @@ public class CheckerBoard
     public static final int COL_NUM = 8;
     public static final int STARTING_COUNT = 12;
 
+    /**
+     * A constructor for CheckerBoard, initializes the three instance variables
+     * @pre
+     *
+     * @post
+     */
     public CheckerBoard() {
         /*
         Constructor for the CheckerBoard object. The constructor should initialize the three instance variables to
@@ -48,6 +54,13 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Standard getter for viableDirections
+     *
+     * @return viableDirections, HashMap<Character, ArrayList<DirectionEnum>>
+     * @pre none
+     * @post getViableDirections = viableDirections
+     */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
         /*
         Simple accessor for the viableDirections HashMap.
