@@ -44,7 +44,7 @@ public class CheckerBoard
      * @post pieceCount.put('x', 12) AND pieceCount.put('o', 12)
      * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
      * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' ' for open space
-     * 
+     *
      */
     public CheckerBoard() {
         /*
@@ -83,6 +83,16 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Setter for one given index in board 2D array
+     *
+     * @param pos BoardPosition object with int row and int col used as the given index
+     * @param player char to be set for given index
+     *
+     * @pre [pos is valid within board] AND [player = 'x', 'X', 'o', OR 'O']
+     * @post board[pos.getRow()][pos.getCol()] = player AND pieceCount = #pieceCount
+     * AND viableDirection = #viableDirection
+     */
     public void placePiece(BoardPosition pos, char player) {
         /*
         A "mutator" for the board 2D array. This should be used for setting a given 2D index within the board 2D array,
@@ -90,6 +100,16 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Getter for a single index in 2D array board
+     *
+     * @param pos BoardPosition object with int row and int col used as the board index
+     * @return char at pos in board
+     *
+     * @pre [pos is valid within board]
+     * @post whatAtPos = board[pos.getRow()][board[pos.getCol()] AND board = #board AND pieceCount = #pieceCount
+     * AND viableDirections = #viableDirections
+     */
     public char whatsAtPos(BoardPosition pos) {
         /*
         an "accessor" for the board 2D array. Returns what is at the position given by the row and col of the BoardPosition
