@@ -35,7 +35,7 @@ public class BoardPosition
     public boolean equals(Object obj) {
         /*
         returns true if this BoardPosition is equal to the parameter object. Two BoardPositions are equal if their row
-        and column vlaues are the same.
+        and column values are the same.
 
         hint: it is intentional that this accepts a parameter of type Object. There is a way to check if that parameter
         Object just happens to be an instance of a BoardPosition.
