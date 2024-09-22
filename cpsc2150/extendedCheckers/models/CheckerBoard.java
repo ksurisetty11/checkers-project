@@ -135,6 +135,14 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * 
+     * @param posOfPlayer BoardPosition object with int row and int col used as the board index
+     *
+     * @pre [pos has reached the end of the board] AND [posOfPlayer piece is not crowned yet]
+     * @post [posOfPlayer = The uppercase equivalent of the car] AND board = #board AND
+     * pieceCount = #pieceCount AND viableDirection = #viableDirection
+     */
     public void crownPiece(BoardPosition posOfPlayer) {
         /*
         "crowns" a piece by converting the char at the position on the board, given by the posOfPlayer parameter, to an
