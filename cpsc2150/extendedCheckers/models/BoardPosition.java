@@ -1,5 +1,7 @@
 package cpsc2150.extendedCheckers.models;
 
+// test test
+
 public class BoardPosition
 {
     /**
