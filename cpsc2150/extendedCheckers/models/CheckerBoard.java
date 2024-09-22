@@ -165,7 +165,7 @@ public class CheckerBoard
      *
      * @pre [startingPos is within the bounds of the board] AND [startingPos is an available piece that
      * can be moved] AND [The desired new position is empty]
-     * @post [startingPos = null] AND board = [board containing the coordinates of the moved piece] AND
+     * @post startingPos = null AND board = [board containing the coordinates of the moved piece] AND
      * pieceCount = #pieceCount AND viableDirection = #viableDirection
      */
     public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
@@ -200,6 +200,17 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Scans and returns what is around the startingPos piece as a Hashmap
+     *
+     * @param startingPos BoardPosition object with int row and int col used as the board index
+     * @return Hashmap<DirectionEnum, Character>
+     *
+     * @pre [startingPos isn't empty] AND [startingPos is within the bounds of the board]
+     * @post scanSurroundingPositions = [Hashmap that contains whether the positions around startingPos
+     * are empty or contain a player] AND startingPos = #startingPos AND board = #board AND #pieceCount =
+     * #pieceCount AND viableDirection = #viableDirection
+     */
     public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
         /*
         "Scans" the indices surrounding the index given by the startingPos parameter. There are a few different ways
