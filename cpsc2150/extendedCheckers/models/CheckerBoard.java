@@ -232,7 +232,7 @@ public class CheckerBoard
      *
      * @pre [dir must be a valid direction] AND [A piece can move in the direction dir]
      * @post getDirection = [BoardsPosition object that represents a piece moving in dir direction by 1
-     * row/column] AND board = #board AND PieceCount = #pieceCount AND viableDirection = #viableDirection
+     * row/column] AND board = #board AND pieceCount = #pieceCount AND viableDirection = #viableDirection
      */
     public static BoardPosition getDirection(DirectionEnum dir) {
         /*
@@ -246,6 +246,16 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * String representation of a 8x8 checkerboard
+     *
+     * @return string that represents the checkerboard, coordinate system, and pieces in a 8x8 grid
+     *
+     * @pre [all BoardPosition objects are initialized]
+     * @post toString = string [that represents a checkerboard that contains the players
+     * pieces and positions in addition to the column and row numbers] AND board = #board AND
+     * pieceCount = #pieceCount AND viableDirection = #viableDirection
+     */
     public String toString()
     {
         /*
