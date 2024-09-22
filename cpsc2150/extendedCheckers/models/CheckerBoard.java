@@ -136,7 +136,7 @@ public class CheckerBoard
     }
 
     /**
-     * 
+     *
      * @param posOfPlayer BoardPosition object with int row and int col used as the board index
      *
      * @pre [pos has reached the end of the board] AND [posOfPlayer piece is not crowned yet]
@@ -150,6 +150,18 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Moves a piece on the board in the direction determined by DirectionEnum dir
+     *
+     * @param startingPos BoardPosition object with int row and int col used as the board index
+     * @param dir DirectionEnum containing the directions that the piece can move (NE, NW, SE, SW)
+     * @return BoardPosition object
+     *
+     * @pre [startingPos is within the bounds of the board] AND [startingPos is an available piece that
+     * can be moved] AND [The desired new position is empty]
+     * @post [startingPos = null] AND board = [board containing the coordinates of the moved piece] AND
+     * pieceCount = #pieceCount AND viableDirection = #viableDirection
+     */
     public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
         /*
         A modified version of placePiece moves a piece on the board, located at the startingPos index, in the direction
