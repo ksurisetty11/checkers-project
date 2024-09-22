@@ -141,6 +141,7 @@ public class CheckerBoard
     }
 
     /**
+     * Crowns a chosen piece by changing the char to its uppercase equivalent
      *
      * @param posOfPlayer BoardPosition object with int row and int col used as the board index
      *
@@ -175,6 +176,19 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Player's piece is moved on the board by jumping over the opposing players piece
+     *
+     * @param startingPos BoardPosition object with int row and int col used as the board index
+     * @param dir DirectionEnum containing the directions that the piece can move (NE, NW, SE, SW)
+     * @return BoardPosition object
+     *
+     * @pre [statingPos isn't empty] AND [startingPos is within the bounds of the board] AND
+     * [startingPos is an available piece that can be moved] AND [The new position is empty] AND [The opponent
+     * piece occupies the position that will be "jumped"]
+     * @post [startingPos = null] AND [opponent piece position is null] AND board = [board containing
+     * the coordinates of the moved piece] AND pieceCount =- 1 AND viableDirection = #viableDirection
+     */
     public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
         /*
         A modified version of movePiece that moves a piece by "jumping" an opponent player piece. When a player "jumps"
