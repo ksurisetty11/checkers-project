@@ -38,7 +38,7 @@ public class CheckerBoard
     public static final int STARTING_COUNT = 12;
 
     /**
-     * A constructor for CheckerBoard, initializes the three instance variables
+     * A constructor for CheckerBoard, initializes instance variables
      *
      * @pre none
      * @post pieceCount.put('x', 12) AND pieceCount.put('o', 12)
@@ -86,8 +86,8 @@ public class CheckerBoard
     /**
      * Setter for one given index in board 2D array
      *
-     * @param pos BoardPosition object with int row and int col used as the given index
-     * @param player char to be set for given index
+     * @param pos BoardPosition object with variables int row and int col that are used as the given index
+     * @param player char that the given index will be set to
      *
      * @pre [pos is valid within board] AND [player = 'x', 'X', 'o', OR 'O']
      * @post board[pos.getRow()][pos.getCol()] = player AND pieceCount = #pieceCount
@@ -103,8 +103,8 @@ public class CheckerBoard
     /**
      * Getter for a single index in 2D array board
      *
-     * @param pos BoardPosition object with int row and int col used as the board index
-     * @return char at pos in board
+     * @param pos BoardPosition object with variables int row and int col used as the board index
+     * @return char found at pos in board
      *
      * @pre [pos is valid within board]
      * @post whatAtPos = board[pos.getRow()][board[pos.getCol()] AND board = #board AND pieceCount = #pieceCount
@@ -121,12 +121,11 @@ public class CheckerBoard
      * Determines if a player has won
      *
      * @param player Character representing one of the two players
-     * @return boolean
+     * @return true if player won, boolean
      *
      * @pre [player equals 'x' OR 'o']
      * @post checkPlayerWin = [true IFF all remaining pieces belong to player, false OW]
-     * AND board = #board AND pieceCount = #pieceCount
-     * AND viableDirection = #viableDirection
+     * AND board = #board AND pieceCount = #pieceCount AND viableDirection = #viableDirection
      */
     public boolean checkPlayerWin(Character player) {
         /*
@@ -136,7 +135,7 @@ public class CheckerBoard
     }
 
     /**
-     * 
+     *
      * @param posOfPlayer BoardPosition object with int row and int col used as the board index
      *
      * @pre [pos has reached the end of the board] AND [posOfPlayer piece is not crowned yet]
