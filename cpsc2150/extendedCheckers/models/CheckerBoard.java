@@ -186,7 +186,7 @@ public class CheckerBoard
      * @pre [statingPos isn't empty] AND [startingPos is within the bounds of the board] AND
      * [startingPos is an available piece that can be moved] AND [The new position is empty] AND [The opponent
      * piece occupies the position that will be "jumped"]
-     * @post [startingPos = null] AND [opponent piece position is null] AND board = [board containing
+     * @post jumpPiece = [] AND [startingPos = null] AND [opponent piece position is null] AND board = [board containing
      * the coordinates of the moved piece] AND pieceCount =- 1 AND viableDirection = #viableDirection
      */
     public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
@@ -224,6 +224,16 @@ public class CheckerBoard
          */
     }
 
+    /**
+     * Returns a new boardPosition that represents movement in the direction of dir
+     *
+     * @param dir DirectionEnum containing the directions that the piece can move (NE, NW, SE, SW)
+     * @return BoardPosition object that represents a piece moving in direction dir by 1
+     *
+     * @pre [dir must be a valid direction] AND [A piece can move in the direction dir]
+     * @post getDirection = [BoardsPosition object that represents a piece moving in dir direction by 1
+     * row/column] AND board = #board AND PieceCount = #pieceCount AND viableDirection = #viableDirection
+     */
     public static BoardPosition getDirection(DirectionEnum dir) {
         /*
         a STATIC function that we can use to return a new BoardPosition that represents movement in the direction given
