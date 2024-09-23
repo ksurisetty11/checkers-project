@@ -164,10 +164,7 @@ public class CheckerBoard
      *
      * @param startingPos BoardPosition object with int row and int col used as the board index
      * @param dir DirectionEnum containing the directions that the piece can move (NE, NW, SE, SW)
-     * @return BoardPosition object
-     * NOTE FOR RETURN
-     * //more for return, new location is being returned, movePiece = new location of piece
-     * //same for jumpPiece
+     * @return BoardPosition object that resides in the new position designated by direction dir
      *
      * @pre [startingPos is within the bounds of the board] AND [startingPos is an available piece that
      * can be moved] AND [The desired new position is empty]
@@ -242,7 +239,6 @@ public class CheckerBoard
      * @pre [dir must be a valid direction] AND [A piece can move in the direction dir]
      * @post getDirection = [BoardPosition object that represents a piece moving in dir direction by 1
      * row/column]
-     *
      */
     public static BoardPosition getDirection(DirectionEnum dir) {
         /*
