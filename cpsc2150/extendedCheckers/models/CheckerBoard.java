@@ -212,13 +212,12 @@ public class CheckerBoard
      * Scans and returns what is around the startingPos piece as a Hashmap
      *
      * @param startingPos BoardPosition object with int row and int col used as the board index
-     * @return Hashmap<DirectionEnum, Character>
-     *
-     * NOTE: more detail for return
+     * @return Hashmap<DirectionEnum, Character> containing the neighboring positions and whether
+     * the positions are occupied
      *
      * @pre [startingPos isn't empty] AND [startingPos is within the bounds of the board]
      * @post scanSurroundingPositions = [Hashmap that contains whether the positions around startingPos
-     * are empty or contain a player] AND board = #board AND #pieceCount #pieceCount
+     * are empty or contain a player] AND board = #board AND pieceCount = #pieceCount
      * AND viableDirection = #viableDirection
      */
     public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
