@@ -192,10 +192,10 @@ public class CheckerBoard
      * @pre [statingPos isn't empty] AND [startingPos is within the bounds of the board] AND
      * [startingPos is an available piece that can be moved] AND [The new position is empty] AND [The opponent
      * piece occupies the position that will be "jumped"]
-     * @post jumpPiece = [] AND [startingPos = null] AND [opponent piece position is null] AND board = [board containing
-     * the coordinates of the moved piece] AND pieceCount =- 1 AND viableDirection = #viableDirection
-     *
-     * NOTE FOR pieceCount =- 1 : pieceCount is a hashmap not an int so just explain it: player loses a piece
+     * @post jumpPiece = [startingPos moving two positions in direction dir and removing the opposing player's
+     * piece] AND [startingPos = null] AND [opponent piece position is null] AND board = [board containing
+     * the coordinates of the moved piece] AND pieceCount = [The opposing player losing a piece] AND
+     * viableDirection = #viableDirection
      */
     public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
         /*
@@ -240,7 +240,7 @@ public class CheckerBoard
      * @return BoardPosition object that represents a piece moving in direction dir by 1
      *
      * @pre [dir must be a valid direction] AND [A piece can move in the direction dir]
-     * @post getDirection = [BoardsPosition object that represents a piece moving in dir direction by 1
+     * @post getDirection = [BoardPosition object that represents a piece moving in dir direction by 1
      * row/column]
      *
      */
