@@ -32,7 +32,7 @@ public class BoardPosition
      *
      * @return the row component of the board position
      * @pre none
-     * @post getRow = row AND column = #column
+     * @post getRow = row AND row = #row AND column = #column
      */
     public int getRow() {
         /*
@@ -45,7 +45,7 @@ public class BoardPosition
      *
      * @return the column component of the board position
      * @pre none
-     * @post getColumn = column AND row = #row
+     * @post getColumn = column AND column = #column AND row = #row
      */
     public int getColumn() {
         /*
@@ -71,7 +71,7 @@ public class BoardPosition
     }
 
     /**
-     * Returns a string representtion of the BoardPosition in the format of "row,column"
+     * Returns a string representation of the BoardPosition in the format of "row,column"
      *
      * @return a string in "row,column" format
      * @pre none

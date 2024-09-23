@@ -11,7 +11,7 @@ public class CheckerBoard
      * @invariant [board has 8 rows and 8 col] AND [all boards indices have either 'x', 'o', 'X', 'O', '*', OR ' ']
      * AND 0 <= pieceCount.get('x') <= 12 AND 0 <= pieceCount.get('o') <= 12
      * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
-     */
+     * /
 
     /**
      * A 2D array of characters used to represent our checkerboard.
@@ -68,7 +68,9 @@ public class CheckerBoard
      *
      * @return viableDirections, HashMap<Character, ArrayList<DirectionEnum>>
      * @pre none
-     * @post getViableDirections = viableDirections
+     * @post getViableDirections = viableDirections AND viableDirection = #viableDirections
+     * AND board = #board AND pieceCount = #pieceCount
+     *
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
         /*
@@ -81,7 +83,8 @@ public class CheckerBoard
      *
      * @return pieceCounts, HashMap<Character, Integer>
      * @pre none
-     * @post getPieceCounts = pieceCounts
+     * @post getPieceCounts = pieceCounts AND pieceCounts = #pieceCounts AND board = #board
+     * AND viableDirections = #viableDirections
      */
     public HashMap<Character, Integer> getPieceCounts() {
         /*
@@ -145,7 +148,7 @@ public class CheckerBoard
      *
      * @param posOfPlayer BoardPosition object with int row and int col used as the board index
      *
-     * @pre [pos has reached the end of the board] AND [posOfPlayer piece is not crowned yet]
+     * @pre [posOfPlayer is valid] AND [posOfPlayer piece is not crowned yet]
      * @post [posOfPlayer = The uppercase equivalent of the car] AND board = #board AND
      * pieceCount = #pieceCount AND viableDirection = #viableDirection
      */
@@ -162,6 +165,9 @@ public class CheckerBoard
      * @param startingPos BoardPosition object with int row and int col used as the board index
      * @param dir DirectionEnum containing the directions that the piece can move (NE, NW, SE, SW)
      * @return BoardPosition object
+     * NOTE FOR RETURN
+     * //more for return, new location is being returned, movePiece = new location of piece
+     * //same for jumpPiece
      *
      * @pre [startingPos is within the bounds of the board] AND [startingPos is an available piece that
      * can be moved] AND [The desired new position is empty]
@@ -188,6 +194,8 @@ public class CheckerBoard
      * piece occupies the position that will be "jumped"]
      * @post jumpPiece = [] AND [startingPos = null] AND [opponent piece position is null] AND board = [board containing
      * the coordinates of the moved piece] AND pieceCount =- 1 AND viableDirection = #viableDirection
+     *
+     * NOTE FOR pieceCount =- 1 : pieceCount is a hashmap not an int so just explain it: player loses a piece
      */
     public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
         /*
@@ -206,10 +214,12 @@ public class CheckerBoard
      * @param startingPos BoardPosition object with int row and int col used as the board index
      * @return Hashmap<DirectionEnum, Character>
      *
+     * NOTE: more detail for return
+     *
      * @pre [startingPos isn't empty] AND [startingPos is within the bounds of the board]
      * @post scanSurroundingPositions = [Hashmap that contains whether the positions around startingPos
-     * are empty or contain a player] AND startingPos = #startingPos AND board = #board AND #pieceCount =
-     * #pieceCount AND viableDirection = #viableDirection
+     * are empty or contain a player] AND board = #board AND #pieceCount #pieceCount
+     * AND viableDirection = #viableDirection
      */
     public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
         /*
@@ -232,7 +242,8 @@ public class CheckerBoard
      *
      * @pre [dir must be a valid direction] AND [A piece can move in the direction dir]
      * @post getDirection = [BoardsPosition object that represents a piece moving in dir direction by 1
-     * row/column] AND board = #board AND pieceCount = #pieceCount AND viableDirection = #viableDirection
+     * row/column]
+     *
      */
     public static BoardPosition getDirection(DirectionEnum dir) {
         /*
