@@ -187,7 +187,7 @@ public class CheckerBoard
      *
      * @param startingPos BoardPosition object with int row and int col used as the board index
      * @param dir DirectionEnum containing the directions that the piece can move (NE, NW, SE, SW)
-     * @return BoardPosition object
+     * @return BoardPosition object that resides in the position two positions away from startingPos in direction dir
      *
      * @pre [statingPos isn't empty] AND [startingPos is within the bounds of the board] AND
      * [startingPos is an available piece that can be moved] AND [The new position is empty] AND [The opponent
