@@ -50,7 +50,6 @@ public class CheckerBoard
      * @post pieceCount.put('x', 12) AND pieceCount.put('o', 12)
      * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
      * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' ' for open space
-     *
      */
     public CheckerBoard() {
         /*
@@ -68,9 +67,8 @@ public class CheckerBoard
      *
      * @return viableDirections, HashMap<Character, ArrayList<DirectionEnum>>
      * @pre none
-     * @post getViableDirections = viableDirections AND viableDirection = #viableDirections
+     * @post getViableDirections = viableDirections AND viableDirections = #viableDirections
      * AND board = #board AND pieceCount = #pieceCount
-     *
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
         /*
@@ -100,7 +98,7 @@ public class CheckerBoard
      *
      * @pre [pos is valid within board] AND [player = 'x', 'X', 'o', OR 'O']
      * @post board[pos.getRow()][pos.getCol()] = player AND pieceCount = #pieceCount
-     * AND viableDirection = #viableDirection
+     * AND viableDirections = #viableDirections
      */
     public void placePiece(BoardPosition pos, char player) {
         /*
@@ -134,7 +132,7 @@ public class CheckerBoard
      *
      * @pre [player equals 'x' OR 'o']
      * @post checkPlayerWin = [true IFF all remaining pieces belong to player, false OW]
-     * AND board = #board AND pieceCount = #pieceCount AND viableDirection = #viableDirection
+     * AND board = #board AND pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public boolean checkPlayerWin(Character player) {
         /*
@@ -150,7 +148,7 @@ public class CheckerBoard
      *
      * @pre [posOfPlayer is valid] AND [posOfPlayer piece is not crowned yet]
      * @post [posOfPlayer = The uppercase equivalent of the car] AND board = #board AND
-     * pieceCount = #pieceCount AND viableDirection = #viableDirection
+     * pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public void crownPiece(BoardPosition posOfPlayer) {
         /*
@@ -169,7 +167,7 @@ public class CheckerBoard
      * @pre [startingPos is within the bounds of the board] AND [startingPos is an available piece that
      * can be moved] AND [The desired new position is empty]
      * @post startingPos = null AND board = [board containing the coordinates of the moved piece] AND
-     * pieceCount = #pieceCount AND viableDirection = #viableDirection
+     * pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
         /*
@@ -192,7 +190,7 @@ public class CheckerBoard
      * @post jumpPiece = [startingPos moving two positions in direction dir and removing the opposing player's
      * piece] AND [startingPos = null] AND [opponent piece position is null] AND board = [board containing
      * the coordinates of the moved piece] AND pieceCount = [The opposing player losing a piece] AND
-     * viableDirection = #viableDirection
+     * viableDirections = #viableDirections
      */
     public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
         /*
@@ -215,7 +213,7 @@ public class CheckerBoard
      * @pre [startingPos isn't empty] AND [startingPos is within the bounds of the board]
      * @post scanSurroundingPositions = [Hashmap that contains whether the positions around startingPos
      * are empty or contain a player] AND board = #board AND pieceCount = #pieceCount
-     * AND viableDirection = #viableDirection
+     * AND viableDirections = #viableDirections
      */
     public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
         /*
@@ -260,7 +258,7 @@ public class CheckerBoard
      * @pre [all BoardPosition objects are initialized]
      * @post toString = string [that represents a checkerboard that contains the players
      * pieces and positions in addition to the column and row numbers] AND board = #board AND
-     * pieceCount = #pieceCount AND viableDirection = #viableDirection
+     * pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public String toString()
     {
