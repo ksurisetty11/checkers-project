@@ -1,4 +1,5 @@
 package cpsc2150.extendedCheckers.tests;
+import cpsc2150.extendedCheckers.models.CheckerBoard;
 import org.junit.*;
 import static org.junit.Assert.*;
 
@@ -7,6 +8,7 @@ public class TestCheckerBoard {
     @Test
     public void test_CheckerBoard_Constructor()
     {
+        CheckerBoard obsCheckerBoard = new CheckerBoard();
 
     }
 
@@ -50,5 +52,10 @@ public class TestCheckerBoard {
     public void test_getPieceCounts_x12_o12()
     {
 
+    }
+
+    private String TestToString(char[][] array)
+    {
+        return "";
     }
 }
