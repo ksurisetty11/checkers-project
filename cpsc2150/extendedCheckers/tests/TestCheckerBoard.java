@@ -12,9 +12,10 @@ public class TestCheckerBoard {
     @Test
     public void test_CheckerBoard_Constructor()
     {
-        //make a string of a 2d array?????
-        CheckerBoard obsCheckerBoard = new CheckerBoard();
-        //assertEquals(obsCheckerBoard, expCheckerBoard);
+        char[][] expBoard;
+        CheckerBoard obsCb = new CheckerBoard();
+        String exp = toStringForTest(expBoard);
+        assertEquals(exp, obsCb.toString());
     }
 
     @Test
@@ -78,8 +79,19 @@ public class TestCheckerBoard {
         assertEquals(exp, obs);
     }
 
-    private String TestToString(char[][] array)
+    private String toStringForTest(char[][] array)
     {
-        return "";
+
+        String arrayString = "|  ";
+        for(int i = 0; i < array.length; i++){
+            arrayString += "| " + i;
+        }
+        for(int i = 0; i < array.length; i++){
+            arrayString += "\n|i |";
+            for(int j = 0; j < array[i].length; j++) {
+                arrayString += array[i][j] + " |";
+            }
+        }
+        return arrayString;
     }
 }
