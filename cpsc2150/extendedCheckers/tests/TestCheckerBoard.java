@@ -1,8 +1,10 @@
 package cpsc2150.extendedCheckers.tests;
 import cpsc2150.extendedCheckers.models.BoardPosition;
 import cpsc2150.extendedCheckers.models.CheckerBoard;
+import cpsc2150.extendedCheckers.util.DirectionEnum;
 import org.junit.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static org.junit.Assert.*;
@@ -12,10 +14,36 @@ public class TestCheckerBoard {
     @Test
     public void test_CheckerBoard_Constructor()
     {
-        char[][] expBoard;
+        char[][] expBoard = {{'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                            {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                            {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                            {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                            {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                            {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                            {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                            {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
         CheckerBoard obsCb = new CheckerBoard();
         String exp = toStringForTest(expBoard);
+
+        HashMap<Character, Integer> expPieceCounts = new HashMap<>();
+        expPieceCounts.put('x', 12);
+        expPieceCounts.put('o', 12);
+        HashMap<Character, Integer> obsPieceCounts = obsCb.getPieceCounts();
+
+        HashMap<Character, ArrayList<DirectionEnum>> expViableDirections = new HashMap<>();
+        ArrayList<DirectionEnum> xDirections = new ArrayList<>();
+        xDirections.add(DirectionEnum.SE);
+        xDirections.add(DirectionEnum.SW);
+        ArrayList<DirectionEnum> oDirections = new ArrayList<>();
+        oDirections.add(DirectionEnum.NE);
+        oDirections.add(DirectionEnum.NW);
+        expViableDirections.put('x', xDirections);
+        expViableDirections.put('o', oDirections);
+        HashMap<Character, ArrayList<DirectionEnum>> obsViableDirections = obsCb.getViableDirections();
+
         assertEquals(exp, obsCb.toString());
+        assertEquals(expPieceCounts, obsPieceCounts);
+        assertEquals(expViableDirections, obsViableDirections);
     }
 
     @Test
