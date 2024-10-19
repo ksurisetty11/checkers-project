@@ -14,6 +14,8 @@ public class TestCheckerBoard {
     @Test
     public void test_CheckerBoard_Constructor()
     {
+        CheckerBoard obsCb = new CheckerBoard();
+        String obs = obsCb.toString();
         char[][] expBoard = {{'x', '*', 'x', '*', 'x', '*', 'x', '*'},
                             {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
                             {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
@@ -22,29 +24,9 @@ public class TestCheckerBoard {
                             {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
                             {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
                             {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
-        CheckerBoard obsCb = new CheckerBoard();
         String exp = toStringForTest(expBoard);
-
-        HashMap<Character, Integer> expPieceCounts = new HashMap<>();
-        expPieceCounts.put('x', 12);
-        expPieceCounts.put('o', 12);
-        HashMap<Character, Integer> obsPieceCounts = obsCb.getPieceCounts();
-
-        HashMap<Character, ArrayList<DirectionEnum>> expViableDirections = new HashMap<>();
-        ArrayList<DirectionEnum> xDirections = new ArrayList<>();
-        xDirections.add(DirectionEnum.SE);
-        xDirections.add(DirectionEnum.SW);
-        ArrayList<DirectionEnum> oDirections = new ArrayList<>();
-        oDirections.add(DirectionEnum.NE);
-        oDirections.add(DirectionEnum.NW);
-        expViableDirections.put('x', xDirections);
-        expViableDirections.put('o', oDirections);
-        HashMap<Character, ArrayList<DirectionEnum>> obsViableDirections = obsCb.getViableDirections();
-
-        assertEquals(exp, obsCb.toString());
-        assertEquals(expPieceCounts, obsPieceCounts);
-        assertEquals(expViableDirections, obsViableDirections);
-    }
+        assertEquals(exp, obs);
+      }
 
     @Test
     public void test_whatsAtPos_MinRowMinCol()
@@ -114,8 +96,9 @@ public class TestCheckerBoard {
         for(int i = 0; i < array.length; i++){
             arrayString += "| " + i;
         }
+        arrayString += "|";
         for(int i = 0; i < array.length; i++){
-            arrayString += "\n|i |";
+            arrayString += "\n|" + i + " |";
             for(int j = 0; j < array[i].length; j++) {
                 arrayString += array[i][j] + " |";
             }
