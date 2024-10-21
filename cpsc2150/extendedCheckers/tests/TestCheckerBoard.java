@@ -113,6 +113,23 @@ public class TestCheckerBoard {
     }
 
     @Test
+    public void test_scanSurroundingPositions_noValidMove()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition startingPosition = new BoardPosition(0,0);
+        //Assuming board has one 'x' at (0,0)
+        board.placePiece(startingPosition, 'x');
+        HashMap<DirectionEnum, Character> surroundingPositions = board.scanSurroundingPositions(startingPosition);
+        BoardPosition[] expPos = {
+            new BoardPosition(1,1); //SE Position
+            new BoardPosition(0,3); //Directly to the right
+            new BoardPosition(2,0); //Directly below
+        };
+
+        assertArrayEquals(expPos, surroundingPositions);
+    }
+
+    @Test
     public void test_getDirection_invalidDirection()
     {
         CheckerBoard board = new CheckerBoard();
