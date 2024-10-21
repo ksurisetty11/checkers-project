@@ -113,6 +113,29 @@ public class TestCheckerBoard {
     }
 
     @Test
+    public void test_scanSurroundingPositions_oSurroundings()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition startingPos = new BoardPosition(5,5);
+
+        board.placePiece(new BoardPosition(5,5), 'o');
+        board.placePiece(new BoardPosition(3,5), 'x');
+        board.placePiece(new BoardPosition(5,3), 'x');
+        board.placePiece(new BoardPosition(3,3), 'x');
+
+        HashMap<DirectionEnum, Character> surroundingPos = board.scanSurroundingPositions(startingPos);
+
+        BoardPosition[] expectedPositions = {
+                new BoardPosition(3,3),
+                new BoardPosition(5,3),
+                new BoardPosition(3,5),
+                new BoardPosition(5,5),
+        };
+
+        assertArrayEquals(expectedPositions, surroundingPos);
+    }
+
+    @Test
     public void test_scanSurroundingPositions_noValidMove()
     {
         CheckerBoard board = new CheckerBoard();
