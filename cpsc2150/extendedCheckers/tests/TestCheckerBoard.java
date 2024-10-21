@@ -80,6 +80,136 @@ public class TestCheckerBoard {
     }
 
     @Test
+    public void test_placePiece_EmptyTile_playerX()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition input = new BoardPosition(3,3);
+        char inputPlayer = 'x';
+
+        board.placePiece(input, inputPlayer);
+
+        String observedBoard = board.toString();
+
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', 'x', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, observedBoard);
+    }
+
+    @Test
+    public void test_placePiece_CornerTile_replaceX_withO()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition input = new BoardPosition(7,7);
+        char inputPlayer = 'x';
+
+        board.placePiece(input, inputPlayer);
+
+        String observedBoard = board.toString();
+
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'x'}
+        };
+
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, observedBoard);
+    }
+
+    @Test
+    public void test_placePiece_BlackTile()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition input = new BoardPosition(3,0);
+        char inputPlayer = 'x';
+
+        board.placePiece(input, inputPlayer);
+
+        String observedBoard = board.toString();
+
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'x', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, observedBoard);
+    }
+
+    @Test
+    public void test_placePiece_MiddleTile_replaceX_withO()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition input = new BoardPosition(2,4);
+        char inputPlayer = 'o';
+
+        board.placePiece(input, inputPlayer);
+
+        String observedBoard = board.toString();
+
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'o', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, observedBoard);
+    }
+
+    @Test
+    public void test_placePiece_CornerTile_replacex_withX()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition input = new BoardPosition(0,0);
+        char inputPlayer = 'x';
+
+        board.placePiece(input, inputPlayer);
+
+        String observedBoard = board.toString();
+
+        char[][] expBoard = {
+                {'X', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, observedBoard);
+    }
+
+    @Test
     public void test_getPieceCounts_x12_o12()
     {
         HashMap<Character, Integer> exp = new HashMap<>();
