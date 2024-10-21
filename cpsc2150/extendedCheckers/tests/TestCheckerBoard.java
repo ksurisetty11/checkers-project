@@ -4,6 +4,7 @@ import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.util.DirectionEnum;
 import org.junit.*;
 
+import javax.annotation.processing.SupportedAnnotationTypes;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -111,6 +112,24 @@ public class TestCheckerBoard {
         assertFalse(hasWon);
     }
 
+    @Test
+    public void test_getDirection_invalidDirection()
+    {
+        CheckerBoard board = new CheckerBoard();
+        int expX = -1;
+        int expY = 1;
+        HashMap<Character, ArrayList<DirectionEnum>> result = board.getViableDirections();
+
+        assertEquals(expX, result[0]);
+        assertEquals(expY, result[1]);
+
+    }
+
+
+
+
+
+
     private String toStringForTest(char[][] array)
     {
 
@@ -128,3 +147,4 @@ public class TestCheckerBoard {
         return arrayString;
     }
 }
+
