@@ -89,6 +89,28 @@ public class TestCheckerBoard {
         assertEquals(exp, obs);
     }
 
+    @Test
+    public void test_checkPlayerWin_no_opponent_pieces_left()
+    {
+        CheckerBoard board = new CheckerBoard();
+        HashMap<Character, Integer> exp = new HashMap<>();
+        exp.put(board.PLAYER_ONE, 12);
+        exp.put(board.PLAYER_TWO, 0);
+        boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
+        assertTrue(hasWon);
+    }
+
+    @Test
+    public void test_checkPlayerWin_opponent_pieces_exist()
+    {
+        CheckerBoard board = new CheckerBoard();
+        HashMap<Character, Integer> exp = new HashMap<>();
+        exp.put(board.PLAYER_ONE, 12);
+        exp.put(board.PLAYER_TWO, 3);
+        boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
+        assertFalse(hasWon);
+    }
+
     private String toStringForTest(char[][] array)
     {
 
