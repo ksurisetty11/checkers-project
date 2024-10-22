@@ -302,6 +302,51 @@ public class TestCheckerBoard {
     }
 
     @Test
+    public void test_jumpPiece_SEjump()
+    {
+        CheckerBoard testBoard = new CheckerBoard(8);
+        BoardPosition startPos = new BoardPosition(4, 4);
+        testBoard.placePiece(startPos, 'x');
+        testBoard.placePiece(new BoardPosition(3, 5), 'o');
+
+        BoardPosition jumpSuccessful = testBoard.jumpPiece(startPos, DirectionEnum.SW);
+        assertTrue("Jump should be successful", jumpSuccessful);
+
+    }
+
+
+    @Test
+    public void test_jumpPiece_SWjump()
+    {
+        CheckerBoard testBoard = new CheckerBoard(8);
+        BoardPosition startPos = new BoardPosition(2, 2);
+        testBoard.placePiece(startPos, 'x');
+        testBoard.placePiece(new BoardPosition(3, 1), 'o');
+
+        BoardPosition jumpSuccessful = testBoard.jumpPiece(startPos, DirectionEnum.SW);
+        assertTrue("Jump should be successful", jumpSuccessful);
+
+    }
+
+    @Test
+    public void test_jumpPiece_invalidMove_noPieceToJump()
+    {
+        CheckerBoard testBoard = new CheckerBoard(8);
+        BoardPosition startingPos = new BoardPosition(3,3);
+        testBoard.placePiece(startingPos, 'x'); //Placing x at 3,3
+        BoardPosition jumpSuccessful = testBoard.jumpPiece(startingPos, DirectionEnum.SE);
+
+        assertFalse("There is no place to jump. Try again!", jumpSuccessful);
+
+        HashMap<Character, Integer> pieceCounts = testBoard.getPieceCounts();
+        assertEquals(1, int) pieceCounts.get('x');
+        assertEquals(1, int) pieceCounts.get('o');
+
+        assertEquals('x', testBoard.whatsAtPos(new BoardPosition(3,3)));
+        assertEquals(' ', testBoard.whatsAtPos(new BoardPosition(5,5)));
+    }
+
+    @Test
     public void test_scanSurroundingPositions_validMoves()
     {
         CheckerBoard board = new CheckerBoard(8);
