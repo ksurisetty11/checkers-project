@@ -226,8 +226,8 @@ public class TestCheckerBoard {
         CheckerBoard testBoard = new CheckerBoard();
         HashMap<Character, Integer> exp = new HashMap<>();
         exp.put(CheckerBoard.PLAYER_ONE, 12);
-        exp.put(board.PLAYER_TWO, 0);
-        boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
+        exp.put(testBoard.PLAYER_TWO, 0);
+        boolean hasWon = testBoard.checkPlayerWin(testBoard.PLAYER_ONE);
         assertTrue(hasWon);
     }
 
@@ -324,7 +324,7 @@ public class TestCheckerBoard {
                 {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
 
         String expBoard = toStringForTest(exp);
-        assertEquals(exp, obsBoard);
+        assertEquals(expBoard, obsBoard);
     }
 
     @Test
@@ -347,7 +347,7 @@ public class TestCheckerBoard {
         };
 
         String expBoard = toStringForTest(exp);
-        assertEquals(exp, obsBoard);
+        assertEquals(expBoard, obsBoard);
     }
 
     @Test
