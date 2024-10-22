@@ -304,7 +304,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SEjump()
     {
-        CheckerBoard testBoard = new CheckerBoard(8);
+        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startPos = new BoardPosition(4, 4);
         testBoard.placePiece(startPos, 'x');
         testBoard.placePiece(new BoardPosition(3, 5), 'o');
@@ -318,7 +318,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SWjump()
     {
-        CheckerBoard testBoard = new CheckerBoard(8);
+        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startPos = new BoardPosition(2, 2);
         testBoard.placePiece(startPos, 'x');
         testBoard.placePiece(new BoardPosition(3, 1), 'o');
@@ -331,7 +331,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_invalidMove_noPieceToJump()
     {
-        CheckerBoard testBoard = new CheckerBoard(8);
+        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startingPos = new BoardPosition(3,3);
         testBoard.placePiece(startingPos, 'x'); //Placing x at 3,3
         BoardPosition jumpSuccessful = testBoard.jumpPiece(startingPos, DirectionEnum.SE);
@@ -349,7 +349,7 @@ public class TestCheckerBoard {
     @Test
     public void test_scanSurroundingPositions_validMoves()
     {
-        CheckerBoard board = new CheckerBoard(8);
+        CheckerBoard board = new CheckerBoard();
         BoardPosition startingPos = new BoardPosition(3,3);
         board.placePiece(new BoardPosition(2,2), 'x');
         board.placePiece(new BoardPosition(1,1), 'o');
@@ -361,7 +361,7 @@ public class TestCheckerBoard {
             new BoardPosition(0,2), //NE
         };
 
-        assertArrayEquals(expectedPositions, surroundingPosition);
+        assertEquals(expectedPositions, surroundingPosition);
     }
 
     @Test
