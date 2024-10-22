@@ -223,9 +223,9 @@ public class TestCheckerBoard {
     @Test
     public void test_checkPlayerWin_no_opponent_pieces_left()
     {
-        CheckerBoard board = new CheckerBoard();
+        CheckerBoard testBoard = new CheckerBoard();
         HashMap<Character, Integer> exp = new HashMap<>();
-        exp.put(board.PLAYER_ONE, 12);
+        exp.put(CheckerBoard.PLAYER_ONE, 12);
         exp.put(board.PLAYER_TWO, 0);
         boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
         assertTrue(hasWon);
@@ -236,9 +236,9 @@ public class TestCheckerBoard {
     {
         CheckerBoard testBoard = new CheckerBoard();
         HashMap<Character, Integer> exp = new HashMap<>();
-        exp.put(testBoard.PLAYER_ONE, 12);
-        exp.put(testBoard.PLAYER_TWO, 3);
-        boolean hasWon = testBoard.checkPlayerWin(testBoard.PLAYER_ONE);
+        exp.put(CheckerBoard.PLAYER_ONE, 12);
+        exp.put(CheckerBoard.PLAYER_TWO, 12);
+        boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
         assertFalse(hasWon);
     }
 
