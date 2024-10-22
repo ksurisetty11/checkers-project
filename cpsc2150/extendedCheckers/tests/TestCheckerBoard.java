@@ -485,4 +485,3 @@ public class TestCheckerBoard {
         return arrayString.toString();
     }
 }
-
