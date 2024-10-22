@@ -226,8 +226,8 @@ public class TestCheckerBoard {
         CheckerBoard testBoard = new CheckerBoard();
         HashMap<Character, Integer> exp = new HashMap<>();
         exp.put(CheckerBoard.PLAYER_ONE, 12);
-        exp.put(board.PLAYER_TWO, 0);
-        boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
+        exp.put(testBoard.PLAYER_TWO, 0);
+        boolean hasWon = testBoard.checkPlayerWin(testBoard.PLAYER_ONE);
         assertTrue(hasWon);
     }
 
@@ -324,7 +324,7 @@ public class TestCheckerBoard {
                 {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
 
         String expBoard = toStringForTest(exp);
-        assertEquals(exp, obsBoard);
+        assertEquals(expBoard, obsBoard);
     }
 
     @Test
@@ -347,13 +347,13 @@ public class TestCheckerBoard {
         };
 
         String expBoard = toStringForTest(exp);
-        assertEquals(exp, obsBoard);
+        assertEquals(expBoard, obsBoard);
     }
 
     @Test
     public void test_jumpPiece_SEjump()
     {
-        CheckerBoard testBoard = new CheckerBoard(8);
+        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startPos = new BoardPosition(4, 4);
         testBoard.placePiece(startPos, 'x');
         testBoard.placePiece(new BoardPosition(3, 5), 'o');
@@ -367,7 +367,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SWjump()
     {
-        CheckerBoard testBoard = new CheckerBoard(8);
+        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startPos = new BoardPosition(2, 2);
         testBoard.placePiece(startPos, 'x');
         testBoard.placePiece(new BoardPosition(3, 1), 'o');
@@ -380,7 +380,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_invalidMove_noPieceToJump()
     {
-        CheckerBoard testBoard = new CheckerBoard(8);
+        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startingPos = new BoardPosition(3,3);
         testBoard.placePiece(startingPos, 'x'); //Placing x at 3,3
         BoardPosition jumpSuccessful = testBoard.jumpPiece(startingPos, DirectionEnum.SE);
@@ -398,7 +398,7 @@ public class TestCheckerBoard {
     @Test
     public void test_scanSurroundingPositions_validMoves()
     {
-        CheckerBoard board = new CheckerBoard(8);
+        CheckerBoard board = new CheckerBoard();
         BoardPosition startingPos = new BoardPosition(3,3);
         board.placePiece(new BoardPosition(2,2), 'x');
         board.placePiece(new BoardPosition(1,1), 'o');
@@ -410,7 +410,7 @@ public class TestCheckerBoard {
             new BoardPosition(0,2), //NE
         };
 
-        assertArrayEquals(expectedPositions, surroundingPosition);
+        assertEquals(expectedPositions, surroundingPosition);
     }
 
     @Test
