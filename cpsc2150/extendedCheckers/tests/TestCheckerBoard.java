@@ -471,18 +471,18 @@ public class TestCheckerBoard {
     private String toStringForTest(char[][] array)
     {
 
-        String arrayString = "|  ";
+        StringBuilder arrayString = new StringBuilder("|  ");
         for(int i = 0; i < array.length; i++){
-            arrayString += "| " + i;
+            arrayString.append("| ").append(i);
         }
-        arrayString += "|";
+        arrayString.append("|");
         for(int i = 0; i < array.length; i++){
-            arrayString += "\n|" + i + " |";
+            arrayString.append("\n|").append(i).append(" |");
             for(int j = 0; j < array[i].length; j++) {
-                arrayString += array[i][j] + " |";
+                arrayString.append(array[i][j]).append(" |");
             }
         }
-        return arrayString;
+        return arrayString.toString();
     }
 }
 
