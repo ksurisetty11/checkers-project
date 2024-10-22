@@ -243,6 +243,65 @@ public class TestCheckerBoard {
     }
 
     @Test
+    public void test_movePiece_in_empty_spot()
+    {
+        CheckerBoard board = new CheckerBoard();
+        BoardPosition startPos = new BoardPosition(2,0);
+        BoardPosition endPos = board.movePiece(startPos, DirectionEnum.SE);
+        assertEquals('x', board.whatsAtPos(endPos));
+    }
+
+    @Test
+    public void test_movePiece_in_occupied_spot()
+    {
+        CheckerBoard testBoard = new CheckerBoard();
+        BoardPosition startPosX = new BoardPosition(2,0);
+        testBoard.movePiece(startPosX, DirectionEnum.SE);
+
+        BoardPosition startPosO = new BoardPosition(5,1);
+        testBoard.movePiece(startPosO, DirectionEnum.NW);
+
+        BoardPosition obsPosX = new BoardPosition(3,1);
+        testBoard.movePiece(obsPosX, DirectionEnum.SW);
+
+        String obsBoard = testBoard.toString();
+        char[][] exp = {{'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {' ', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', ' ', '*', ' ', '*', ' '},
+                {'o', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', ' ', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
+
+        String expBoard = toStringForTest(exp);
+        assertEquals(exp, obsBoard);
+    }
+
+    @Test
+    public void test_movePiece_SW_out_of_bounds()
+    {
+        CheckerBoard testBoard = new CheckerBoard();
+        BoardPosition startPos = new BoardPosition(2,0);
+        BoardPosition endPos = testBoard.movePiece(startPos, DirectionEnum.SW);
+
+        String obsBoard = testBoard.toString();
+        char[][] exp = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'o', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+
+        String expBoard = toStringForTest(exp);
+        assertEquals(exp, obsBoard);
+    }
+
+    @Test
     public void test_scanSurroundingPositions_validMoves()
     {
         CheckerBoard board = new CheckerBoard(8);
