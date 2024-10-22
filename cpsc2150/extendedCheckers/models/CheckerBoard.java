@@ -96,7 +96,7 @@ public class CheckerBoard
      * @param pos BoardPosition object with variables int row and int col that are used as the given index
      * @param player char that the given index will be set to
      *
-     * @pre [pos is valid within board] AND [player = 'x', 'X', 'o', OR 'O']
+     * @pre [pos is valid within board]
      * @post board[pos.getRow()][pos.getCol()] = player AND pieceCount = #pieceCount
      * AND viableDirections = #viableDirections
      */

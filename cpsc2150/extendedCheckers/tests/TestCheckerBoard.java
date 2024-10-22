@@ -223,9 +223,9 @@ public class TestCheckerBoard {
     @Test
     public void test_checkPlayerWin_no_opponent_pieces_left()
     {
-        CheckerBoard board = new CheckerBoard();
+        CheckerBoard testBoard = new CheckerBoard();
         HashMap<Character, Integer> exp = new HashMap<>();
-        exp.put(board.PLAYER_ONE, 12);
+        exp.put(CheckerBoard.PLAYER_ONE, 12);
         exp.put(board.PLAYER_TWO, 0);
         boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
         assertTrue(hasWon);
@@ -234,12 +234,60 @@ public class TestCheckerBoard {
     @Test
     public void test_checkPlayerWin_opponent_pieces_exist()
     {
-        CheckerBoard board = new CheckerBoard();
+        CheckerBoard testBoard = new CheckerBoard();
         HashMap<Character, Integer> exp = new HashMap<>();
-        exp.put(board.PLAYER_ONE, 12);
-        exp.put(board.PLAYER_TWO, 3);
-        boolean hasWon = board.checkPlayerWin(board.PLAYER_ONE);
+        exp.put(CheckerBoard.PLAYER_ONE, 12);
+        exp.put(CheckerBoard.PLAYER_TWO, 12);
+        boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
         assertFalse(hasWon);
+    }
+
+    @Test
+    public void test_crownPiece_playerx_on_opposing_side()
+    {
+        CheckerBoard testBoard = new CheckerBoard();
+        BoardPosition targetPos = new BoardPosition(7,1);
+        testBoard.placePiece(targetPos, 'x');
+
+        //Removing pieces from board
+        testBoard.placePiece(new BoardPosition(6, 0), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(6, 2), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(5, 1), CheckerBoard.EMPTY_POS);
+
+        //Moving pieces on board
+        testBoard.placePiece(new BoardPosition(4, 4), CheckerBoard.PLAYER_TWO);
+        testBoard.placePiece(new BoardPosition(4, 6), CheckerBoard.PLAYER_TWO);
+
+        testBoard.crownPiece(targetPos);
+        char obsChar = testBoard.whatsAtPos(targetPos);
+        assertEquals(obsChar, 'X');
+    }
+
+    @Test
+    public void test_crownPiece_playerx_on_player_side()
+    {
+        CheckerBoard testBoard = new CheckerBoard();
+        BoardPosition targetPos = new BoardPosition(0,0);
+        testBoard.crownPiece(targetPos);
+        char obsChar = testBoard.whatsAtPos(targetPos);
+
+        assertEquals(obsChar, 'x');
+    }
+
+    @Test
+    public void test_crownPiece_playerx_already_crowned()
+    {
+        CheckerBoard testBoard = new CheckerBoard();
+        testBoard.placePiece(new BoardPosition(2, 0), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(5, 7), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(4, 6), CheckerBoard.PLAYER_TWO);
+
+        BoardPosition targetPos = new BoardPosition(4,0);
+        testBoard.placePiece(targetPos, 'X');
+        testBoard.crownPiece(targetPos);
+        char obsChar = testBoard.whatsAtPos(targetPos);
+
+        assertEquals(obsChar, 'X');
     }
 
     @Test
@@ -265,7 +313,8 @@ public class TestCheckerBoard {
         testBoard.movePiece(obsPosX, DirectionEnum.SW);
 
         String obsBoard = testBoard.toString();
-        char[][] exp = {{'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+        char[][] exp = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
                 {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
                 {' ', '*', 'x', '*', 'x', '*', 'x', '*'},
                 {'*', 'x', '*', ' ', '*', ' ', '*', ' '},
