@@ -132,7 +132,7 @@ public class TestCheckerBoard {
     }
 
     @Test
-    public void test_placePiece_BlackTile()
+    public void test_placePiece_WhiteTile()
     {
         CheckerBoard board = new CheckerBoard();
         BoardPosition input = new BoardPosition(3,0);
@@ -218,6 +218,27 @@ public class TestCheckerBoard {
         CheckerBoard board = new CheckerBoard();
         HashMap<Character, Integer> obs = board.getPieceCounts();
         assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_getViableDirections_8x8board()
+    {
+        CheckerBoard board = new CheckerBoard();
+        HashMap<Character, ArrayList<DirectionEnum>> actual = board.getViableDirections();
+        HashMap<Character, ArrayList<DirectionEnum>> expected = new HashMap<>();
+
+        ArrayList<DirectionEnum> xDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> oDirections = new ArrayList<>();
+
+        xDirections.add(DirectionEnum.SE);
+        xDirections.add(DirectionEnum.SW);
+        oDirections.add(DirectionEnum.NE);
+        oDirections.add(DirectionEnum.NW);
+
+        expected.put('x', xDirections);
+        expected.put('o', oDirections);
+
+        assertEquals(expected, actual);
     }
 
     @Test
