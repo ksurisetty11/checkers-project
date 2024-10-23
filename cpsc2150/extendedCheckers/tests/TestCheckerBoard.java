@@ -522,7 +522,7 @@ public class TestCheckerBoard {
         // Assert that the surrounding positions match the expected ones
         assertEquals(expectedSurroundingPos, surroundingPos);
     }
-}
+
 
 
 @Test
