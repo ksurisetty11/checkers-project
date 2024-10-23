@@ -4,7 +4,6 @@ import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.util.DirectionEnum;
 import org.junit.*;
 
-import javax.annotation.processing.SupportedAnnotationTypes;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -374,13 +373,11 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SEjump()
     {
-        CheckerBoard testBoard = new CheckerBoard();
         BoardPosition startPos = new BoardPosition(4, 4);
-        testBoard.placePiece(startPos, 'x');
-        testBoard.placePiece(new BoardPosition(3, 5), 'o');
+        DirectionEnum dir = DirectionEnum.SE;
 
-        BoardPosition jumpSuccessful = testBoard.jumpPiece(startPos, DirectionEnum.SW);
-        assertEquals("Jump should be successful", true, jumpSuccessful);
+        Board board = new Board();
+        board.setPieceAt(4,4)
 
     }
 
@@ -388,31 +385,49 @@ public class TestCheckerBoard {
     public void test_jumpPiece_SWjump()
     {
         CheckerBoard testBoard = new CheckerBoard();
-        BoardPosition startPos = new BoardPosition(2, 2);
-        testBoard.placePiece(startPos, 'x');
-        testBoard.placePiece(new BoardPosition(3, 1), 'o');
 
-        BoardPosition jumpSuccessful = testBoard.jumpPiece(startPos, DirectionEnum.SW);
-        assertTrue("Jump should be successful", jumpSuccessful);
+        // Empty the board
+        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+        //Manually place the pieces
+        testBoard.placePiece(new BoardPosition(2,2), 'x');
+        testBoard.placePiece(new BoardPosition(3,1), 'o');
 
     }
 
     @Test
     public void test_jumpPiece_invalidMove_noPieceToJump()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+        CheckerBoard board = new CheckerBoard();
+
+        // Empty the board
+        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        //Manually place the 'x' piece
+        board.placePiece(new BoardPosition(3,3), 'x');
+
+        //Define starting position and jump direction
         BoardPosition startingPos = new BoardPosition(3,3);
-        testBoard.placePiece(startingPos, 'x'); //Placing x at 3,3
-        BoardPosition jumpSuccessful = testBoard.jumpPiece(startingPos, DirectionEnum.SE);
+        DirectionEnum dir = DirectionEnum.SE;
 
-        assertFalse("There is no place to jump. Try again!", jumpSuccessful);
+        //Attempt to jump in SE direction
+        board.jumpPiece(startingPos, dir);
 
-        HashMap<Character, Integer> pieceCounts = testBoard.getPieceCounts();
-        assertEquals(1, int) pieceCounts.get('x');
-        assertEquals(1, int) pieceCounts.get('o');
+        //Check board to remain same
+        assertEquals(1, board.getPieceCounts('x');
+        assertEquals(0, board.getPieceCounts('o');
 
-        assertEquals('x', testBoard.whatsAtPos(new BoardPosition(3,3)));
-        assertEquals(' ', testBoard.whatsAtPos(new BoardPosition(5,5)));
     }
 
     @Test
@@ -448,7 +463,7 @@ public class TestCheckerBoard {
     }
 
     @Test
-    public void test_scanSurroundingPositions_osurroundings() {
+    public void test_scanSurroundingPositions_oSurroundings() {
         CheckerBoard board = new CheckerBoard();
 
         // Empty the board
