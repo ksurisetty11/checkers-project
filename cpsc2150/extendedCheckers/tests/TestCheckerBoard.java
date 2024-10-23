@@ -359,10 +359,9 @@ public class TestCheckerBoard {
         testBoard.placePiece(new BoardPosition(3, 5), 'o');
 
         BoardPosition jumpSuccessful = testBoard.jumpPiece(startPos, DirectionEnum.SW);
-        assertTrue("Jump should be successful", jumpSuccessful);
+        assertEquals("Jump should be successful", true, jumpSuccessful);
 
     }
-
 
     @Test
     public void test_jumpPiece_SWjump()
@@ -399,58 +398,102 @@ public class TestCheckerBoard {
     public void test_scanSurroundingPositions_validMoves()
     {
         CheckerBoard board = new CheckerBoard();
+
+        // Empty the board
+        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        //Define starting position
         BoardPosition startingPos = new BoardPosition(3,3);
+
+        //Manually add
         board.placePiece(new BoardPosition(2,2), 'x');
         board.placePiece(new BoardPosition(1,1), 'o');
-        HashMap<DirectionEnum, Character> surroundingPosition = board.scanSurroundingPositions(startingPos);
-
-        BoardPosition[] expectedPositions = {
-            new BoardPosition(0,0), //NW
-            new BoardPosition(2,0), //SE
-            new BoardPosition(0,2), //NE
-        };
-
-        assertEquals(expectedPositions, surroundingPosition);
-    }
-
-    @Test
-    public void test_scanSurroundingPositions_oSurroundings()
-    {
-        CheckerBoard board = new CheckerBoard();
-        BoardPosition startingPos = new BoardPosition(5,5);
-
-        board.placePiece(new BoardPosition(5,5), 'o');
-        board.placePiece(new BoardPosition(3,5), 'x');
-        board.placePiece(new BoardPosition(5,3), 'x');
-        board.placePiece(new BoardPosition(3,3), 'x');
 
         HashMap<DirectionEnum, Character> surroundingPos = board.scanSurroundingPositions(startingPos);
 
-        BoardPosition[] expectedPositions = {
-                new BoardPosition(3,3),
-                new BoardPosition(5,3),
-                new BoardPosition(3,5),
-                new BoardPosition(5,5),
-        };
+        HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
+        expectedSurroundingPos.put(DirectionEnum.NW, 'o');
+        expectedSurroundingPos.put(DirectionEnum.SE, 'o');
+        expectedSurroundingPos.put(DirectionEnum.SW, '');
+        expectedSurroundingPos.put(DirectionEnum.NE, '');
 
-        assertArrayEquals(expectedPositions, surroundingPos);
+        assertEquals(expectedSurroundingPos, surroundingPos);
     }
 
     @Test
+    public void test_scanSurroundingPositions_osurroundings() {
+        CheckerBoard board = new CheckerBoard();
+
+        // Empty the board
+        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        // Manually add pieces to the board
+        board.placePiece(new BoardPosition(5, 5), 'o');  // 'o' at (5,5)
+        board.placePiece(new BoardPosition(3, 5), 'x');  // 'x' at (3,5)
+        board.placePiece(new BoardPosition(5, 3), 'x');  // 'x' at (5,3)
+        board.placePiece(new BoardPosition(3, 3), 'x');  // 'x' at (3,3)
+
+        // Define the starting position
+        BoardPosition startingPos = new BoardPosition(5, 5);
+
+        // Scan the surrounding positions
+        HashMap<DirectionEnum, Character> surroundingPos = board.scanSurroundingPositions(startingPos);
+
+        // Expected positions and values
+        HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
+        expectedSurroundingPos.put(DirectionEnum.NW, 'x');
+        expectedSurroundingPos.put(DirectionEnum.SW, 'x');
+        expectedSurroundingPos.put(DirectionEnum.SE, 'x');
+        expectedSurroundingPos.put(DirectionEnum.NE, 'o');  // Assuming 'o' remains at (5,5)
+
+        // Assert that the surrounding positions match the expected ones
+        assertEquals(expectedSurroundingPos, surroundingPos);
+    }
+}
+
+
+@Test
     public void test_scanSurroundingPositions_noValidMove()
     {
         CheckerBoard board = new CheckerBoard();
+
+        // Empty the board
+        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        // Manually add one piece to the board at (0, 0)
+        board.placePiece(new BoardPosition(0, 0), 'x');
+
         BoardPosition startingPosition = new BoardPosition(0,0);
         //Assuming board has one 'x' at (0,0)
-        board.placePiece(startingPosition, 'x');
-        HashMap<DirectionEnum, Character> surroundingPositions = board.scanSurroundingPositions(startingPosition);
-        BoardPosition[] expPos = {
-            new BoardPosition(1,1); //SE Position
-            new BoardPosition(0,3); //Directly to the right
-            new BoardPosition(2,0); //Directly below
-        };
 
-        assertArrayEquals(expPos, surroundingPositions);
+        HashMap<DirectionEnum, Character> surroundingPositions = board.scanSurroundingPositions(startingPosition);
+
+        // Expected positions and values
+        HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
+        expectedSurroundingPos.put(DirectionEnum.SE, ' ');
+        expectedSurroundingPos.put(DirectionEnum.SW, ' ');
+        expectedSurroundingPos.put(DirectionEnum.NE, ' ');
+        expectedSurroundingPos.put(DirectionEnum.NW, ' ');
+
+        assertEquals(expectedSurroundingPos, surroundingPositions);
     }
 
     @Test
@@ -465,8 +508,6 @@ public class TestCheckerBoard {
         assertEquals(expY, result[1]);
 
     }
-
-
 
     private String toStringForTest(char[][] array)
     {
