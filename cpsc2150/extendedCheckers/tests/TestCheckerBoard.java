@@ -244,10 +244,15 @@ public class TestCheckerBoard {
     public void test_checkPlayerWin_no_opponent_pieces_left()
     {
         CheckerBoard testBoard = new CheckerBoard();
-        HashMap<Character, Integer> exp = new HashMap<>();
-        exp.put(CheckerBoard.PLAYER_ONE, 12);
-        exp.put(testBoard.PLAYER_TWO, 0);
-        boolean hasWon = testBoard.checkPlayerWin(testBoard.PLAYER_ONE);
+        //Eliminating o pieces
+        for (int row = 5; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+        boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
         assertTrue(hasWon);
     }
 
@@ -255,9 +260,6 @@ public class TestCheckerBoard {
     public void test_checkPlayerWin_opponent_pieces_exist()
     {
         CheckerBoard testBoard = new CheckerBoard();
-        HashMap<Character, Integer> exp = new HashMap<>();
-        exp.put(CheckerBoard.PLAYER_ONE, 12);
-        exp.put(CheckerBoard.PLAYER_TWO, 12);
         boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
         assertFalse(hasWon);
     }
@@ -322,15 +324,19 @@ public class TestCheckerBoard {
     @Test
     public void test_movePiece_in_occupied_spot()
     {
+        //Moving pieces to match the initial state
         CheckerBoard testBoard = new CheckerBoard();
-        BoardPosition startPosX = new BoardPosition(2,0);
-        testBoard.movePiece(startPosX, DirectionEnum.SE);
 
-        BoardPosition startPosO = new BoardPosition(5,1);
-        testBoard.movePiece(startPosO, DirectionEnum.NW);
+        testBoard.placePiece(new BoardPosition(2,0), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(5,1), CheckerBoard.EMPTY_POS);
 
-        BoardPosition obsPosX = new BoardPosition(3,1);
-        testBoard.movePiece(obsPosX, DirectionEnum.SW);
+        BoardPosition startPosX = new BoardPosition(3,1);
+        BoardPosition startPosO = new BoardPosition(4,0);
+        testBoard.placePiece(startPosX, CheckerBoard.PLAYER_ONE);
+        testBoard.placePiece(startPosO, CheckerBoard.PLAYER_ONE);
+
+        BoardPosition obsPos = testBoard.movePiece(startPosX, DirectionEnum.SW);
+        BoardPosition expPos = new BoardPosition(3,1);
 
         String obsBoard = testBoard.toString();
         char[][] exp = {
@@ -345,14 +351,17 @@ public class TestCheckerBoard {
 
         String expBoard = toStringForTest(exp);
         assertEquals(expBoard, obsBoard);
+        assertEquals(obsPos,expPos);
     }
 
     @Test
     public void test_movePiece_SW_out_of_bounds()
     {
         CheckerBoard testBoard = new CheckerBoard();
+
         BoardPosition startPos = new BoardPosition(2,0);
-        BoardPosition endPos = testBoard.movePiece(startPos, DirectionEnum.SW);
+        BoardPosition obsPos = testBoard.movePiece(startPos, DirectionEnum.SW);
+        BoardPosition expPos = new BoardPosition(2,0);
 
         String obsBoard = testBoard.toString();
         char[][] exp = {
@@ -368,6 +377,7 @@ public class TestCheckerBoard {
 
         String expBoard = toStringForTest(exp);
         assertEquals(expBoard, obsBoard);
+        assertEquals(obsPos, expPos);
     }
 
     @Test
