@@ -373,11 +373,28 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SEjump()
     {
-        BoardPosition startPos = new BoardPosition(4, 4);
-        DirectionEnum dir = DirectionEnum.SE;
+        CheckerBoard testBoard = new CheckerBoard();
 
-        Board board = new Board();
-        board.setPieceAt(4,4)
+        // Empty the board
+        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
+            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+                if ((row + col) % 2 == 0) {
+                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+        //Manually place the pieces
+        testBoard.placePiece(new BoardPosition(4,4), 'x');
+        testBoard.placePiece(new BoardPosition(5,5), 'o');
+        testBoard.placePiece(new BoardPosition(6,4), 'o');
+
+        BoardPosition startingPos = new BoardPosition(4,4);
+        DirectionEnum dir = DirectionEnum.SE;
+        boolean result = testBoard.jumpPiece(startingPos, dir);
+
+        assertTrue(result);
+        assertEquals(new BoardPosition(2,6), testBoard.placePiece('x'));
+        assertFalse(testBoard.getPieceCounts('o'));
 
     }
 
@@ -397,6 +414,14 @@ public class TestCheckerBoard {
         //Manually place the pieces
         testBoard.placePiece(new BoardPosition(2,2), 'x');
         testBoard.placePiece(new BoardPosition(3,1), 'o');
+
+        BoardPosition startingPos = new BoardPosition(2,2);
+        DirectionEnum dir = DirectionEnum.SW;
+        boolean result = testBoard.jumpPiece(startingPos, dir);
+
+        assertTrue(result);
+        assertEquals(new BoardPosition(4,0), testBoard.placePiece('x'));
+        assertFalse(testBoard.getPieceCounts('o'));
 
     }
 
