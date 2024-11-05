@@ -5,7 +5,7 @@ import cpsc2150.extendedCheckers.util.DirectionEnum;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CheckerBoard
+public class CheckerBoard extends AbsCheckerBoard
 {
     /**
      * @invariant [board has 8 rows and 8 col] AND [all boards indices have either 'x', 'o', 'X', 'O', '*', OR ' ']
@@ -52,14 +52,33 @@ public class CheckerBoard
      * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' ' for open space
      */
     public CheckerBoard() {
-        /*
-        Constructor for the CheckerBoard object. The constructor should initialize the three instance variables to
-        a new data structure of their respective type. Furthermore, the constructor should use the pieceCount HashMap
-        to map the starting count of tokens to each player, and use the viableDirections HashMap to map the players to
-        their respective starting directions (SE and SW for player one, NE and NW for player two). Finally, the
-        constructor should also initialize all the indices within the checkerboard to either a player char, an asterisk
-        (a 'black, non-playable' position), or a space (the 'empty' position)
-         */
+        board = new char[][] {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
+
+        //Initializing pieceCount contain player one and two's number of pieces
+        pieceCount = new HashMap<>();
+        pieceCount.put(PLAYER_ONE, STARTING_COUNT);
+        pieceCount.put(PLAYER_TWO, STARTING_COUNT);
+
+        //Initializing viable directions for player one and two
+        viableDirections = new HashMap<>();
+        ArrayList<DirectionEnum> xPlayerDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> oPlayerDirections = new ArrayList<>();
+
+        xPlayerDirections.add(DirectionEnum.SE);
+        xPlayerDirections.add(DirectionEnum.SW);
+        oPlayerDirections.add(DirectionEnum.NE);
+        oPlayerDirections.add(DirectionEnum.NW);
+
+        viableDirections.put('x', xPlayerDirections);
+        viableDirections.put('o', oPlayerDirections);
     }
 
     /**
