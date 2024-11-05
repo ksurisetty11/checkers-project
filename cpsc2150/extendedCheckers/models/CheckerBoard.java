@@ -166,7 +166,7 @@ public class CheckerBoard extends AbsCheckerBoard
      * @param posOfPlayer BoardPosition object with int row and int col used as the board index
      *
      * @pre [posOfPlayer is valid] AND [posOfPlayer piece is not crowned yet]
-     * @post [posOfPlayer = The uppercase equivalent of the car] AND board = #board AND
+     * @post [posOfPlayer = The uppercase equivalent of the char] AND board = #board AND
      * pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public void crownPiece(BoardPosition posOfPlayer) {

@@ -26,7 +26,8 @@ public interface ICheckerBoard {
     }
 
     default public void crownPiece(BoardPosition posOfPlayer) {
-
+        char newCrownedPiece = Character.toUpperCase(whatsAtPos(posOfPlayer));
+        placePiece(posOfPlayer, newCrownedPiece);
     }
 
     default public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
