@@ -258,15 +258,20 @@ public class CheckerBoard extends AbsCheckerBoard
      * row/column]
      */
     public static BoardPosition getDirection(DirectionEnum dir) {
-        /*
-        a STATIC function that we can use to return a new BoardPosition that represents movement in the direction given
-        by the dir parameter.
-
-        For example, to move a piece DirectionEnum.SE we would have to add 1 to that piece's row position and 1 to that
-        pieces column position. As such, if DirectionEnum.SE is passed in as a parameter, this function should return a
-        new BoardPosition that could be added to any given piece's position so that the piece now sits one position SE
-        of where it began.
-         */
+        BoardPosition intendedDirection = null;
+        if (dir == DirectionEnum.SE) {
+            intendedDirection = new BoardPosition(1,1);
+        }
+        if (dir == DirectionEnum.SW) {
+            intendedDirection = new BoardPosition(1, -1);
+        }
+        if (dir == DirectionEnum.NE) {
+            intendedDirection = new BoardPosition(-1, 1);
+        }
+        if (dir == DirectionEnum.NW) {
+            intendedDirection = new BoardPosition(-1, -1);
+        }
+        return intendedDirection;
     }
 
     /**
