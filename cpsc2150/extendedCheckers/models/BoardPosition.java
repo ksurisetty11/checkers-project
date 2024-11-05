@@ -59,12 +59,6 @@ public class BoardPosition
             return ((this.row == comparedPosition.row) && (this.column == comparedPosition.column));
         }
         return false;
-        /*
-        returns true if this BoardPosition is equal to the parameter object. Two BoardPositions are equal if their row
-        and column values are the same.
-        hint: it is intentional that this accepts a parameter of type Object. There is a way to check if that parameter
-        Object just happens to be an instance of a BoardPosition.
-         */
     }
 
     /**
@@ -76,9 +70,6 @@ public class BoardPosition
      */
     public String toString() {
         return row + "," + column;
-        /*
-        returns a String representation of the BoardPosition in the format of "row,column"
-         */
     }
 
 }
