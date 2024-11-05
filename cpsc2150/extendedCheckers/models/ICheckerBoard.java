@@ -12,7 +12,17 @@ public interface ICheckerBoard {
     public char whatsAtPos(BoardPosition pos);
 
     default public boolean checkPlayerWin(Character player) {
-
+        HashMap<Character, Integer> pieceCounts = getPieceCounts();
+        Integer numOfPlayerPieces = pieceCounts.get(player);
+        if(numOfPlayerPieces == 0){
+            return false;
+        }
+        else if(player == 'x') {
+            return pieceCounts.get('o') == 0;
+        }
+        else {
+            return pieceCounts.get('x') == 0;
+        }
     }
 
     default public void crownPiece(BoardPosition posOfPlayer) {
