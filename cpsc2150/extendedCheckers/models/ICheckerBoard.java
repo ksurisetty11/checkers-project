@@ -11,6 +11,12 @@ public interface ICheckerBoard {
     public void placePiece(BoardPosition pos, char player);
     public char whatsAtPos(BoardPosition pos);
 
+    /**
+     * Checks if the specified player has won the game. A player only wins if the opponent has no remaining pieces on the board.
+     * @param player, The player character ('x' or 'o') whose win status is to be checked.
+     *                'x' represents one player and ;i; represents the opponent
+     * @return true if the specified player has won otherwise it is false
+     */
     default public boolean checkPlayerWin(Character player) {
         HashMap<Character, Integer> pieceCounts = getPieceCounts();
         Integer numOfPlayerPieces = pieceCounts.get(player);
