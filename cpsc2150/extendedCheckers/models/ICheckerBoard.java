@@ -31,6 +31,11 @@ public interface ICheckerBoard {
         }
     }
 
+    /**
+     * Crowns the piece at the specific board position and promotes it to a "king" piece or "crowned" by changing it to upper case
+     * @param posOfPlayer The position on the board where the player's piece to be crowned is located.
+     * @defines boardRepresentation, an abstract representation of the checkerboard state
+     */
     default public void crownPiece(BoardPosition posOfPlayer) {
         char newCrownedPiece = Character.toUpperCase(whatsAtPos(posOfPlayer));
         placePiece(posOfPlayer, newCrownedPiece);
