@@ -90,9 +90,7 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND board = #board AND pieceCount = #pieceCount
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
-        /*
-        Simple accessor for the viableDirections HashMap.
-         */
+        return viableDirections;
     }
 
     /**
