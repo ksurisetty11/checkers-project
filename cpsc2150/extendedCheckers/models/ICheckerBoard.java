@@ -72,7 +72,21 @@ public interface ICheckerBoard {
      * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions on the checkerboard
      */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
+        HashMap<DirectionEnum, Character> charAtDirection = new HashMap<>();
 
+        BoardPosition posAtNW = new BoardPosition(startingPos.getRow()-1, startingPos.getColumn()-1);
+        charAtDirection.put(DirectionEnum.NW, whatsAtPos(posAtNW));
+
+        BoardPosition posAtNE = new BoardPosition(startingPos.getRow()-1, startingPos.getColumn()+1);
+        charAtDirection.put(DirectionEnum.NE, whatsAtPos(posAtNE));
+
+        BoardPosition posAtSW = new BoardPosition(startingPos.getRow()+1, startingPos.getColumn()-1);
+        charAtDirection.put(DirectionEnum.SW, whatsAtPos(posAtSW));
+
+        BoardPosition posAtSE = new BoardPosition(startingPos.getRow()+1, startingPos.getColumn()+1);
+        charAtDirection.put(DirectionEnum.SE, whatsAtPos(posAtSE));
+
+        return charAtDirection;
     }
 
     //public static BoardPosition getDirection(DirectionEnum dir);
