@@ -41,14 +41,36 @@ public interface ICheckerBoard {
         placePiece(posOfPlayer, newCrownedPiece);
     }
 
+    /**
+     * Moves the piece from the starting position in the specific direction by one space
+     *
+     * @param startingPos The current position of the piece to be moved
+     * @param dir The direction in which to move the piece
+     * @return The new position of the piece after moving one space in the specified direction.
+     * @defines boardRepresentation, an abstract representation of the checkerBoard state
+     */
     default public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
 
     }
 
+    /**
+     * Jumps the piece from the starting position over another piece in the specific direction
+     *
+     * @param startingPos the current position of the piece to be jumped
+     * @param dir the direction in which to jump the piece
+     * @return the new position of the piece after jumping over another piece in the specified direction
+     */
     default public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
 
     }
 
+    /**
+     * Scans the surrounding positions around the starting position
+     *
+     * @param startingPos the position from which to scan surrounding positions
+     * @return a map where each key is a direction and each value is the character present at that position in the specific direction
+     * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions on the checkerboard
+     */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
 
     }
