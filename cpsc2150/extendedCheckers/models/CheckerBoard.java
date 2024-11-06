@@ -102,9 +102,7 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND viableDirections = #viableDirections
      */
     public HashMap<Character, Integer> getPieceCounts() {
-        /*
-        Simple accessor for the getPieceCounts HashMap
-         */
+        return pieceCount;
     }
 
     /**
