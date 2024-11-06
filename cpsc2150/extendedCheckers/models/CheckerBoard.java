@@ -116,10 +116,10 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND viableDirections = #viableDirections
      */
     public void placePiece(BoardPosition pos, char player) {
-        /*
-        A "mutator" for the board 2D array. This should be used for setting a given 2D index within the board 2D array,
-         given by the row and col of the parameter BoardPosition, equal to the char given by player.
-         */
+        int intendedRow = pos.getRow();
+        int intendedColumn = pos.getColumn();
+
+        board[intendedRow][intendedColumn] = player;
     }
 
     /**
