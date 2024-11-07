@@ -99,8 +99,26 @@ public interface ICheckerBoard {
     }
 
     public static BoardPosition getDirection(DirectionEnum dir) {
+        int tempRow = 0;
+        int tempCol = 0;
+        if(dir == DirectionEnum.NE){
+            tempRow = -1;
+            tempCol = 1;
+        }
+        else if(dir == DirectionEnum.NW){]
+            tempRow = -1;
+            tempCol = -1;
+        }
+        else if(dir == DirectionEnum.SE){
+            tempRow = 1;
+            tempCol = 1;
+        }
+        else if(dir == DirectionEnum.SW){
+            tempRow = 1;
+            tempCol = -1;
+        }
 
-
+        return new BoardPosition(tempRow, tempCol);
     }
 
 
