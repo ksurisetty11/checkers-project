@@ -5,6 +5,15 @@ import cpsc2150.extendedCheckers.util.DirectionEnum;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * ICheckerBoard is an interface that contains methods for managing and run the game checkers.
+ * It manages how the pieces interact with each other and move around the board. This interface contains
+ * primary actions that can be performed on a checkerboard.
+ *
+ * @defines board: the internal representation of the board, stored in a private data structure that maintains the current
+ *                  state of each position. This abstract board structure should not be directly accessed in implementations,
+ *                  and methods in this interface provide means of board interaction.
+ */
 public interface ICheckerBoard {
 
     public static final int BOARD_DIMENSIONS = 8;
