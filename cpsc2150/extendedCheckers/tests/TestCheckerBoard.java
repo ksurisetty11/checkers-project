@@ -1,4 +1,4 @@
-package cpsc2150.extendedCheckers.tests.TestCheckerBoard;
+package cpsc2150.extendedCheckers.tests;
 import cpsc2150.extendedCheckers.models.BoardPosition;
 import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.models.ICheckerBoard;
@@ -194,7 +194,7 @@ public class TestCheckerBoard {
     {
        ICheckerBoard board = makeBoard();
         BoardPosition input = new BoardPosition(0,0);
-        char inputPlayer = 'x';
+        char inputPlayer = 'X';
 
         board.placePiece(input, inputPlayer);
 
@@ -355,7 +355,7 @@ public class TestCheckerBoard {
         BoardPosition startPosx = new BoardPosition(3,1);
         BoardPosition startPoso = new BoardPosition(4,0);
         testBoard.placePiece(startPosx, CheckerBoard.PLAYER_ONE);
-        testBoard.placePiece(startPoso, CheckerBoard.PLAYER_ONE);
+        testBoard.placePiece(startPoso, CheckerBoard.PLAYER_TWO);
 
         BoardPosition obsPos = testBoard.movePiece(startPosx, DirectionEnum.SW);
         BoardPosition expPos = new BoardPosition(3,1);
@@ -509,8 +509,8 @@ public class TestCheckerBoard {
         HashMap<DirectionEnum, Character> surroundingPos = board.scanSurroundingPositions(startingPos);
 
         HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
-        expectedSurroundingPos.put(DirectionEnum.NW, 'o');
-        expectedSurroundingPos.put(DirectionEnum.SE, 'o');
+        expectedSurroundingPos.put(DirectionEnum.NW, 'x');
+        expectedSurroundingPos.put(DirectionEnum.SE, ' ');
         expectedSurroundingPos.put(DirectionEnum.SW, ' ');
         expectedSurroundingPos.put(DirectionEnum.NE, ' ');
 
