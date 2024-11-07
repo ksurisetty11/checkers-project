@@ -9,9 +9,30 @@ public interface ICheckerBoard {
 
     public static final int BOARD_DIMENSIONS = 8;
 
+    /**
+     * Retrieves a mapping of pieces to their viable movement direction
+     * @return A hashmap where the key is a character representing a piece type 'X' or 'O' and the value is a list of possible directions that the piece can move
+     */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections();
+
+    /**
+     * Retrieves the count of each type of piece currently on the board
+     * @return A hashmap where each key is a character representing a piece type and each corresponding value is an integer count of pieces of that type
+     */
     public HashMap<Character, Integer> getPieceCounts();
+
+    /**
+     * Places a piece on the board at the specified position
+     * @param pos The BoardPosition where the piece will be placed
+     * @param player A character representing the player piece to be placed
+     */
     public void placePiece(BoardPosition pos, char player);
+
+    /**
+     * Checks what piece is at the specific board position
+     * @param pos The BoardPosition to be checked
+     * @return A character representing the piece the specified position, or a default character if the position is empty
+     */
     public char whatsAtPos(BoardPosition pos);
 
     /**
