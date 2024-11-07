@@ -589,7 +589,7 @@ public class TestCheckerBoard {
     public void test_getDirection_invalidDirection()
     {
        ICheckerBoard board = makeBoard();
-        int expRow = -1;
+        int expRow = 1;
         int expCol = 1;
         DirectionEnum dir = DirectionEnum.SE;
         BoardPosition result = ICheckerBoard.getDirection(dir);
