@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"cpsc2150.extendedCheckers.models"},{"l":"cpsc2150.extendedCheckers.tests"},{"l":"cpsc2150.extendedCheckers.util"},{"l":"cpsc2150.extendedCheckers.views"}];updateSearchResults();
