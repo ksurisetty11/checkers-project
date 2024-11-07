@@ -70,8 +70,15 @@ public interface ICheckerBoard {
      * @defines boardRepresentation, an abstract representation of the checkerboard state
      */
     default public void crownPiece(BoardPosition posOfPlayer) {
-        char newCrownedPiece = Character.toUpperCase(whatsAtPos(posOfPlayer));
-        placePiece(posOfPlayer, newCrownedPiece);
+        char player = whatsAtPos(posOfPlayer);
+        int originRow = 0;
+        boolean xAcross = (player == CheckerBoard.PLAYER_ONE && posOfPlayer.getRow() == CheckerBoard.ROW_NUM);
+        boolean oAcross = (player == CheckerBoard.PLAYER_TWO && posOfPlayer.getRow() == originRow);
+        if (xAcross || oAcross)
+        {
+            char newCrownedPiece = Character.toUpperCase(whatsAtPos(posOfPlayer));
+            placePiece(posOfPlayer, newCrownedPiece);
+        }
     }
 
     /**
