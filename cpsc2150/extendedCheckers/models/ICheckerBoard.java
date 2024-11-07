@@ -50,7 +50,16 @@ public interface ICheckerBoard {
      * @defines boardRepresentation, an abstract representation of the checkerBoard state
      */
     default public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
+        BoardPosition intendedDirection = getDirection(dir);
+        int intendedRow = startingPos.getRow() + intendedDirection.getRow();
+        int intendedCol = startingPos.getColumn() + intendedDirection.getColumn();
+        char playerPiece = whatsAtPos(startingPos);
 
+        BoardPosition endingPos = new BoardPosition(intendedRow, intendedCol);
+        placePiece(startingPos, CheckerBoard.EMPTY_POS);
+        placePiece(endingPos, playerPiece);
+
+        return endingPos;
     }
 
     /**
@@ -89,7 +98,10 @@ public interface ICheckerBoard {
         return charAtDirection;
     }
 
-    //public static BoardPosition getDirection(DirectionEnum dir);
+    public static BoardPosition getDirection(DirectionEnum dir) {
+
+
+    }
 
 
 }
