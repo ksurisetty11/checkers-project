@@ -69,7 +69,7 @@ public interface ICheckerBoard {
      *
      * @param startingPos the position from which to scan surrounding positions
      * @return a map where each key is a direction and each value is the character present at that position in the specific direction
-     * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions on the checkerboard
+     * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions on the checkerboardgit
      */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
 
