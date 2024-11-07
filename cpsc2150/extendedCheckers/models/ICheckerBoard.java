@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface ICheckerBoard {
+
+    public static final int BOARD_DIMENSIONS = 8;
+
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections();
     public HashMap<Character, Integer> getPieceCounts();
     public void placePiece(BoardPosition pos, char player);
@@ -70,7 +73,7 @@ public interface ICheckerBoard {
      * @return the new position of the piece after jumping over another piece in the specified direction
      */
     default public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
-
+        //
     }
 
     /**
@@ -99,8 +102,26 @@ public interface ICheckerBoard {
     }
 
     public static BoardPosition getDirection(DirectionEnum dir) {
+        int tempRow = 0;
+        int tempCol = 0;
+        if(dir == DirectionEnum.NE){
+            tempRow = -1;
+            tempCol = 1;
+        }
+        else if(dir == DirectionEnum.NW){
+            tempRow = -1;
+            tempCol = -1;
+        }
+        else if(dir == DirectionEnum.SE){
+            tempRow = 1;
+            tempCol = 1;
+        }
+        else if(dir == DirectionEnum.SW){
+            tempRow = 1;
+            tempCol = -1;
+        }
 
-
+        return new BoardPosition(tempRow, tempCol);
     }
 
 
