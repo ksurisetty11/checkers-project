@@ -90,9 +90,7 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND board = #board AND pieceCount = #pieceCount
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
-        /*
-        Simple accessor for the viableDirections HashMap.
-         */
+        return viableDirections;
     }
 
     /**
@@ -104,9 +102,7 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND viableDirections = #viableDirections
      */
     public HashMap<Character, Integer> getPieceCounts() {
-        /*
-        Simple accessor for the getPieceCounts HashMap
-         */
+        return pieceCount;
     }
 
     /**
@@ -120,10 +116,10 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND viableDirections = #viableDirections
      */
     public void placePiece(BoardPosition pos, char player) {
-        /*
-        A "mutator" for the board 2D array. This should be used for setting a given 2D index within the board 2D array,
-         given by the row and col of the parameter BoardPosition, equal to the char given by player.
-         */
+        int intendedRow = pos.getRow();
+        int intendedColumn = pos.getColumn();
+
+        board[intendedRow][intendedColumn] = player;
     }
 
     /**
@@ -137,10 +133,9 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND viableDirections = #viableDirections
      */
     public char whatsAtPos(BoardPosition pos) {
-        /*
-        an "accessor" for the board 2D array. Returns what is at the position given by the row and col of the BoardPosition
-        parameter.
-         */
+        int intendedRow = pos.getRow();
+        int intendedCol = pos.getColumn();
+        return board[intendedRow][intendedCol];
     }
 
     /**
@@ -170,10 +165,8 @@ public class CheckerBoard extends AbsCheckerBoard
      * pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public void crownPiece(BoardPosition posOfPlayer) {
-        /*
-        "crowns" a piece by converting the char at the position on the board, given by the posOfPlayer parameter, to an
-        uppercase equivalent of the char.
-         */
+        char playerChar = Character.toUpperCase(board[posOfPlayer.getRow()][posOfPlayer.getColumn()]);
+        board[posOfPlayer.getRow()][posOfPlayer.getColumn()] = playerChar;
     }
 
     /**

@@ -50,7 +50,16 @@ public interface ICheckerBoard {
      * @defines boardRepresentation, an abstract representation of the checkerBoard state
      */
     default public BoardPosition movePiece(BoardPosition startingPos, DirectionEnum dir) {
+        BoardPosition intendedDirection = getDirection(dir);
+        int intendedRow = startingPos.getRow() + intendedDirection.getRow();
+        int intendedCol = startingPos.getColumn() + intendedDirection.getColumn();
+        char playerPiece = whatsAtPos(startingPos);
 
+        BoardPosition endingPos = new BoardPosition(intendedRow, intendedCol);
+        placePiece(startingPos, CheckerBoard.EMPTY_POS);
+        placePiece(endingPos, playerPiece);
+
+        return endingPos;
     }
 
     /**
@@ -72,10 +81,27 @@ public interface ICheckerBoard {
      * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions on the checkerboardgit
      */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
+        HashMap<DirectionEnum, Character> charAtDirection = new HashMap<>();
 
+        BoardPosition posAtNW = new BoardPosition(startingPos.getRow()-1, startingPos.getColumn()-1);
+        charAtDirection.put(DirectionEnum.NW, whatsAtPos(posAtNW));
+
+        BoardPosition posAtNE = new BoardPosition(startingPos.getRow()-1, startingPos.getColumn()+1);
+        charAtDirection.put(DirectionEnum.NE, whatsAtPos(posAtNE));
+
+        BoardPosition posAtSW = new BoardPosition(startingPos.getRow()+1, startingPos.getColumn()-1);
+        charAtDirection.put(DirectionEnum.SW, whatsAtPos(posAtSW));
+
+        BoardPosition posAtSE = new BoardPosition(startingPos.getRow()+1, startingPos.getColumn()+1);
+        charAtDirection.put(DirectionEnum.SE, whatsAtPos(posAtSE));
+
+        return charAtDirection;
     }
 
-    //public static BoardPosition getDirection(DirectionEnum dir);
+    public static BoardPosition getDirection(DirectionEnum dir) {
+
+
+    }
 
 
 }
