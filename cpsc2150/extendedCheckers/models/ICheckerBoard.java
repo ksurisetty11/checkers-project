@@ -106,6 +106,10 @@ public interface ICheckerBoard {
         placePiece(jumpedPos, ' ');
         placePiece(moveTo, piece);
 
+        HashMap<Character, Integer> playerPieceCount = getPieceCounts();
+        int totalPieces = playerPieceCount.get(piece);
+        playerPieceCount.put(piece, totalPieces - 1);
+
         return moveTo;
     }
 
@@ -156,6 +160,5 @@ public interface ICheckerBoard {
 
         return new BoardPosition(tempRow, tempCol);
     }
-
 
 }
