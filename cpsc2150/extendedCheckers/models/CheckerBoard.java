@@ -133,10 +133,9 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND viableDirections = #viableDirections
      */
     public char whatsAtPos(BoardPosition pos) {
-        /*
-        an "accessor" for the board 2D array. Returns what is at the position given by the row and col of the BoardPosition
-        parameter.
-         */
+        int intendedRow = pos.getRow();
+        int intendedCol = pos.getColumn();
+        return board[intendedRow][intendedCol];
     }
 
     /**
