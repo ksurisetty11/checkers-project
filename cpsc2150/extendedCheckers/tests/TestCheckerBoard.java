@@ -1,4 +1,4 @@
-package cpsc2150.extendedCheckers.tests;
+package cpsc2150.extendedCheckers.tests.TestCheckerBoard;
 import cpsc2150.extendedCheckers.models.BoardPosition;
 import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.models.ICheckerBoard;
@@ -592,7 +592,7 @@ public class TestCheckerBoard {
         int expRow = -1;
         int expCol = 1;
         DirectionEnum dir = DirectionEnum.SE;
-        BoardPosition result = CheckerBoard.getDirection(dir);
+        BoardPosition result = ICheckerBoard.getDirection(dir);
 
         assertEquals(expRow, result.getRow());
         assertEquals(expCol, result.getColumn());
