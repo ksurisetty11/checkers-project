@@ -1,6 +1,7 @@
 package cpsc2150.extendedCheckers.tests;
 import cpsc2150.extendedCheckers.models.BoardPosition;
 import cpsc2150.extendedCheckers.models.CheckerBoard;
+import cpsc2150.extendedCheckers.models.ICheckerBoard;
 import cpsc2150.extendedCheckers.util.DirectionEnum;
 import org.junit.*;
 
@@ -11,10 +12,16 @@ import static org.junit.Assert.*;
 
 
 public class TestCheckerBoard {
+
+    private ICheckerBoard makeBoard(){
+        return new CheckerBoard();
+    }
+
+
     @Test
     public void test_CheckerBoard_Constructor()
     {
-        CheckerBoard obsCb = new CheckerBoard();
+        ICheckerBoard obsCb = makeBoard();
         String obs = obsCb.toString();
         char[][] expBoard = {{'x', '*', 'x', '*', 'x', '*', 'x', '*'},
                             {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
@@ -33,7 +40,7 @@ public class TestCheckerBoard {
     {
         BoardPosition input = new BoardPosition(0,0);
         char exp = 'x';
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
     }
@@ -43,7 +50,7 @@ public class TestCheckerBoard {
     {
         BoardPosition input = new BoardPosition(7,7);
         char exp = 'o';
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
     }
@@ -53,7 +60,7 @@ public class TestCheckerBoard {
     {
         BoardPosition input = new BoardPosition(2,4);
         char exp = 'x';
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
     }
@@ -63,7 +70,7 @@ public class TestCheckerBoard {
     {
         BoardPosition input = new BoardPosition(0,1);
         char exp = '*';
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
     }
@@ -73,7 +80,7 @@ public class TestCheckerBoard {
     {
         BoardPosition input = new BoardPosition(4,0);
         char exp = ' ';
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
     }
@@ -81,7 +88,7 @@ public class TestCheckerBoard {
     @Test
     public void test_placePiece_EmptyTile_playerX()
     {
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         BoardPosition input = new BoardPosition(3,3);
         char inputPlayer = 'x';
 
@@ -107,7 +114,7 @@ public class TestCheckerBoard {
     @Test
     public void test_placePiece_CornerTile_replaceX_withO()
     {
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         BoardPosition input = new BoardPosition(7,7);
         char inputPlayer = 'x';
 
@@ -133,7 +140,7 @@ public class TestCheckerBoard {
     @Test
     public void test_placePiece_WhiteTile()
     {
-        CheckerBoard board = new CheckerBoard();
+        ICheckerBoard board = makeBoard();
         BoardPosition input = new BoardPosition(3,0);
         char inputPlayer = 'x';
 
@@ -159,7 +166,7 @@ public class TestCheckerBoard {
     @Test
     public void test_placePiece_MiddleTile_replaceX_withO()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
         BoardPosition input = new BoardPosition(2,4);
         char inputPlayer = 'o';
 
@@ -185,7 +192,7 @@ public class TestCheckerBoard {
     @Test
     public void test_placePiece_CornerTile_replacex_withX()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
         BoardPosition input = new BoardPosition(0,0);
         char inputPlayer = 'x';
 
@@ -214,7 +221,7 @@ public class TestCheckerBoard {
         HashMap<Character, Integer> exp = new HashMap<>();
         exp.put('x', 12);
         exp.put('o', 12);
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
         HashMap<Character, Integer> obs = board.getPieceCounts();
         assertEquals(exp, obs);
     }
@@ -222,7 +229,7 @@ public class TestCheckerBoard {
     @Test
     public void test_getViableDirections_8x8board()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
         HashMap<Character, ArrayList<DirectionEnum>> actual = board.getViableDirections();
         HashMap<Character, ArrayList<DirectionEnum>> expected = new HashMap<>();
 
@@ -243,7 +250,7 @@ public class TestCheckerBoard {
     @Test
     public void test_checkPlayerWin_no_opponent_pieces_left()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
         //Eliminating o pieces
         for (int row = 5; row < CheckerBoard.ROW_NUM; row++) {
             for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
@@ -259,7 +266,7 @@ public class TestCheckerBoard {
     @Test
     public void test_checkPlayerWin_opponent_pieces_exist()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
         boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
         assertFalse(hasWon);
     }
@@ -267,7 +274,7 @@ public class TestCheckerBoard {
     @Test
     public void test_crownPiece_playerx_on_opposing_side()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
         BoardPosition targetPos = new BoardPosition(7,1);
         testBoard.placePiece(targetPos, 'x');
 
@@ -288,7 +295,7 @@ public class TestCheckerBoard {
     @Test
     public void test_crownPiece_playerx_on_player_side()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
         BoardPosition targetPos = new BoardPosition(0,0);
         testBoard.crownPiece(targetPos);
         char obsChar = testBoard.whatsAtPos(targetPos);
@@ -299,7 +306,7 @@ public class TestCheckerBoard {
     @Test
     public void test_crownPiece_playerx_already_crowned()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
         testBoard.placePiece(new BoardPosition(2, 0), CheckerBoard.EMPTY_POS);
         testBoard.placePiece(new BoardPosition(5, 7), CheckerBoard.EMPTY_POS);
         testBoard.placePiece(new BoardPosition(4, 6), CheckerBoard.PLAYER_TWO);
@@ -315,7 +322,7 @@ public class TestCheckerBoard {
     @Test
     public void test_movePiece_in_empty_spot()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
         BoardPosition startPos = new BoardPosition(2,0);
         BoardPosition endPos = board.movePiece(startPos, DirectionEnum.SE);
 
@@ -340,7 +347,7 @@ public class TestCheckerBoard {
     public void test_movePiece_in_occupied_spot()
     {
         //Moving pieces to match the initial state
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
 
         testBoard.placePiece(new BoardPosition(2,0), CheckerBoard.EMPTY_POS);
         testBoard.placePiece(new BoardPosition(5,1), CheckerBoard.EMPTY_POS);
@@ -372,7 +379,7 @@ public class TestCheckerBoard {
     @Test
     public void test_movePiece_SW_out_of_bounds()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
 
         BoardPosition startPos = new BoardPosition(2,0);
         BoardPosition obsPos = testBoard.movePiece(startPos, DirectionEnum.SW);
@@ -398,7 +405,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SEjump()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
@@ -423,7 +430,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_SWjump()
     {
-        CheckerBoard testBoard = new CheckerBoard();
+       ICheckerBoard testBoard = makeBoard();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
@@ -447,7 +454,7 @@ public class TestCheckerBoard {
     @Test
     public void test_jumpPiece_invalidMove_noPieceToJump()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
@@ -481,7 +488,7 @@ public class TestCheckerBoard {
     @Test
     public void test_scanSurroundingPositions_validMoves()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
@@ -512,7 +519,7 @@ public class TestCheckerBoard {
 
     @Test
     public void test_scanSurroundingPositions_oSurroundings() {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
@@ -549,7 +556,7 @@ public class TestCheckerBoard {
 @Test
     public void test_scanSurroundingPositions_noValidMove()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
@@ -581,7 +588,7 @@ public class TestCheckerBoard {
     @Test
     public void test_getDirection_invalidDirection()
     {
-        CheckerBoard board = new CheckerBoard();
+       ICheckerBoard board = makeBoard();
         int expRow = -1;
         int expCol = 1;
         DirectionEnum dir = DirectionEnum.SE;
