@@ -112,7 +112,8 @@ public class CheckerBoard extends AbsCheckerBoard
      * @param player char that the given index will be set to
      *
      * @pre [pos is valid within board]
-     * @post board[pos.getRow()][pos.getCol()] = player AND pieceCount = #pieceCount
+     * @post board[pos.getRow()][pos.getCol()] = player AND pieceCount = [#pieceCount IFF pos is empty,
+     * else the player losing a piece]
      * AND viableDirections = #viableDirections
      */
     public void placePiece(BoardPosition pos, char player) {
