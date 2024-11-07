@@ -279,22 +279,17 @@ public class CheckerBoard extends AbsCheckerBoard
      */
     public String toString()
     {
-        /*
-        returns a String representation of the checkerboard with all the pieces on it and their current positions. there
-        should be a "header" line to display all the column numbers and a "header column" that displays all the row
-        numbers. In essence, it should look like this:
-
-        |  | 0| 1| 2| 3| 4| 5| 6| 7|
-        |0 |x |* |x |* |x |* |x |* |
-        |1 |* |x |* |x |* |x |* |x |
-        |2 |x |* |x |* |x |* |x |* |
-        |3 |* |  |* |  |* |  |* |  |
-        |4 |  |* |  |* |  |* |  |* |
-        |5 |* |o |* |o |* |o |* |o |
-        |6 |o |* |o |* |o |* |o |* |
-        |7 |* |o |* |o |* |o |* |o |
-
-        THIS FUNCTION DOES NOT PRINT TO THE CONSOLE OR MAKE ANY KIND OF SYSTEM.OUT.PRINTLN CALLS
-         */
+        StringBuilder currentBoard = new StringBuilder("|  ");
+        for(int columnGuide = 0; columnGuide < COL_NUM; columnGuide++){
+            currentBoard.append("| ").append(columnGuide);
+        }
+        currentBoard.append("|");
+        for(int row = 0; row < ROW_NUM; row++){
+            currentBoard.append("\n|").append(row).append(" |");
+            for(int col = 0; col < COL_NUM; col++) {
+                currentBoard.append(board[row][col]).append(" |");
+            }
+        }
+        return currentBoard.toString();
     }
 }
