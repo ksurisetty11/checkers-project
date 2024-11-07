@@ -119,7 +119,21 @@ public class CheckerBoard extends AbsCheckerBoard
         int intendedRow = pos.getRow();
         int intendedColumn = pos.getColumn();
 
+        char piece = whatsAtPos(pos);
+
         board[intendedRow][intendedColumn] = player;
+
+        HashMap<Character, Integer> playerPieceCount = getPieceCounts();
+
+        if(piece != ' ') {
+            int currentPieceCount = playerPieceCount.getOrDefault(piece, 0);
+            playerPieceCount.put(piece, currentPieceCount - 1);
+        }
+
+        if(player != ' '){
+            int newPieceCount = playerPieceCount.getOrDefault(player, 0);
+            playerPieceCount.put(player, newPieceCount + 1);
+        }
     }
 
     /**

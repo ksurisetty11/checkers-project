@@ -103,21 +103,30 @@ public interface ICheckerBoard {
      * @return the new position of the piece after jumping over another piece in the specified direction
      */
     default public BoardPosition jumpPiece(BoardPosition startingPos, DirectionEnum dir) {
-        //not sure how to update pieceCount
-
         char piece = whatsAtPos(startingPos);
         BoardPosition direction = getDirection(dir);
 
         BoardPosition jumpedPos = new BoardPosition(startingPos.getRow() + direction.getRow(),startingPos.getColumn() + direction.getColumn());
         BoardPosition moveTo = new BoardPosition(startingPos.getRow() + (2 * direction.getRow()),startingPos.getColumn() + (2 * direction.getColumn()));
 
+        char jumpedPiece = whatsAtPos(jumpedPos);
+
+        if (jumpedPiece == ' ' || jumpedPiece == piece) {
+            //not sure what to return if trying to jump over invalid piece
+            return startingPos;
+        }
+
         placePiece(startingPos, ' ');
         placePiece(jumpedPos, ' ');
         placePiece(moveTo, piece);
 
         HashMap<Character, Integer> playerPieceCount = getPieceCounts();
-        int totalPieces = playerPieceCount.get(piece);
+        int totalPieces = playerPieceCount.getOrDefault(piece, 0);
         playerPieceCount.put(piece, totalPieces - 1);
+
+
+        int jumpedPieceCount = playerPieceCount.getOrDefault(jumpedPiece, 0);
+        playerPieceCount.put(jumpedPiece, jumpedPieceCount - 1);
 
         return moveTo;
     }
