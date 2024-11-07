@@ -165,10 +165,8 @@ public class CheckerBoard extends AbsCheckerBoard
      * pieceCount = #pieceCount AND viableDirections = #viableDirections
      */
     public void crownPiece(BoardPosition posOfPlayer) {
-        /*
-        "crowns" a piece by converting the char at the position on the board, given by the posOfPlayer parameter, to an
-        uppercase equivalent of the char.
-         */
+        char playerChar = Character.toUpperCase(board[posOfPlayer.getRow()][posOfPlayer.getColumn()]);
+        board[posOfPlayer.getRow()][posOfPlayer.getColumn()] = playerChar;
     }
 
     /**
