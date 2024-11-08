@@ -41,25 +41,34 @@ public class CheckersFE {
             DirectionEnum intendedDir = null;
             do
             {
-                HashMap<DirectionEnum, Character> availableMoves = gameBoard.scanSurroundingPositions(new BoardPosition(startPos.getRow(), startPos.getColumn()));
+                HashMap<DirectionEnum, Character> availableMoves = gameBoard.scanSurroundingPositions(startPos);
                 System.out.println("In which direction do you wish to move the piece?\n" +
                         "Enter one of these options:");
 
-                //Loop through hashmap and only show direction
-                //char crownedCharX = 'X' char crownedCharO = 'O';
-                if (gameBoard.whatsAtPos(startPos) == Character.toUpperCase(whichPlayer)) {
-                    for (DirectionEnum allDir : availableMoves.keySet()) { System.out.println(allDir); }
+                for (DirectionEnum possibleDirections : gameBoard.getViableDirections().get(startPos)) {
+                    if (availableMoves.containsKey(possibleDirections)) {
+                        System.out.println(possibleDirections);
+                    }
                 }
-                else {
-                    // x can only go sw , se
-                    //o can only go ne nw
-                    //use availableMoves to show the only available directions for these pieces
-                }
-                String directionToMove = readInInput.next().toLowerCase();
-                intendedDir = DirectionEnum.valueOf(directionToMove);
 
-                if (availableMoves.containsKey(directionToMove))
-                {
+                String directionToMove = readInInput.next().toUpperCase();
+
+                if (directionToMove.contains("NE" )) {
+                    intendedDir = DirectionEnum.NE;
+                } else if (directionToMove.contains("NW")) {
+                    intendedDir = DirectionEnum.NW;
+                } else if (directionToMove.contains("SE")) {
+                    intendedDir = DirectionEnum.SE;
+                } else if (directionToMove.contains("SW")) {
+                    intendedDir = DirectionEnum.SW;
+                } else{
+                    System.out.println("Invalid direction.");
+                }
+                intendedDir = DirectionEnum.valueOf(directionToMove);
+                if (!(availableMoves.containsKey(intendedDir))) {
+                    System.out.println("Unable to move in that direction.");
+                }
+                if (availableMoves.containsKey(directionToMove)) {
                     isValidDirection = true;
                 }
 
