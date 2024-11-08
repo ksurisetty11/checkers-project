@@ -46,9 +46,14 @@ public class CheckersFE {
                         "Enter one of these options:");
 
                 //Loop through hashmap and only show direction
-                for (DirectionEnum allDir : availableMoves.keySet())
-                {
-                    System.out.println(allDir);
+                //char crownedCharX = 'X' char crownedCharO = 'O';
+                if (gameBoard.whatsAtPos(startPos) == Character.toUpperCase(whichPlayer)) {
+                    for (DirectionEnum allDir : availableMoves.keySet()) { System.out.println(allDir); }
+                }
+                else {
+                    // x can only go sw , se
+                    //o can only go ne nw
+                    //use availableMoves to show the only available directions for these pieces
                 }
                 String directionToMove = readInInput.next().toLowerCase();
                 intendedDir = DirectionEnum.valueOf(directionToMove);
@@ -79,7 +84,7 @@ public class CheckersFE {
                 boolean keepPlaying = true;
                 boolean endGame = true;
 
-                //Input validation for accepting or declinging playing the game again
+                //Input validation for accepting or declining playing the game again
                 do
                 {
                     System.out.println("Would you like to play again? Enter 'Y' or 'N'");
@@ -113,25 +118,27 @@ public class CheckersFE {
      * @return
      */
     private static BoardPosition getPieceCoordinates(char whichPlayer, ICheckerBoard gameBoard) {
-        int row, col;
-        while (true) {
+        int inputRow, inputCol;
+        boolean isValidPiece = false;
+        do {
             System.out.println("Player " + whichPlayer + ", which piece do you wish to move?" +
                     "\nEnter the row followed by a space followed by the column.");
-            row = readInInput.nextInt();
-            col = readInInput.nextInt();
+            inputRow = readInInput.nextInt();
+            inputCol = readInInput.nextInt();
 
-            boolean withinBounds = (row >= 0 && row < CheckerBoard.ROW_NUM) && (col >= 0 && col < CheckerBoard.COL_NUM);
+            boolean withinBounds = (inputRow >= 0 && inputRow < CheckerBoard.ROW_NUM) && (inputCol >= 0 && inputCol < CheckerBoard.COL_NUM);
             if (!withinBounds) {
                 System.out.println("Out of bounds! Choose a different coordinate.");
                 continue;
             }
 
-            char pieceAtPos = gameBoard.whatsAtPos(new BoardPosition(row, col));
+            char pieceAtPos = gameBoard.whatsAtPos(new BoardPosition(inputRow, inputCol));
             if (pieceAtPos == whichPlayer) {
-                return new BoardPosition(row, col);
+                isValidPiece = true;
             } else {
                 System.out.println("Player " + whichPlayer + ", that isn't your piece. Pick one of your pieces.");
             }
-        }
+        } while (!isValidPiece);
+        return new BoardPosition(inputRow, inputCol);
     }
 }
