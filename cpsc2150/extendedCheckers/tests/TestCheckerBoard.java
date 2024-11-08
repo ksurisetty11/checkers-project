@@ -418,13 +418,12 @@ public class TestCheckerBoard {
         //Manually place the pieces
         testBoard.placePiece(new BoardPosition(4,4), 'x');
         testBoard.placePiece(new BoardPosition(5,5), 'o');
-        testBoard.placePiece(new BoardPosition(6,4), 'o');
 
         BoardPosition startingPos = new BoardPosition(4,4);
         DirectionEnum dir = DirectionEnum.SE;
         BoardPosition obsPos = testBoard.jumpPiece(startingPos, dir);
 
-        assertEquals(new BoardPosition(2,6), obsPos);
+        assertEquals(new BoardPosition(6,6), obsPos);
     }
 
     @Test

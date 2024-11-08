@@ -96,10 +96,14 @@ public interface ICheckerBoard {
         char playerPiece = whatsAtPos(startingPos);
 
         BoardPosition endingPos = new BoardPosition(intendedRow, intendedCol);
-        placePiece(startingPos, CheckerBoard.EMPTY_POS);
-        placePiece(endingPos, playerPiece);
-
-        return endingPos;
+        if (((endingPos.getRow() < CheckerBoard.ROW_NUM) && endingPos.getRow() >= 0)
+            && ((endingPos.getColumn() < CheckerBoard.COL_NUM) && (endingPos.getColumn() >= 0) &&
+            (whatsAtPos(endingPos) == CheckerBoard.EMPTY_POS))) {
+                placePiece(startingPos, CheckerBoard.EMPTY_POS);
+                placePiece(endingPos, playerPiece);
+                return endingPos;
+        }
+        return startingPos;
     }
 
     /**
