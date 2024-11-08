@@ -151,19 +151,28 @@ public interface ICheckerBoard {
      */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
         HashMap<DirectionEnum, Character> charAtDirection = new HashMap<>();
+        ArrayList<DirectionEnum> viableDirections = new ArrayList<>();
+        viableDirections.add(DirectionEnum.SE);
+        viableDirections.add(DirectionEnum.SW);
+        viableDirections.add(DirectionEnum.NE);
+        viableDirections.add(DirectionEnum.NW);
 
-        BoardPosition posAtNW = new BoardPosition(startingPos.getRow()-1, startingPos.getColumn()-1);
-        charAtDirection.put(DirectionEnum.NW, whatsAtPos(posAtNW));
-
-        BoardPosition posAtNE = new BoardPosition(startingPos.getRow()-1, startingPos.getColumn()+1);
-        charAtDirection.put(DirectionEnum.NE, whatsAtPos(posAtNE));
-
-        BoardPosition posAtSW = new BoardPosition(startingPos.getRow()+1, startingPos.getColumn()-1);
-        charAtDirection.put(DirectionEnum.SW, whatsAtPos(posAtSW));
-
-        BoardPosition posAtSE = new BoardPosition(startingPos.getRow()+1, startingPos.getColumn()+1);
-        charAtDirection.put(DirectionEnum.SE, whatsAtPos(posAtSE));
-
+        for(DirectionEnum direction : viableDirections)
+        {
+           BoardPosition possibleMove = getDirection(direction);
+           BoardPosition possiblePos = new BoardPosition(
+                   startingPos.getRow() + possibleMove.getRow(), startingPos.getColumn() + possibleMove.getColumn());
+           boolean rowBounds = (possiblePos.getRow() < CheckerBoard.ROW_NUM) && (possiblePos.getRow() >= 0);
+           boolean colBounds = (possiblePos.getColumn() < CheckerBoard.COL_NUM) && (possiblePos.getColumn() >= 0);
+           if(rowBounds && colBounds)
+           {
+               charAtDirection.put(direction, whatsAtPos(possiblePos));
+           }
+           else
+           {
+               charAtDirection.put(direction, ' ');
+           }
+        }
         return charAtDirection;
     }
 
