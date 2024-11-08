@@ -71,12 +71,20 @@ public class CheckerBoard extends AbsCheckerBoard
         viableDirections = new HashMap<>();
         ArrayList<DirectionEnum> xPlayerDirections = new ArrayList<>();
         ArrayList<DirectionEnum> oPlayerDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> allDirections = new ArrayList<>();
 
         xPlayerDirections.add(DirectionEnum.SE);
         xPlayerDirections.add(DirectionEnum.SW);
         oPlayerDirections.add(DirectionEnum.NE);
         oPlayerDirections.add(DirectionEnum.NW);
 
+        allDirections.add(DirectionEnum.SE);
+        allDirections.add(DirectionEnum.SW);
+        allDirections.add(DirectionEnum.NE);
+        allDirections.add(DirectionEnum.NW);
+
+        viableDirections.put('X', allDirections);
+        viableDirections.put('O', allDirections);
         viableDirections.put('x', xPlayerDirections);
         viableDirections.put('o', oPlayerDirections);
     }
