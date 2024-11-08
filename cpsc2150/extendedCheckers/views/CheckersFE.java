@@ -4,6 +4,7 @@ import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.models.ICheckerBoard;
 import cpsc2150.extendedCheckers.util.DirectionEnum;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -45,10 +46,17 @@ public class CheckersFE {
                 System.out.println("In which direction do you wish to move the piece?\n" +
                         "Enter one of these options:");
 
-                for (DirectionEnum possibleDirections : gameBoard.getViableDirections().get(startPos)) {
-                    if (availableMoves.containsKey(possibleDirections)) {
-                        System.out.println(possibleDirections);
+                //Do a null check
+                ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(startPos);
+
+                if (possibleMoves != null) {
+                    for (DirectionEnum possibleDirections : possibleMoves) {
+                        if (availableMoves.containsKey(possibleDirections)) {
+                            System.out.println(possibleDirections);
+                        }
                     }
+                } else {
+                    System.out.println("There are no possible moves");
                 }
 
                 String directionToMove = readInInput.next().toUpperCase();
