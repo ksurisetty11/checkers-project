@@ -13,10 +13,10 @@ import static org.junit.Assert.*;
 
 public class TestCheckerBoard {
 
-    private ICheckerBoard makeBoard(){
+    private ICheckerBoard makeBoard()
+    {
         return new CheckerBoard();
     }
-
 
     @Test
     public void test_CheckerBoard_Constructor()
@@ -439,7 +439,7 @@ public class TestCheckerBoard {
     {
        ICheckerBoard testBoard = makeBoard();
 
-        // Empty the board
+        //Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
             for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
                 if ((row + col) % 2 == 0) {
@@ -447,6 +447,7 @@ public class TestCheckerBoard {
                 }
             }
         }
+
         //Manually place the pieces
         testBoard.placePiece(new BoardPosition(2,2), 'x');
         testBoard.placePiece(new BoardPosition(3,1), 'o');
@@ -578,8 +579,8 @@ public class TestCheckerBoard {
         board.placePiece(new BoardPosition(0, 0), 'x');
 
         BoardPosition startingPosition = new BoardPosition(0,0);
-        //Assuming board has one 'x' at (0,0)
 
+        //Assuming board has one 'x' at (0,0)
         HashMap<DirectionEnum, Character> surroundingPositions = board.scanSurroundingPositions(startingPosition);
 
         // Expected positions and values
