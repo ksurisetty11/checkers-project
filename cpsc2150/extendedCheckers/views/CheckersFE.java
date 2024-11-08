@@ -46,7 +46,7 @@ public class CheckersFE {
                         "Enter one of these options:");
 
                 //Do a null check
-                ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(startPos);
+                ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(whichPlayer);
 
                 if (possibleMoves != null) {
                     for (DirectionEnum possibleDirections : possibleMoves) {
