@@ -72,7 +72,7 @@ public interface ICheckerBoard {
     default public void crownPiece(BoardPosition posOfPlayer) {
         char player = whatsAtPos(posOfPlayer);
         int originRow = 0;
-        boolean xAcross = (player == CheckerBoard.PLAYER_ONE && posOfPlayer.getRow() == CheckerBoard.ROW_NUM);
+        boolean xAcross = (player == CheckerBoard.PLAYER_ONE && posOfPlayer.getRow() == CheckerBoard.ROW_NUM - 1);
         boolean oAcross = (player == CheckerBoard.PLAYER_TWO && posOfPlayer.getRow() == originRow);
         if (xAcross || oAcross)
         {
