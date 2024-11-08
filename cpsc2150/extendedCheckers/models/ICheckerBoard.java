@@ -20,6 +20,7 @@ public interface ICheckerBoard {
 
     /**
      * Retrieves a mapping of pieces to their viable movement direction
+     *
      * @return A hashmap where the key is a character representing a piece type 'X' or 'O' and the value is a list of
      *          possible directions that the piece can move
      */
@@ -27,6 +28,7 @@ public interface ICheckerBoard {
 
     /**
      * Retrieves the count of each type of piece currently on the board
+     *
      * @return A hashmap where each key is a character representing a piece type and each corresponding value is an
      *         integer count of pieces of that type
      */
@@ -34,6 +36,7 @@ public interface ICheckerBoard {
 
     /**
      * Places a piece on the board at the specified position
+     *
      * @param pos The BoardPosition where the piece will be placed
      * @param player A character representing the player piece to be placed
      */
@@ -41,15 +44,17 @@ public interface ICheckerBoard {
 
     /**
      * Checks what piece is at the specific board position
+     *
      * @param pos The BoardPosition to be checked
-     * @return A character representing the piece of the specified position, or a default character if the
-     *         position is empty
+     * @return A character representing the piece of the specified position, or a default character
+     *         if the position is empty
      */
     public char whatsAtPos(BoardPosition pos);
 
     /**
-     * Checks if the specified player has won the game. A player only wins if the opponent has no remaining pieces on
-     * the board.
+     * Checks if the specified player has won the game. A player only wins if the opponent has no
+     * remaining pieces on the board.
+     *
      * @param player, The player character ('x' or 'o') whose win status is to be checked.
      *                'x' represents one player and ;i; represents the opponent
      * @return true if the specified player has won otherwise it is false
@@ -57,20 +62,24 @@ public interface ICheckerBoard {
     default public boolean checkPlayerWin(Character player) {
         HashMap<Character, Integer> pieceCounts = getPieceCounts();
         Integer numOfPlayerPieces = pieceCounts.get(player);
-        if(numOfPlayerPieces == 0){
+        if (numOfPlayerPieces == 0)
+        {
             return false;
         }
-        else if(player == 'x') {
-            return pieceCounts.get('o') == 0;
+        else if(player == CheckerBoard.PLAYER_ONE)
+        {
+            return pieceCounts.get(CheckerBoard.PLAYER_TWO) == 0;
         }
-        else {
-            return pieceCounts.get('x') == 0;
+        else
+        {
+            return pieceCounts.get(CheckerBoard.PLAYER_ONE) == 0;
         }
     }
 
     /**
      * Crowns the piece at the specific board position and promotes it to a "king" piece or "crowned" by changing it to
      * upper case
+     *
      * @param posOfPlayer The position on the board where the player's piece to be crowned is located.
      * @defines boardRepresentation, an abstract representation of the checkerboard state
      */
@@ -101,9 +110,11 @@ public interface ICheckerBoard {
         char playerPiece = whatsAtPos(startingPos);
 
         BoardPosition endingPos = new BoardPosition(intendedRow, intendedCol);
-        if (((endingPos.getRow() < CheckerBoard.ROW_NUM) && endingPos.getRow() >= 0)
-            && ((endingPos.getColumn() < CheckerBoard.COL_NUM) && (endingPos.getColumn() >= 0) &&
-            (whatsAtPos(endingPos) == CheckerBoard.EMPTY_POS))) {
+        boolean withinRowBoundaries = endingPos.getRow() < CheckerBoard.ROW_NUM && endingPos.getRow() >= 0;
+        boolean withinColBoundaries = endingPos.getColumn() < CheckerBoard.COL_NUM && endingPos.getColumn() >= 0;
+
+        if (withinRowBoundaries && withinColBoundaries && (whatsAtPos(endingPos) == CheckerBoard.EMPTY_POS))
+        {
                 placePiece(startingPos, CheckerBoard.EMPTY_POS);
                 placePiece(endingPos, playerPiece);
                 return endingPos;
@@ -122,8 +133,10 @@ public interface ICheckerBoard {
         char piece = whatsAtPos(startingPos);
         BoardPosition direction = getDirection(dir);
 
-        BoardPosition jumpedPos = new BoardPosition(startingPos.getRow() + direction.getRow(),startingPos.getColumn() + direction.getColumn());
-        BoardPosition moveTo = new BoardPosition(startingPos.getRow() + (2 * direction.getRow()),startingPos.getColumn() + (2 * direction.getColumn()));
+        BoardPosition jumpedPos = new BoardPosition(startingPos.getRow() + direction.getRow(),
+                                 startingPos.getColumn() + direction.getColumn());
+        BoardPosition moveTo = new BoardPosition(startingPos.getRow() + (2 * direction.getRow()),
+                              startingPos.getColumn() + (2 * direction.getColumn()));
 
         char jumpedPiece = whatsAtPos(jumpedPos);
 
@@ -135,11 +148,11 @@ public interface ICheckerBoard {
         int totalPieces = playerPieceCount.getOrDefault(piece, 0);
         playerPieceCount.put(piece, totalPieces);
 
-        if(jumpedPiece != ' ') {
+        if (jumpedPiece != ' ')
+        {
             int jumpedPieceCount = playerPieceCount.getOrDefault(jumpedPiece, 0);
             playerPieceCount.put(jumpedPiece, jumpedPieceCount - 1);
         }
-
         return moveTo;
     }
 
@@ -150,7 +163,7 @@ public interface ICheckerBoard {
      * @return a map where each key is a direction and each value is the character present at that position in the
      *          specific direction
      * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions
-     * on the checkerboardgit
+     * on the checkerboard
      */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
         HashMap<DirectionEnum, Character> charAtDirection = new HashMap<>();
@@ -163,10 +176,11 @@ public interface ICheckerBoard {
         for(DirectionEnum direction : viableDirections)
         {
            BoardPosition possibleMove = getDirection(direction);
-           BoardPosition possiblePos = new BoardPosition(
-                   startingPos.getRow() + possibleMove.getRow(), startingPos.getColumn() + possibleMove.getColumn());
+           BoardPosition possiblePos = new BoardPosition(startingPos.getRow() + possibleMove.getRow(),
+                                      startingPos.getColumn() + possibleMove.getColumn());
            boolean rowBounds = (possiblePos.getRow() < CheckerBoard.ROW_NUM) && (possiblePos.getRow() >= 0);
            boolean colBounds = (possiblePos.getColumn() < CheckerBoard.COL_NUM) && (possiblePos.getColumn() >= 0);
+
            if(rowBounds && colBounds)
            {
                charAtDirection.put(direction, whatsAtPos(possiblePos));
@@ -198,7 +212,6 @@ public interface ICheckerBoard {
             tempRow = 1;
             tempCol = -1;
         }
-
         return new BoardPosition(tempRow, tempCol);
     }
 
