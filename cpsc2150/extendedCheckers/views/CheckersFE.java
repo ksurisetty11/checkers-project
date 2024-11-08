@@ -139,10 +139,14 @@ public class CheckersFE {
     }
 
     /**
+     * Prompts the player to select a piece to move
+     * The method repeatedly asks the player to choose valid coordinates to move their pieces.
+     * @param whichPlayer The character that represents the player 'x' or 'o'
+     * @param gameBoard The checker board that implements the interface
      *
-     * @param whichPlayer
-     * @param gameBoard
-     * @return
+     * @return a BoardPosition object representing the coordinates of the selected piece
+     * @pre whichPlayer needs to be 'x', 'X', 'o', 'O'
+     * @post getPieceCoordinates = BoardPosition [BoardPosition that was chosen by users]
      */
     private static BoardPosition getPieceCoordinates(char whichPlayer, ICheckerBoard gameBoard) {
         int inputRow, inputCol;
