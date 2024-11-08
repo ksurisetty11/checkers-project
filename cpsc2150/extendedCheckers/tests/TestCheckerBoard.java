@@ -451,7 +451,7 @@ public class TestCheckerBoard {
     }
 
     @Test
-    public void test_jumpPiece_invalidMove_noPieceToJump()
+    public void test_jumpPiece_jumpBlankTile()
     {
        ICheckerBoard board = makeBoard();
 

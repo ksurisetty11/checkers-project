@@ -128,11 +128,12 @@ public interface ICheckerBoard {
 
         HashMap<Character, Integer> playerPieceCount = getPieceCounts();
         int totalPieces = playerPieceCount.getOrDefault(piece, 0);
-        playerPieceCount.put(piece, totalPieces - 1);
+        playerPieceCount.put(piece, totalPieces);
 
-
-        int jumpedPieceCount = playerPieceCount.getOrDefault(jumpedPiece, 0);
-        playerPieceCount.put(jumpedPiece, jumpedPieceCount - 1);
+        if(jumpedPiece != ' ') {
+            int jumpedPieceCount = playerPieceCount.getOrDefault(jumpedPiece, 0);
+            playerPieceCount.put(jumpedPiece, jumpedPieceCount - 1);
+        }
 
         return moveTo;
     }
