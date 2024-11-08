@@ -57,17 +57,6 @@ public class CheckersFE {
                 } else {
                     System.out.println("There are no possible moves");
                 }
-            /*do
-            {
-                HashMap<DirectionEnum, Character> availableMoves = gameBoard.scanSurroundingPositions(startPos);
-                System.out.println("In which direction do you wish to move the piece?\n" +
-                        "Enter one of these options:");
-
-                for (DirectionEnum possibleDirections : gameBoard.getViableDirections().get(startPos)) {
-                    if (availableMoves.containsKey(possibleDirections)) {
-                        System.out.println(possibleDirections);
-                    }
-                }*/
 
                 String directionToMove = readInInput.next().toUpperCase();
 
@@ -160,7 +149,7 @@ public class CheckersFE {
             }
 
             char pieceAtPos = gameBoard.whatsAtPos(new BoardPosition(inputRow, inputCol));
-            if (pieceAtPos == whichPlayer) {
+            if ((pieceAtPos == whichPlayer) || (pieceAtPos == Character.toUpperCase(whichPlayer))) {
                 isValidPiece = true;
             } else {
                 System.out.println("Player " + whichPlayer + ", that isn't your piece. Pick one of your pieces.");
