@@ -49,7 +49,7 @@ public class CheckerBoard extends AbsCheckerBoard
      * @pre none
      * @post pieceCount.put('x', 12) AND pieceCount.put('o', 12)
      * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
-     * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' ' for open space
+     * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' 'for open space
      */
     public CheckerBoard() {
         board = new char[][] {

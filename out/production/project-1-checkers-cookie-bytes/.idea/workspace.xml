@@ -24,6 +24,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CheckersFE.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.TestCheckerBoard.executor": "Run",
     "Repository.Attach.Annotations": "false",
@@ -62,7 +63,8 @@
       <workItem from="1730946989999" duration="4194000" />
       <workItem from="1730993652369" duration="2296000" />
       <workItem from="1731074336106" duration="173000" />
-      <workItem from="1731074727116" duration="739000" />
+      <workItem from="1731074727116" duration="8926000" />
+      <workItem from="1731105494952" duration="384000" />
     </task>
     <servers />
   </component>

@@ -10,9 +10,9 @@ import java.util.HashMap;
  * It manages how the pieces interact with each other and move around the board. This interface contains
  * primary actions that can be performed on a checkerboard.
  *
- * @defines board: the internal representation of the board, stored in a private data structure that maintains the current
- *                  state of each position. This abstract board structure should not be directly accessed in implementations,
- *                  and methods in this interface provide means of board interaction.
+ * @defines board: the internal representation of the board, stored in a private data structure that maintains the
+ *                  current state of each position. This abstract board structure should not be directly accessed in
+ *                  implementations, and methods in this interface provide means of board interaction.
  */
 public interface ICheckerBoard {
 
@@ -20,13 +20,15 @@ public interface ICheckerBoard {
 
     /**
      * Retrieves a mapping of pieces to their viable movement direction
-     * @return A hashmap where the key is a character representing a piece type 'X' or 'O' and the value is a list of possible directions that the piece can move
+     * @return A hashmap where the key is a character representing a piece type 'X' or 'O' and the value is a list of
+     *          possible directions that the piece can move
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections();
 
     /**
      * Retrieves the count of each type of piece currently on the board
-     * @return A hashmap where each key is a character representing a piece type and each corresponding value is an integer count of pieces of that type
+     * @return A hashmap where each key is a character representing a piece type and each corresponding value is an
+     *         integer count of pieces of that type
      */
     public HashMap<Character, Integer> getPieceCounts();
 
@@ -40,12 +42,14 @@ public interface ICheckerBoard {
     /**
      * Checks what piece is at the specific board position
      * @param pos The BoardPosition to be checked
-     * @return A character representing the piece the specified position, or a default character if the position is empty
+     * @return A character representing the piece of the specified position, or a default character if the
+     *         position is empty
      */
     public char whatsAtPos(BoardPosition pos);
 
     /**
-     * Checks if the specified player has won the game. A player only wins if the opponent has no remaining pieces on the board.
+     * Checks if the specified player has won the game. A player only wins if the opponent has no remaining pieces on
+     * the board.
      * @param player, The player character ('x' or 'o') whose win status is to be checked.
      *                'x' represents one player and ;i; represents the opponent
      * @return true if the specified player has won otherwise it is false
@@ -65,7 +69,8 @@ public interface ICheckerBoard {
     }
 
     /**
-     * Crowns the piece at the specific board position and promotes it to a "king" piece or "crowned" by changing it to upper case
+     * Crowns the piece at the specific board position and promotes it to a "king" piece or "crowned" by changing it to
+     * upper case
      * @param posOfPlayer The position on the board where the player's piece to be crowned is located.
      * @defines boardRepresentation, an abstract representation of the checkerboard state
      */
@@ -142,8 +147,10 @@ public interface ICheckerBoard {
      * Scans the surrounding positions around the starting position
      *
      * @param startingPos the position from which to scan surrounding positions
-     * @return a map where each key is a direction and each value is the character present at that position in the specific direction
-     * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions on the checkerboardgit
+     * @return a map where each key is a direction and each value is the character present at that position in the
+     *          specific direction
+     * @defines surroundingBoardRepresentation, an abstract representation indicating the contents of adjacent positions
+     * on the checkerboardgit
      */
     default public HashMap<DirectionEnum, Character> scanSurroundingPositions(BoardPosition startingPos) {
         HashMap<DirectionEnum, Character> charAtDirection = new HashMap<>();
