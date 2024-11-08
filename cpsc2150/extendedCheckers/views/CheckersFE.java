@@ -57,7 +57,7 @@ public class CheckersFE {
                 } else {
                     System.out.println("There are no possible moves");
                 }
-                
+
                 String directionToMove = readInInput.next().toUpperCase();
 
                 if (directionToMove.contains("NE" )) {
@@ -153,7 +153,7 @@ public class CheckersFE {
             }
 
             char pieceAtPos = gameBoard.whatsAtPos(new BoardPosition(inputRow, inputCol));
-            if (pieceAtPos == whichPlayer) {
+            if ((pieceAtPos == whichPlayer) || (pieceAtPos == Character.toUpperCase(whichPlayer))) {
                 isValidPiece = true;
             } else {
                 System.out.println("Player " + whichPlayer + ", that isn't your piece. Pick one of your pieces.");
