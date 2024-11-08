@@ -46,8 +46,8 @@ public class CheckersFE {
                         "Enter one of these options:");
 
                 //Do a null check
-                ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(whichPlayer);
-
+                char checkPosition = gameBoard.whatsAtPos(startPos);
+                ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(checkPosition);
                 if (possibleMoves != null) {
                     for (DirectionEnum possibleDirections : possibleMoves) {
                         if (availableMoves.containsKey(possibleDirections)) {
@@ -57,18 +57,7 @@ public class CheckersFE {
                 } else {
                     System.out.println("There are no possible moves");
                 }
-            /*do
-            {
-                HashMap<DirectionEnum, Character> availableMoves = gameBoard.scanSurroundingPositions(startPos);
-                System.out.println("In which direction do you wish to move the piece?\n" +
-                        "Enter one of these options:");
-
-                for (DirectionEnum possibleDirections : gameBoard.getViableDirections().get(startPos)) {
-                    if (availableMoves.containsKey(possibleDirections)) {
-                        System.out.println(possibleDirections);
-                    }
-                }*/
-
+                
                 String directionToMove = readInInput.next().toUpperCase();
 
                 if (directionToMove.contains("NE" )) {
