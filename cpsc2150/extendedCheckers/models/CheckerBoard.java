@@ -70,7 +70,7 @@ public class CheckerBoard extends AbsCheckerBoard
         //Initializing viable directions for player one and two
         viableDirections = new HashMap<>();
         ArrayList<DirectionEnum> xPlayerDirections = new ArrayList<>();
-        ArrayList<DirectionEnum> oPlayerDirections = new ArrayList<>();m
+        ArrayList<DirectionEnum> oPlayerDirections = new ArrayList<>();
 
         xPlayerDirections.add(DirectionEnum.SE);
         xPlayerDirections.add(DirectionEnum.SW);
