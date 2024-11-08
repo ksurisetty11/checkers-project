@@ -122,11 +122,6 @@ public interface ICheckerBoard {
 
         char jumpedPiece = whatsAtPos(jumpedPos);
 
-        if (jumpedPiece == ' ' || jumpedPiece == piece) {
-            //not sure what to return if trying to jump over invalid piece
-            return startingPos;
-        }
-
         placePiece(startingPos, ' ');
         placePiece(jumpedPos, ' ');
         placePiece(moveTo, piece);
