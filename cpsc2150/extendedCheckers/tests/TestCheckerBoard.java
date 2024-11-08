@@ -235,14 +235,22 @@ public class TestCheckerBoard {
 
         ArrayList<DirectionEnum> xDirections = new ArrayList<>();
         ArrayList<DirectionEnum> oDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> crownedDirections = new ArrayList<>();
 
         xDirections.add(DirectionEnum.SE);
         xDirections.add(DirectionEnum.SW);
         oDirections.add(DirectionEnum.NE);
         oDirections.add(DirectionEnum.NW);
 
+        crownedDirections.add(DirectionEnum.SE);
+        crownedDirections.add(DirectionEnum.SW);
+        crownedDirections.add(DirectionEnum.NE);
+        crownedDirections.add(DirectionEnum.NW);
+
         expected.put('x', xDirections);
         expected.put('o', oDirections);
+        expected.put('X', crownedDirections);
+        expected.put('O', crownedDirections);
 
         assertEquals(expected, actual);
     }
