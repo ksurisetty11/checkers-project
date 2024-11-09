@@ -148,11 +148,11 @@ public interface ICheckerBoard {
         int totalPieces = playerPieceCount.getOrDefault(piece, 0);
         playerPieceCount.put(piece, totalPieces);
 
-        if (jumpedPiece != ' ')
-        {
-            int jumpedPieceCount = playerPieceCount.getOrDefault(jumpedPiece, 0);
-            playerPieceCount.put(jumpedPiece, jumpedPieceCount - 1);
+        //Subtracting 1 from the total number of opposing pieces
+        if (jumpedPiece != ' ') {
+            playerPieceCount.put(jumpedPiece, playerPieceCount.get(jumpedPiece) - 1);
         }
+        
         return moveTo;
     }
 
