@@ -25,6 +25,7 @@ public class CheckersFE {
         HashMap<Character, ArrayList<DirectionEnum>> gameDir = gameBoard.getViableDirections();
         Scanner readInInput = new Scanner(System.in);
         boolean gameOn = true;
+
         //Game starts with player x
         char whichPlayer = CheckerBoard.PLAYER_ONE;
 
@@ -60,17 +61,27 @@ public class CheckersFE {
 
                 String directionToMove = readInInput.next().toUpperCase();
 
-                if (directionToMove.contains("NE" )) {
+                if (directionToMove.contains("NE" ))
+                {
                     intendedDir = DirectionEnum.NE;
-                } else if (directionToMove.contains("NW")) {
+                }
+                else if (directionToMove.contains("NW"))
+                {
                     intendedDir = DirectionEnum.NW;
-                } else if (directionToMove.contains("SE")) {
+                }
+                else if (directionToMove.contains("SE"))
+                {
                     intendedDir = DirectionEnum.SE;
-                } else if (directionToMove.contains("SW")) {
+                }
+                else if (directionToMove.contains("SW"))
+                {
                     intendedDir = DirectionEnum.SW;
-                } else{
+                }
+                else {
                     System.out.println("Invalid direction.");
                 }
+
+                //idk
                 intendedDir = DirectionEnum.valueOf(directionToMove);
                 if (!(availableMoves.containsKey(intendedDir))) {
                     System.out.println("Unable to move in that direction.");
@@ -131,34 +142,43 @@ public class CheckersFE {
      * Prompts the player to select a piece to move
      * The method repeatedly asks the player to choose valid coordinates to move their pieces.
      * @param whichPlayer The character that represents the player 'x' or 'o'
-     * @param gameBoard The checker board that implements the interface
+     * @param gameBoard The checkerboard that implements the interface
      *
      * @return a BoardPosition object representing the coordinates of the selected piece
      * @pre whichPlayer needs to be 'x', 'X', 'o', 'O'
-     * @post getPieceCoordinates = BoardPosition [BoardPosition that was chosen by users]
+     * @post getPieceCoordinates = [BoardPosition that was chosen by users]
      */
     private static BoardPosition getPieceCoordinates(char whichPlayer, ICheckerBoard gameBoard) {
         int inputRow, inputCol;
         boolean isValidPiece = false;
+
         do {
             System.out.println("Player " + whichPlayer + ", which piece do you wish to move?" +
-                    "\nEnter the row followed by a space followed by the column.");
+                    " Enter the row followed by a space followed by the column.");
             inputRow = readInInput.nextInt();
             inputCol = readInInput.nextInt();
 
-            boolean withinBounds = (inputRow >= 0 && inputRow < CheckerBoard.ROW_NUM) && (inputCol >= 0 && inputCol < CheckerBoard.COL_NUM);
-            if (!withinBounds) {
+            //Checking if the user inputted coordinate is within the board boundary
+            boolean withinBounds = (inputRow >= 0 && inputRow < CheckerBoard.ROW_NUM)
+                    && (inputCol >= 0 && inputCol < CheckerBoard.COL_NUM);
+
+            if (!withinBounds)
+            {
                 System.out.println("Out of bounds! Choose a different coordinate.");
                 continue;
             }
 
+            //Checking that the player chose their own piece
             char pieceAtPos = gameBoard.whatsAtPos(new BoardPosition(inputRow, inputCol));
-            if ((pieceAtPos == whichPlayer) || (pieceAtPos == Character.toUpperCase(whichPlayer))) {
+            if ((pieceAtPos == whichPlayer) || (pieceAtPos == Character.toUpperCase(whichPlayer)))
+            {
                 isValidPiece = true;
-            } else {
+            } else
+            {
                 System.out.println("Player " + whichPlayer + ", that isn't your piece. Pick one of your pieces.");
             }
         } while (!isValidPiece);
+
         return new BoardPosition(inputRow, inputCol);
     }
 }
