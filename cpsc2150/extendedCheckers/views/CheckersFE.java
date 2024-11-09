@@ -61,6 +61,7 @@ public class CheckersFE {
 
                 String directionToMove = readInInput.next().toUpperCase();
 
+                //Checking for values other than what's in DirectionEum
                 if (directionToMove.contains("NE" ))
                 {
                     intendedDir = DirectionEnum.NE;
@@ -94,13 +95,16 @@ public class CheckersFE {
 
             //Moving the piece in the specified direction
             BoardPosition firstPos = ICheckerBoard.getDirection(intendedDir);
-            BoardPosition moveToPos = new BoardPosition(startPos.getRow() + firstPos.getRow(), startPos.getColumn() + firstPos.getColumn());
+            BoardPosition moveToPos = new BoardPosition(startPos.getRow() +
+                    firstPos.getRow(),startPos.getColumn() + firstPos.getColumn());
 
             if (gameBoard.whatsAtPos(moveToPos) == CheckerBoard.EMPTY_POS) {
-                BoardPosition endPos = gameBoard.movePiece(new BoardPosition(startPos.getRow(), startPos.getColumn()), intendedDir);
+                BoardPosition endPos = gameBoard.movePiece(new BoardPosition(startPos.getRow(),
+                                       startPos.getColumn()), intendedDir);
                 gameBoard.crownPiece(endPos);
             } else {
-                BoardPosition endPos = gameBoard.jumpPiece(new BoardPosition(startPos.getRow(), startPos.getColumn()), intendedDir);
+                BoardPosition endPos = gameBoard.jumpPiece(new BoardPosition(startPos.getRow(),
+                                       startPos.getColumn()), intendedDir);
                 gameBoard.crownPiece(endPos);
             }
 
