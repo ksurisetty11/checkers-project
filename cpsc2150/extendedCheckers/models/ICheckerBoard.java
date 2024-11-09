@@ -185,10 +185,6 @@ public interface ICheckerBoard {
            {
                charAtDirection.put(direction, whatsAtPos(possiblePos));
            }
-           else
-           {
-               charAtDirection.put(direction, ' ');
-           }
         }
         return charAtDirection;
     }

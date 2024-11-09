@@ -592,9 +592,6 @@ public class TestCheckerBoard {
         // Expected positions and values
         HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
         expectedSurroundingPos.put(DirectionEnum.SE, ' ');
-        expectedSurroundingPos.put(DirectionEnum.SW, ' ');
-        expectedSurroundingPos.put(DirectionEnum.NE, ' ');
-        expectedSurroundingPos.put(DirectionEnum.NW, ' ');
 
         assertEquals(expectedSurroundingPos, surroundingPositions);
     }
