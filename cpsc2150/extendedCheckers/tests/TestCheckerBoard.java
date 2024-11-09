@@ -264,6 +264,8 @@ public class TestCheckerBoard {
             for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
                 if ((row + col) % 2 == 0) {
                     testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    HashMap<Character, Integer> playerPieceCount = testBoard.getPieceCounts();
+                    playerPieceCount.put(CheckerBoard.PLAYER_TWO, playerPieceCount.get(CheckerBoard.PLAYER_TWO) - 1);
                 }
             }
         }
@@ -463,21 +465,25 @@ public class TestCheckerBoard {
     public void test_jumpPiece_jumpBlankTile()
     {
        ICheckerBoard board = makeBoard();
+       HashMap<Character, Integer> playerPieceCount = board.getPieceCounts();
 
         // Empty the board
         for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
             for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    BoardPosition coordinate = new BoardPosition(row,col);
+                    board.placePiece(coordinate, CheckerBoard.EMPTY_POS);
                 }
             }
         }
+        playerPieceCount.put(CheckerBoard.PLAYER_ONE, playerPieceCount.get(CheckerBoard.PLAYER_ONE) - 11);
+        playerPieceCount.put(CheckerBoard.PLAYER_TWO, playerPieceCount.get(CheckerBoard.PLAYER_TWO) - 12);
 
         // Manually place the 'x' piece
-        board.placePiece(new BoardPosition(3,3), 'x');
+        board.placePiece(new BoardPosition(3, 3), 'x');
 
         // Define starting position and jump direction
-        BoardPosition startingPos = new BoardPosition(3,3);
+        BoardPosition startingPos = new BoardPosition(3, 3);
         DirectionEnum dir = DirectionEnum.SE;
 
         // Attempt to jump in SE direction
