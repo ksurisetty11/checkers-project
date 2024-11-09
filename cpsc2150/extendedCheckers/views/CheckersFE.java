@@ -43,10 +43,10 @@ public class CheckersFE {
             do
             {
                 HashMap<DirectionEnum, Character> availableMoves = gameBoard.scanSurroundingPositions(startPos);
-                System.out.println("In which direction do you wish to move the piece?\n" +
+                System.out.println("In which direction do you wish to move the piece? " +
                         "Enter one of these options:");
 
-                //Do a null check
+                //Checking for null values
                 char checkPosition = gameBoard.whatsAtPos(startPos);
                 ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(checkPosition);
                 if (possibleMoves != null) {
@@ -55,8 +55,9 @@ public class CheckersFE {
                             System.out.println(possibleDirections);
                         }
                     }
-                } else {
-                    System.out.println("There are no possible moves");
+                }
+                else {
+                    System.out.println("No possible moves.");
                 }
 
                 String directionToMove = readInInput.next().toUpperCase();
@@ -78,11 +79,12 @@ public class CheckersFE {
                 {
                     intendedDir = DirectionEnum.SW;
                 }
-                else {
+                else
+                {
                     System.out.println("Invalid direction.");
                 }
 
-                //idk
+                //Checking that the chosen direction is valid
                 intendedDir = DirectionEnum.valueOf(directionToMove);
                 if (!(availableMoves.containsKey(intendedDir))) {
                     System.out.println("Unable to move in that direction.");
@@ -102,7 +104,9 @@ public class CheckersFE {
                 BoardPosition endPos = gameBoard.movePiece(new BoardPosition(startPos.getRow(),
                                        startPos.getColumn()), intendedDir);
                 gameBoard.crownPiece(endPos);
-            } else {
+            }
+            else
+            {
                 BoardPosition endPos = gameBoard.jumpPiece(new BoardPosition(startPos.getRow(),
                                        startPos.getColumn()), intendedDir);
                 gameBoard.crownPiece(endPos);
