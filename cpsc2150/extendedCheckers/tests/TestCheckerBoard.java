@@ -309,8 +309,7 @@ public class TestCheckerBoard {
         BoardPosition targetPos = new BoardPosition(0,0);
         testBoard.crownPiece(targetPos);
         char obsChar = testBoard.whatsAtPos(targetPos);
-
-        assertEquals(obsChar, 'x');
+        assertEquals(obsChar, 'X');
     }
 
     @Test
@@ -368,15 +367,15 @@ public class TestCheckerBoard {
         testBoard.placePiece(startPoso, CheckerBoard.PLAYER_TWO);
 
         BoardPosition obsPos = testBoard.movePiece(startPosx, DirectionEnum.SW);
-        BoardPosition expPos = new BoardPosition(3,1);
+        BoardPosition expPos = new BoardPosition(4,0);
 
         String obsBoard = testBoard.toString();
         char[][] exp = {
                 {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
                 {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
                 {' ', '*', 'x', '*', 'x', '*', 'x', '*'},
-                {'*', 'x', '*', ' ', '*', ' ', '*', ' '},
-                {'o', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {'x', '*', ' ', '*', ' ', '*', ' ', '*'},
                 {'*', ' ', '*', 'o', '*', 'o', '*', 'o'},
                 {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
                 {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
