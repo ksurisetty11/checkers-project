@@ -86,8 +86,8 @@ public interface ICheckerBoard {
     default public void crownPiece(BoardPosition posOfPlayer) {
         char player = whatsAtPos(posOfPlayer);
         int originRow = 0;
-        boolean xAcross = (player == CheckerBoard.PLAYER_ONE && posOfPlayer.getRow() == CheckerBoard.ROW_NUM - 1);
-        boolean oAcross = (player == CheckerBoard.PLAYER_TWO && posOfPlayer.getRow() == originRow);
+        boolean xAcross = (player == CheckerBoard.PLAYER_ONE);
+        boolean oAcross = (player == CheckerBoard.PLAYER_TWO);
         if (xAcross || oAcross)
         {
             char newCrownedPiece = Character.toUpperCase(whatsAtPos(posOfPlayer));
@@ -113,7 +113,7 @@ public interface ICheckerBoard {
         boolean withinRowBoundaries = endingPos.getRow() < CheckerBoard.ROW_NUM && endingPos.getRow() >= 0;
         boolean withinColBoundaries = endingPos.getColumn() < CheckerBoard.COL_NUM && endingPos.getColumn() >= 0;
 
-        if (withinRowBoundaries && withinColBoundaries && (whatsAtPos(endingPos) == CheckerBoard.EMPTY_POS))
+        if (withinRowBoundaries && withinColBoundaries)
         {
                 placePiece(startingPos, CheckerBoard.EMPTY_POS);
                 placePiece(endingPos, playerPiece);
