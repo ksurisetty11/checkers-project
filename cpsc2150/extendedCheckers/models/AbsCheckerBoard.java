@@ -1,5 +1,9 @@
 package cpsc2150.extendedCheckers.models;
 
+/**
+ * AbsCheckerBoard implements ICheckerBoard and overrides the toString
+ * method so that it will print the current checkerboard state
+ */
 public abstract class AbsCheckerBoard implements ICheckerBoard {
     @Override
     public String toString() {

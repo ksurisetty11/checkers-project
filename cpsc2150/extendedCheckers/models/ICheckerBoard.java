@@ -10,10 +10,19 @@ import java.util.HashMap;
  * It manages how the pieces interact with each other and move around the board. This interface contains
  * primary actions that can be performed on a checkerboard.
  *
- * @defines board: the internal representation of the board, stored in a private data structure that maintains the
+ * @initialization_ensures board is made, each player has a starting set of directions and starting amount of pieces
+ *
+ * @defines
+ *      board: the internal representation of the board, stored in a private data structure that maintains the
  *                  current state of each position. This abstract board structure should not be directly accessed in
  *                  implementations, and methods in this interface provide means of board interaction.
- */
+ *
+ * @constraints
+ *     A player cannot exist on or move to a black tile
+ *     0 <= a player's number of pieces <= STARTING_COUNT
+ *     Pieces cannot be moved out of bounds of the board
+ *     When a piece moves, its original position is left as an EMPTY_POS where it started
+ * /
 public interface ICheckerBoard {
 
     public static final int BOARD_DIMENSIONS = 8;
