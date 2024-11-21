@@ -11,6 +11,11 @@ public class CheckerBoard extends AbsCheckerBoard
      * @invariant [board has 8 rows and 8 col] AND [all boards indices have either 'x', 'o', 'X', 'O', '*', OR ' ']
      * AND 0 <= pieceCount.get('x') <= 12 AND 0 <= pieceCount.get('o') <= 12
      * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
+     *
+     * @corresponds
+     *      self: board
+     *      numberOfPiece: pieceCounts
+     *      directions: getViableDirections
      * /
 
     /**

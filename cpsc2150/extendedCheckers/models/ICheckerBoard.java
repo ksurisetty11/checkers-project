@@ -16,12 +16,15 @@ import java.util.HashMap;
  *      board: the internal representation of the board, stored in a private data structure that maintains the
  *                  current state of each position. This abstract board structure should not be directly accessed in
  *                  implementations, and methods in this interface provide means of board interaction.
+ *      numberOfPieces: how many pieces each player has
+ *      directions: possible directions a piece can move
  *
  * @constraints
- *     A player cannot exist on or move to a black tile
- *     0 <= a player's number of pieces <= STARTING_COUNT
- *     Pieces cannot be moved out of bounds of the board
- *     When a piece moves, its original position is left as an EMPTY_POS where it started
+ *     [Player cannot exist on OR move to a black tile]
+ *     AND 0 <= numberOfPieces <= STARTING_COUNT
+ *     AND Pieces cannot be moved out of bounds of the board
+ *     AND Piece can only move in it's directions
+ *     AND When a piece moves, its original position is left as an EMPTY_POS where it started
  * /
 public interface ICheckerBoard {
 
