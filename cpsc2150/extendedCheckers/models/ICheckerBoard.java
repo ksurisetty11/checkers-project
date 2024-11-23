@@ -23,9 +23,9 @@ import java.util.HashMap;
  *     [Player cannot exist on OR move to a black tile]
  *     AND 0 <= numberOfPieces <= STARTING_COUNT
  *     AND Pieces cannot be moved out of bounds of the board
- *     AND Piece can only move in it's directions
+ *     AND Piece can only move in its directions
  *     AND When a piece moves, its original position is left as an EMPTY_POS where it started
- * /
+ */
 public interface ICheckerBoard {
 
     public static final int BOARD_DIMENSIONS = 8;
@@ -45,6 +45,10 @@ public interface ICheckerBoard {
      *         integer count of pieces of that type
      */
     public HashMap<Character, Integer> getPieceCounts();
+
+    public int getRowNum();
+
+    public int getColNum();
 
     /**
      * Places a piece on the board at the specified position
@@ -97,7 +101,6 @@ public interface ICheckerBoard {
      */
     default public void crownPiece(BoardPosition posOfPlayer) {
         char player = whatsAtPos(posOfPlayer);
-        int originRow = 0;
         boolean xAcross = (player == CheckerBoard.PLAYER_ONE);
         boolean oAcross = (player == CheckerBoard.PLAYER_TWO);
         if (xAcross || oAcross)
@@ -122,8 +125,8 @@ public interface ICheckerBoard {
         char playerPiece = whatsAtPos(startingPos);
 
         BoardPosition endingPos = new BoardPosition(intendedRow, intendedCol);
-        boolean withinRowBoundaries = endingPos.getRow() < CheckerBoard.ROW_NUM && endingPos.getRow() >= 0;
-        boolean withinColBoundaries = endingPos.getColumn() < CheckerBoard.COL_NUM && endingPos.getColumn() >= 0;
+        boolean withinRowBoundaries = endingPos.getRow() < getRowNum() && endingPos.getRow() >= 0;
+        boolean withinColBoundaries = endingPos.getColumn() < getColNum() && endingPos.getColumn() >= 0;
 
         if (withinRowBoundaries && withinColBoundaries)
         {
@@ -190,8 +193,8 @@ public interface ICheckerBoard {
            BoardPosition possibleMove = getDirection(direction);
            BoardPosition possiblePos = new BoardPosition(startingPos.getRow() + possibleMove.getRow(),
                                       startingPos.getColumn() + possibleMove.getColumn());
-           boolean rowBounds = (possiblePos.getRow() < CheckerBoard.ROW_NUM) && (possiblePos.getRow() >= 0);
-           boolean colBounds = (possiblePos.getColumn() < CheckerBoard.COL_NUM) && (possiblePos.getColumn() >= 0);
+           boolean rowBounds = (possiblePos.getRow() < getRowNum()) && (possiblePos.getRow() >= 0);
+           boolean colBounds = (possiblePos.getColumn() < getColNum()) && (possiblePos.getColumn() >= 0);
 
            if(rowBounds && colBounds)
            {
