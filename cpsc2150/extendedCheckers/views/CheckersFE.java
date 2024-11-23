@@ -221,6 +221,14 @@ public class CheckersFE {
     {
         return playerOne;
     }
+
+    /**
+     *Standard getter for playerTwo
+     *
+     * @return playerTwo, char
+     * @pre none
+     * @post getPlayerTwo = playerTwo AND playerOne = #playerOne AND playerTwo = #playerTwo
+     */
     public static char getPlayerTwo()
     {
         return playerTwo;
