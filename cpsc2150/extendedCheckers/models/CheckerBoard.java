@@ -44,9 +44,8 @@ public class CheckerBoard extends AbsCheckerBoard
     /*
     Standard Checkers starts with 8 rows and 8 columns. Both players begin with 12 pieces each.
      */
-    public static final int ROW_NUM = 8;
-    public static final int COL_NUM = 8;
-    public static final int STARTING_COUNT = 12;
+    public final int ROW_NUM;
+    public final int COL_NUM;
 
     /**
      * A constructor for CheckerBoard, initializes instance variables
@@ -56,21 +55,36 @@ public class CheckerBoard extends AbsCheckerBoard
      * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
      * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' 'for open space
      */
-    public CheckerBoard() {
-        board = new char[][] {
-                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
-                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
-                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
-                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
-                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
-                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
-                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
-                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
+    public CheckerBoard(int aDimensions) {
+        ROW_NUM = aDimensions;
+        COL_NUM = aDimensions;
+        int startingCount = (((ROW_NUM / 2) - 1) * (COL_NUM / 2));
+
+        //Adding all pieces, blank spaces, and black tiles into the board
+        board = new char[ROW_NUM][COL_NUM];
+        for (int row = 0; row < ROW_NUM; row++) {
+            for (int col = 0; col < COL_NUM; col++) {
+                if ((row + col) % 2 == 1) {
+                    board[row][col] = BLACK_TILE;
+                }
+                if ((row + col) % 2 == 0) {
+                    if (row < (ROW_NUM / 2 - 1)) {
+                        board[row][col] = PLAYER_ONE;
+                    }
+                    else if (row > (ROW_NUM / 2)) {
+                        board[row][col] = PLAYER_TWO;
+                    }
+                    else {
+                        board[row][col] = EMPTY_POS;
+                    }
+                }
+            }
+        }
 
         //Initializing pieceCount contain player one and two's number of pieces
         pieceCount = new HashMap<>();
-        pieceCount.put(PLAYER_ONE, STARTING_COUNT);
-        pieceCount.put(PLAYER_TWO, STARTING_COUNT);
+        pieceCount.put(PLAYER_ONE, startingCount);
+        pieceCount.put(PLAYER_TWO, startingCount);
 
         //Initializing viable directions for player one and two
         viableDirections = new HashMap<>();
@@ -93,6 +107,26 @@ public class CheckerBoard extends AbsCheckerBoard
         viableDirections.put('O', allDirections);
         viableDirections.put('x', xPlayerDirections);
         viableDirections.put('o', oPlayerDirections);
+    }
+
+    /**
+     * Standard getter for ROW_NUM
+     * @pre none
+     * @post getViableDirections = viableDirections AND viableDirections = #viableDirections
+     * AND board = #board AND pieceCount = #pieceCount
+     */
+    public int getRowNum() {
+        return ROW_NUM;
+    }
+
+    /**
+     * Standard getter for COL_NUM
+     * @pre none
+     * @post getViableDirections = viableDirections AND viableDirections = #viableDirections
+     * AND board = #board AND pieceCount = #pieceCount
+     */
+    public int getColNum() {
+        return COL_NUM;
     }
 
     /**
@@ -132,8 +166,6 @@ public class CheckerBoard extends AbsCheckerBoard
     public void placePiece(BoardPosition pos, char player) {
         int intendedRow = pos.getRow();
         int intendedColumn = pos.getColumn();
-        char piece = whatsAtPos(pos);
-
         board[intendedRow][intendedColumn] = player;
     }
 
