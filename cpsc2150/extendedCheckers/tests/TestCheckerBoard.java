@@ -15,7 +15,7 @@ public class TestCheckerBoard {
 
     private ICheckerBoard makeBoard()
     {
-        return new CheckerBoard();
+        return new CheckerBoard(8);
     }
 
     @Test
@@ -260,8 +260,8 @@ public class TestCheckerBoard {
     {
        ICheckerBoard testBoard = makeBoard();
         //Eliminating o pieces
-        for (int row = 5; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 5; row < testBoard.getRowNum(); row++) {
+            for (int col = 0; col < testBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
                     HashMap<Character, Integer> playerPieceCount = testBoard.getPieceCounts();
@@ -417,8 +417,8 @@ public class TestCheckerBoard {
        ICheckerBoard testBoard = makeBoard();
 
         // Empty the board
-        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 0; row < testBoard.getRowNum(); row++) {
+            for (int col = 0; col < testBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
                 }
@@ -441,8 +441,8 @@ public class TestCheckerBoard {
        ICheckerBoard testBoard = makeBoard();
 
         //Empty the board
-        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 0; row < testBoard.getRowNum(); row++) {
+            for (int col = 0; col < testBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
                 }
@@ -467,8 +467,8 @@ public class TestCheckerBoard {
        HashMap<Character, Integer> playerPieceCount = board.getPieceCounts();
 
         // Empty the board
-        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     BoardPosition coordinate = new BoardPosition(row,col);
                     board.placePiece(coordinate, CheckerBoard.EMPTY_POS);
@@ -504,8 +504,8 @@ public class TestCheckerBoard {
        ICheckerBoard board = makeBoard();
 
         // Empty the board
-        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
                 }
@@ -535,8 +535,8 @@ public class TestCheckerBoard {
        ICheckerBoard board = makeBoard();
 
         // Empty the board
-        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
                 }
@@ -572,8 +572,8 @@ public class TestCheckerBoard {
        ICheckerBoard board = makeBoard();
 
         // Empty the board
-        for (int row = 0; row < CheckerBoard.ROW_NUM; row++) {
-            for (int col = 0; col < CheckerBoard.COL_NUM; col++) {
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
                 }
@@ -598,7 +598,6 @@ public class TestCheckerBoard {
     @Test
     public void test_getDirection_invalidDirection()
     {
-       ICheckerBoard board = makeBoard();
         int expRow = 1;
         int expCol = 1;
         DirectionEnum dir = DirectionEnum.SE;
