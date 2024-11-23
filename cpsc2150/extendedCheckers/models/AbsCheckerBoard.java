@@ -5,6 +5,16 @@ package cpsc2150.extendedCheckers.models;
  * method so that it will print the current checkerboard state
  */
 public abstract class AbsCheckerBoard implements ICheckerBoard {
+    private int dimensionCheck;
+
+    public static char getPlayerOne() {
+        return CheckerBoard.PLAYER_ONE;
+    }
+
+    public static char getPlayerTwo() {
+        return CheckerBoard.PLAYER_TWO;
+    }
+
     @Override
     public String toString() {
         {
