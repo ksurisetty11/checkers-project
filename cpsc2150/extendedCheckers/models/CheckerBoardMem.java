@@ -103,11 +103,11 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     }
 
     public int getRowNum() {
-        return 0;
+        return ROW_NUM;
     }
 
     public int getColNum() {
-        return 0;
+        return COL_NUM;
     }
 
     public void placePiece(BoardPosition pos, char player) {
