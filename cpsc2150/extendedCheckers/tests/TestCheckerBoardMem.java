@@ -121,5 +121,156 @@ public class TestCheckerBoardMem {
         }
         return '\0';
     }
+
+    @Test
+    public void test_placePiece_EmptyTile_playerX() {
+        ICheckerBoard obsCb = makeBoard();
+        BoardPosition input = new BoardPosition(3, 3);
+        char inputPlayer = 'x';
+
+        obsCb.placePiece(input, inputPlayer);
+
+        String obs = obsCb.toString();
+        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
+
+        expCb.put('x', List.of(new BoardPosition(0, 0),
+                new BoardPosition(0, 2), new BoardPosition(0, 4),
+                new BoardPosition(0, 6), new BoardPosition(1, 1),
+                new BoardPosition(1, 3), new BoardPosition(1, 5),
+                new BoardPosition(1, 7), new BoardPosition(2, 0),
+                new BoardPosition(2, 2), new BoardPosition(2, 4),
+                new BoardPosition(2, 6), new BoardPosition(3,3)));
+        expCb.put('o', List.of(new BoardPosition(5, 1),
+                new BoardPosition(5, 3), new BoardPosition(5, 5),
+                new BoardPosition(5, 7), new BoardPosition(6, 0),
+                new BoardPosition(6, 2), new BoardPosition(6, 4),
+                new BoardPosition(6, 6), new BoardPosition(7, 1),
+                new BoardPosition(7, 3), new BoardPosition(7, 5),
+                new BoardPosition(7, 7)
+        ));
+        String exp = toStringForTest(expCb, 8);
+        assertEquals(exp, obs);
+
+    }
+
+    @Test
+    public void test_placePiece_CornerTile_replaceX_withO() {
+        ICheckerBoard obsCb = makeBoard();
+        BoardPosition input = new BoardPosition(7, 7);
+        char inputPlayer = 'x';
+
+        obsCb.placePiece(input, inputPlayer);
+
+        String obs = obsCb.toString();
+        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
+        expCb.put('x', List.of(new BoardPosition(0, 0),
+                new BoardPosition(0, 2), new BoardPosition(0, 4),
+                new BoardPosition(0, 6), new BoardPosition(1, 1),
+                new BoardPosition(1, 3), new BoardPosition(1, 5),
+                new BoardPosition(1, 7), new BoardPosition(2, 0),
+                new BoardPosition(2, 2), new BoardPosition(2, 4),
+                new BoardPosition(2, 6), new BoardPosition(7,7)));
+        expCb.put('o', List.of(new BoardPosition(5, 1),
+                new BoardPosition(5, 3), new BoardPosition(5, 5),
+                new BoardPosition(5, 7), new BoardPosition(6, 0),
+                new BoardPosition(6, 2), new BoardPosition(6, 4),
+                new BoardPosition(6, 6), new BoardPosition(7, 1),
+                new BoardPosition(7, 3), new BoardPosition(7, 5)));
+
+        String exp = toStringForTest(expCb, 8);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_placePiece_WhiteTile() {
+        ICheckerBoard obsCb = makeBoard();
+        BoardPosition input = new BoardPosition(3, 0);
+        char inputPlayer = 'x';
+
+        obsCb.placePiece(input, inputPlayer);
+
+        String obs = obsCb.toString();
+
+        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
+        expCb.put('x', List.of(new BoardPosition(0, 0),
+                new BoardPosition(0, 2), new BoardPosition(0, 4),
+                new BoardPosition(0, 6), new BoardPosition(1, 1),
+                new BoardPosition(1, 3), new BoardPosition(1, 5),
+                new BoardPosition(1, 7), new BoardPosition(2, 0),
+                new BoardPosition(2, 2), new BoardPosition(2, 4),
+                new BoardPosition(2, 6), new BoardPosition(3,0)));
+        expCb.put('o', List.of(new BoardPosition(5, 1),
+                new BoardPosition(5, 3), new BoardPosition(5, 5),
+                new BoardPosition(5, 7), new BoardPosition(6, 0),
+                new BoardPosition(6, 2), new BoardPosition(6, 4),
+                new BoardPosition(6, 6), new BoardPosition(7, 1),
+                new BoardPosition(7, 3), new BoardPosition(7, 5),
+                new BoardPosition(7, 7)
+        ));
+
+        String exp = toStringForTest(expCb, 8);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_placePiece_MiddleTile_replaceX_withO() {
+        ICheckerBoard obsCb = makeBoard();
+        BoardPosition input = new BoardPosition(2, 4);
+        char inputPlayer = 'o';
+
+        obsCb.placePiece(input, inputPlayer);
+
+        String obs= obsCb.toString();
+
+        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
+        expCb.put('x', List.of(new BoardPosition(0, 0),
+                new BoardPosition(0, 2), new BoardPosition(0, 4),
+                new BoardPosition(0, 6), new BoardPosition(1, 1),
+                new BoardPosition(1, 3), new BoardPosition(1, 5),
+                new BoardPosition(1, 7), new BoardPosition(2, 0),
+                new BoardPosition(2, 2), new BoardPosition(2, 6)));
+        expCb.put('o', List.of(new BoardPosition(5, 1),
+                new BoardPosition(5, 3), new BoardPosition(5, 5),
+                new BoardPosition(5, 7), new BoardPosition(6, 0),
+                new BoardPosition(6, 2), new BoardPosition(6, 4),
+                new BoardPosition(6, 6), new BoardPosition(7, 1),
+                new BoardPosition(7, 3), new BoardPosition(7, 5),
+                new BoardPosition(7, 7), new BoardPosition (2,4)
+        ));
+
+        String exp = toStringForTest(expCb, 8);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_placePiece_CornerTile_replacex_withX() {
+        ICheckerBoard obsCb = makeBoard();
+        BoardPosition input = new BoardPosition(0, 0);
+        char inputPlayer = 'X';
+
+        obsCb.placePiece(input, inputPlayer);
+
+        String obs = obsCb.toString();
+
+        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
+        expCb.put('X', List.of(new BoardPosition(0,0)));
+        expCb.put('x', List.of(new BoardPosition(0, 2), new BoardPosition(0, 4),
+                new BoardPosition(0, 6), new BoardPosition(1, 1),
+                new BoardPosition(1, 3), new BoardPosition(1, 5),
+                new BoardPosition(1, 7), new BoardPosition(2, 0),
+                new BoardPosition(2, 2), new BoardPosition(2, 4),
+                new BoardPosition(2, 6)));
+        expCb.put('o', List.of(new BoardPosition(5, 1),
+                new BoardPosition(5, 3), new BoardPosition(5, 5),
+                new BoardPosition(5, 7), new BoardPosition(6, 0),
+                new BoardPosition(6, 2), new BoardPosition(6, 4),
+                new BoardPosition(6, 6), new BoardPosition(7, 1),
+                new BoardPosition(7, 3), new BoardPosition(7, 5),
+                new BoardPosition(7, 7)));
+
+        String exp = toStringForTest(expCb, 8);
+        assertEquals(exp, obs);
+    }
+
 }
 
