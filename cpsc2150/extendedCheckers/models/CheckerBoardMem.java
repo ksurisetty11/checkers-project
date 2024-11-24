@@ -10,26 +10,46 @@ import java.util.Map;
 public class CheckerBoardMem extends AbsCheckerBoard {
 
     /**
-     *
+     *Tracks the number of pieces for each player 
+     *Key: Player character 'X', 'x', 'O', 'o'
+     *Value: Number of pieces on the board 
      */
     private HashMap<Character, Integer> pieceCount;
 
     /**
-     *
+     *Tracks the viable move directions for each player
+     *Key: Player character 'X', 'x', 'O', 'o'
+     *Value: List of allowed move directions
      */
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
 
     /**
-     * row and col
+     * Number of rows on the board
      */
     private final int ROW_NUM;
+
+    /**
+     * Number of columns on the board
+     */
     private final int COL_NUM;
 
     /**
-     *
+     *Tracks the state of the board
+     *Key: Player character 'X', 'x', 'O', 'o'
+     *Value: List of postions occupied by pieces 
+     */
+
      */
     private Map<Character, List<BoardPosition>> memBoard;
 
+    /**
+     * Constructor to initlaize a checkerboard with the given dimensions
+     * @param aDimensions the size of the board (even and positive)
+     * @pre aDimensions > 0 && aDimensions % 2 == 0
+     * @post ROW_NUM == aDimensions && COL_NUM == aDimensions &&
+     *                  memBoard initialized with pieces in starting positions && pieceCount
+     *                  updated with total pieces for each player && viableDirections initialized for all players
+     */
     public CheckerBoardMem(int aDimensions) {
         ROW_NUM = aDimensions;
         COL_NUM = aDimensions;
@@ -94,27 +114,63 @@ public class CheckerBoardMem extends AbsCheckerBoard {
         viableDirections.put('o', oPlayerDirections);
     }
 
+    /**
+     * Returns the vaible directions for each player 
+     * @return a map of player characters to their allowed move directions
+     * @post getViableDirections() == viableDirections
+     */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
         return viableDirections;
     }
 
+    /**
+     * Returns the current piece counts for each player
+     * @return a map of player characters to their piece counts 
+     * @post getPieceCounts() == pieceCount
+     */
     public HashMap<Character, Integer> getPieceCounts() {
         return pieceCount;
     }
 
+    /**
+     * Returns the number of rows on the board
+     * 
+     * @return the number of rows
+     * @post getRowNum() == ROW_NUM
+     */
     public int getRowNum() {
         return ROW_NUM;
     }
 
+    /**
+     * Returns the number of rows on the board
+     * 
+     * @return the number of rows
+     * @post getColNum() == COL_NUM
+     */
     public int getColNum() {
         return COL_NUM;
     }
 
+    /**
+     * Places a piece on the board for a given player
+     * @param pos the position to place the piece 
+     * @param player the player characters 'X', 'x', 'O', 'o'
+     * @pre memBoard.containsKey(player) && pos != null
+     * @post memBoard.get(player).contains(pos)
+     */
     //assuming the player char is one that is already in the map
     public void placePiece(BoardPosition pos, char player) {
         memBoard.get(player).add(pos);
     }
 
+    /**
+     * Checks what is at a given position on the board
+     * @param pos the position to check 
+     * @return the character of the player at teh position, or '\0' if empty
+     * @pre pos != null
+     * @post whatsAtPos(pos) == the character at pos or 0 
+     */
     //assuming pos is in memBoard
     public char whatsAtPos(BoardPosition pos) {
         for(Character player : memBoard.keySet()) {
