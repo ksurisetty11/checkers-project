@@ -36,14 +36,12 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     /**
      *Tracks the state of the board
      *Key: Player character 'X', 'x', 'O', 'o'
-     *Value: List of postions occupied by pieces 
-     */
-
+     *Value: List of positions occupied by pieces
      */
     private Map<Character, List<BoardPosition>> memBoard;
 
     /**
-     * Constructor to initlaize a checkerboard with the given dimensions
+     * Constructor to initialize a checkerboard with the given dimensions
      * @param aDimensions the size of the board (even and positive)
      * @pre aDimensions > 0 && aDimensions % 2 == 0
      * @post ROW_NUM == aDimensions && COL_NUM == aDimensions &&
@@ -82,7 +80,7 @@ public class CheckerBoardMem extends AbsCheckerBoard {
                     memBoard.get(playerOneChar).add(new BoardPosition(row,col));
                 }
                 if (row > ROW_NUM / 2) {
-                    memBoard.get(playerOneChar).add(new BoardPosition(row,col));
+                    memBoard.get(playerTwoChar).add(new BoardPosition(row,col));
                 }
             }
         }
@@ -115,7 +113,7 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     }
 
     /**
-     * Returns the vaible directions for each player 
+     * Returns the viable directions for each player
      * @return a map of player characters to their allowed move directions
      * @post getViableDirections() == viableDirections
      */
