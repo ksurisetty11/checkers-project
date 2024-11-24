@@ -95,11 +95,11 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     }
 
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
-        return null;
+        return viableDirections;
     }
 
     public HashMap<Character, Integer> getPieceCounts() {
-        return null;
+        return pieceCount;
     }
 
     public int getRowNum() {
