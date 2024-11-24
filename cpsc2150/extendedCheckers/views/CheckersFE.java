@@ -19,8 +19,8 @@ import static cpsc2150.extendedCheckers.models.ICheckerBoard.getDirection;
  */
 public class CheckersFE {
     public static final Scanner readInInput = new Scanner(System.in);
-    private static char playerOne;
-    private static char playerTwo;
+    private static char playerOne = 'x';
+    private static char playerTwo = 'o';
 
     public static void main(String[] args) {
         ICheckerBoard gameBoard = new CheckerBoard(8);
