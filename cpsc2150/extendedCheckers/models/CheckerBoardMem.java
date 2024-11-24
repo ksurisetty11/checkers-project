@@ -110,8 +110,9 @@ public class CheckerBoardMem extends AbsCheckerBoard {
         return COL_NUM;
     }
 
+    //assuming the player char is one that is already in the map
     public void placePiece(BoardPosition pos, char player) {
-
+        memBoard.get(player).add(pos);
     }
 
     public char whatsAtPos(BoardPosition pos) {
