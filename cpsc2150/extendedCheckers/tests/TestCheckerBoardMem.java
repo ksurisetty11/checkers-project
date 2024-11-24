@@ -46,6 +46,51 @@ public class TestCheckerBoardMem {
 
     }
 
+    @Test
+    public void test_whatsAtPos_MinRowMinCol() {
+        BoardPosition input = new BoardPosition(0, 0);
+        char exp = 'x';
+        ICheckerBoard board = makeBoard();
+        int obs = board.whatsAtPos(input);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_whatsAtPos_MaxRowMaxCol() {
+        BoardPosition input = new BoardPosition(7, 7);
+        char exp = 'o';
+        ICheckerBoard board = makeBoard();
+        int obs = board.whatsAtPos(input);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_whatsAtPos_MidRowMidCol() {
+        BoardPosition input = new BoardPosition(2, 4);
+        char exp = 'x';
+        ICheckerBoard board = makeBoard();
+        int obs = board.whatsAtPos(input);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_whatsAtPos_BlackTile() {
+        BoardPosition input = new BoardPosition(0, 1);
+        char exp = '\0';
+        ICheckerBoard board = makeBoard();
+        int obs = board.whatsAtPos(input);
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_whatsAtPos_EmptyTile() {
+        BoardPosition input = new BoardPosition(4, 0);
+        char exp = '\0';
+        ICheckerBoard board = makeBoard();
+        int obs = board.whatsAtPos(input);
+        assertEquals(exp, obs);
+    }
+
     //ToString function for expected boards
     private String toStringForTest(Map<Character, List<BoardPosition>> memBoard, int size) {
         StringBuilder mapString = new StringBuilder("|  ");
