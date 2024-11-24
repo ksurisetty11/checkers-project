@@ -159,7 +159,28 @@ public class CheckerBoardMem extends AbsCheckerBoard {
      */
     //assuming the player char is one that is already in the map
     public void placePiece(BoardPosition pos, char player) {
-        memBoard.get(player).add(pos);
+        //Look at all the positions on memBoard to check if the position is occupied
+        for (Map.Entry<Character, List<BoardPosition>> allPositions: memBoard.entrySet()) {
+            char positionPiece = allPositions.getKey();
+            List<BoardPosition> currPlayerPositions  = allPositions.getValue();
+
+            //Going through the current players location to determine if pos is already occupied
+            for (int i = 0; i < currPlayerPositions.size(); i++) {
+                if (currPlayerPositions.get(i).equals(pos)) {
+                    //If there is a piece at pos, remove it to eventually replace it with player
+                    currPlayerPositions.remove(i);
+                    break;
+                }
+            }
+            memBoard.put(positionPiece, currPlayerPositions);
+        }
+
+        //if player isn't ' ' add the piece to the board
+        if (player != ' ') {
+            List<BoardPosition> locationToPlace = memBoard.get(player);
+            locationToPlace.add(pos);
+            memBoard.put(player, locationToPlace);
+        }
     }
 
     /**
