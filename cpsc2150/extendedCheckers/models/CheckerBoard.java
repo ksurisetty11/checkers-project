@@ -1,7 +1,6 @@
 package cpsc2150.extendedCheckers.models;
 
 import cpsc2150.extendedCheckers.util.DirectionEnum;
-import cpsc2150.extendedCheckers.views.CheckersFE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,8 +36,8 @@ public class CheckerBoard extends AbsCheckerBoard
      * standard piece can move in plus the opposite directions the standard piece can move in.
      */
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
-    public static final char PLAYER_ONE = CheckersFE.getPlayerOne();
-    public static final char PLAYER_TWO = CheckersFE.getPlayerTwo();
+    public static final char PLAYER_ONE = 'x';
+    public static final char PLAYER_TWO = 'o';
     public static final char EMPTY_POS = ' ';
     public static final char BLACK_TILE = '*';
 

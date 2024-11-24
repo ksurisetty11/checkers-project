@@ -1,7 +1,6 @@
 package cpsc2150.extendedCheckers.models;
 
 import cpsc2150.extendedCheckers.util.DirectionEnum;
-import cpsc2150.extendedCheckers.views.CheckersFE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -37,8 +36,8 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
         memBoard = new HashMap<>();
 
-        char playerOneChar = CheckersFE.getPlayerOne();
-        char playerTwoChar = CheckersFE.getPlayerTwo();
+        char playerOneChar = 'x';
+        char playerTwoChar = 'o';
 
         char crownedPlayerOne = Character.toUpperCase(playerOneChar);
         char crownedPlayerTwo = Character.toUpperCase(playerTwoChar);
