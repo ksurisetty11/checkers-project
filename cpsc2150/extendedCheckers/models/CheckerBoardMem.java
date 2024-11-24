@@ -23,6 +23,10 @@ public class CheckerBoardMem extends AbsCheckerBoard {
      */
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
 
+    public static final char PLAYER_ONE = 'x';
+    public static final char PLAYER_TWO = 'o';
+    public static final char EMPTY_POS = ' ';
+
     /**
      * Number of rows on the board
      */
@@ -54,8 +58,8 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
         memBoard = new HashMap<>();
 
-        char playerOneChar = 'x';
-        char playerTwoChar = 'o';
+        char playerOneChar = PLAYER_ONE;
+        char playerTwoChar = PLAYER_TWO;
 
         char crownedPlayerOne = Character.toUpperCase(playerOneChar);
         char crownedPlayerTwo = Character.toUpperCase(playerTwoChar);
@@ -106,10 +110,10 @@ public class CheckerBoardMem extends AbsCheckerBoard {
         allDirections.add(DirectionEnum.NE);
         allDirections.add(DirectionEnum.NW);
 
-        viableDirections.put('X', allDirections);
-        viableDirections.put('O', allDirections);
-        viableDirections.put('x', xPlayerDirections);
-        viableDirections.put('o', oPlayerDirections);
+        viableDirections.put(Character.toUpperCase(PLAYER_ONE), allDirections);
+        viableDirections.put(Character.toUpperCase(PLAYER_TWO), allDirections);
+        viableDirections.put(PLAYER_ONE, xPlayerDirections);
+        viableDirections.put(PLAYER_TWO, oPlayerDirections);
     }
 
     /**
