@@ -115,9 +115,16 @@ public class CheckerBoardMem extends AbsCheckerBoard {
         memBoard.get(player).add(pos);
     }
 
+    //assuming pos is in memBoard
     public char whatsAtPos(BoardPosition pos) {
-        return 0;
+        for(Character player : memBoard.keySet()) {
+            List<BoardPosition> positions = memBoard.get(player);
+            for (BoardPosition currentPos : positions) {
+                if (currentPos.equals(pos)) {
+                    return player;
+                }
+            }
+        }
+        return '\0';
     }
 }
-
-
