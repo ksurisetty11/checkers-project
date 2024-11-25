@@ -319,6 +319,60 @@ public class TestCheckerBoardMem {
         assertFalse(hasWon);
     }
 
+    @Test
+    public void test_crownPiece_playerx_on_opposing_side()
+    {
+        char playerOne = CheckerBoardMem.PLAYER_ONE;
+        char playerTwo = CheckerBoardMem.PLAYER_TWO;
+        char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
+
+        ICheckerBoard testBoard = makeBoard();
+        BoardPosition targetPos = new BoardPosition(7,1);
+        testBoard.placePiece(targetPos, playerOne);
+
+        //Removing pieces from board
+        testBoard.placePiece(new BoardPosition(6, 0), CheckerBoardMem.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(6, 2), CheckerBoardMem.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(5, 1), CheckerBoardMem.EMPTY_POS);
+
+        //Moving pieces on board
+        testBoard.placePiece(new BoardPosition(4, 4), playerTwo);
+        testBoard.placePiece(new BoardPosition(4, 6), playerTwo);
+
+        testBoard.crownPiece(targetPos);
+        char obsChar = testBoard.whatsAtPos(targetPos);
+        assertEquals(obsChar, playerOneCrowned);
+    }
+
+    @Test
+    public void test_crownPiece_playerx_on_player_side()
+    {
+        ICheckerBoard testBoard = makeBoard();
+        char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
+        BoardPosition targetPos = new BoardPosition(0,0);
+        testBoard.crownPiece(targetPos);
+        char obsChar = testBoard.whatsAtPos(targetPos);
+        assertEquals(obsChar, playerOneCrowned);
+    }
+
+    @Test
+    public void test_crownPiece_playerx_already_crowned()
+    {
+        ICheckerBoard testBoard = makeBoard();
+        testBoard.placePiece(new BoardPosition(2, 0), CheckerBoardMem.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(5, 7), CheckerBoardMem.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(4, 6), CheckerBoardMem.PLAYER_TWO);
+
+        char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
+
+        BoardPosition targetPos = new BoardPosition(4,0);
+        testBoard.placePiece(targetPos, playerOneCrowned);
+        testBoard.crownPiece(targetPos);
+        char obsChar = testBoard.whatsAtPos(targetPos);
+
+        assertEquals(obsChar, playerOneCrowned);
+    }
+
     //ToString function for expected boards
     private String toStringForTest(Map<Character, List<BoardPosition>> memBoard, int size) {
         StringBuilder mapString = new StringBuilder("|  ");
