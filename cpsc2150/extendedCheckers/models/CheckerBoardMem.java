@@ -196,7 +196,9 @@ public class CheckerBoardMem extends AbsCheckerBoard {
      */
     //assuming pos is in memBoard
     public char whatsAtPos(BoardPosition pos) {
-        for(Character player : memBoard.keySet()) {
+        int row = pos.getRow();
+        int col = pos.getColumn();
+        for (Character player : memBoard.keySet()) {
             List<BoardPosition> positions = memBoard.get(player);
             for (BoardPosition currentPos : positions) {
                 if (currentPos.equals(pos)) {
@@ -204,6 +206,9 @@ public class CheckerBoardMem extends AbsCheckerBoard {
                 }
             }
         }
-        return '\0';
+        if ((col % 2 == 0 && row % 2 == 1) || (col % 2 == 1 && row % 2 == 0)) {
+            return '*';
+        }
+        return ' ';
     }
 }
