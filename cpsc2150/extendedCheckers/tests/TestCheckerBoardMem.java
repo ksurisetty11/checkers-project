@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.*;
@@ -66,7 +65,7 @@ public class TestCheckerBoardMem {
     @Test
     public void test_whatsAtPos_BlackTile() {
         BoardPosition input = new BoardPosition(0, 1);
-        char exp = '\0';
+        char exp = '*';
         ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
@@ -75,7 +74,7 @@ public class TestCheckerBoardMem {
     @Test
     public void test_whatsAtPos_EmptyTile() {
         BoardPosition input = new BoardPosition(4, 0);
-        char exp = '\0';
+        char exp = ' ';
         ICheckerBoard board = makeBoard();
         int obs = board.whatsAtPos(input);
         assertEquals(exp, obs);
@@ -90,8 +89,6 @@ public class TestCheckerBoardMem {
         obsCb.placePiece(input, inputPlayer);
 
         String obs = obsCb.toString();
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-
         char[][] expBoard = {
                 {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
                 {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
@@ -102,7 +99,7 @@ public class TestCheckerBoardMem {
                 {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
                 {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
         };
-
+        
         String expected = toStringForTest(expBoard);
         assertEquals(expected, obs);
 
@@ -210,15 +207,11 @@ public class TestCheckerBoardMem {
     @Test
     public void test_getPieceCounts_x12_o12()
     {
-        Map<Character, Integer> exp = new HashMap<>();
-
-        char playerOne = CheckerBoardMem.PLAYER_ONE;
-        char playerTwo = CheckerBoardMem.PLAYER_TWO;
-
-        exp.put(playerOne, 12);
-        exp.put(playerTwo, 12);
+        HashMap<Character, Integer> exp = new HashMap<>();
+        exp.put(CheckerBoardMem.PLAYER_ONE, 12);
+        exp.put(CheckerBoardMem.PLAYER_TWO, 12);
         ICheckerBoard board = makeBoard();
-        Map<Character, Integer> obs = board.getPieceCounts();
+        HashMap<Character, Integer> obs = board.getPieceCounts();
         assertEquals(exp, obs);
     }
 
@@ -232,12 +225,7 @@ public class TestCheckerBoardMem {
         ArrayList<DirectionEnum> xDirections = new ArrayList<>();
         ArrayList<DirectionEnum> oDirections = new ArrayList<>();
         ArrayList<DirectionEnum> crownedDirections = new ArrayList<>();
-
-        char playerOne = CheckerBoardMem.PLAYER_ONE;
-        char playerTwo = CheckerBoardMem.PLAYER_TWO;
-        char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
-        char playerTwoCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_TWO);
-
+        
         xDirections.add(DirectionEnum.SE);
         xDirections.add(DirectionEnum.SW);
         oDirections.add(DirectionEnum.NE);
@@ -248,10 +236,10 @@ public class TestCheckerBoardMem {
         crownedDirections.add(DirectionEnum.NE);
         crownedDirections.add(DirectionEnum.NW);
 
-        expected.put(playerOne, xDirections);
-        expected.put(playerTwo, oDirections);
-        expected.put(playerOneCrowned, crownedDirections);
-        expected.put(playerTwoCrowned, crownedDirections);
+        expected.put(CheckerBoardMem.PLAYER_ONE, xDirections);
+        expected.put(CheckerBoardMem.PLAYER_TWO, oDirections);
+        expected.put(Character.toUpperCase(CheckerBoardMem.PLAYER_ONE), crownedDirections);
+        expected.put(Character.toUpperCase(CheckerBoardMem.PLAYER_TWO), crownedDirections);
 
         assertEquals(expected, actual);
     }
@@ -259,79 +247,79 @@ public class TestCheckerBoardMem {
     @Test
     public void test_checkPlayerWin_no_opponent_pieces_left()
     {
-        ICheckerBoard testBoard = makeBoard();
+        ICheckerBoard obsBoard = makeBoard();
         //Eliminating o pieces
-        for (int row = 5; row < testBoard.getRowNum(); row++) {
-            for (int col = 0; col < testBoard.getColNum(); col++) {
+        for (int row = 5; row < obsBoard.getRowNum(); row++) {
+            for (int col = 0; col < obsBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
-                    HashMap<Character, Integer> playerPieceCount = testBoard.getPieceCounts();
+                    obsBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                    HashMap<Character, Integer> playerPieceCount = obsBoard.getPieceCounts();
                     playerPieceCount.put(CheckerBoardMem.PLAYER_TWO, playerPieceCount.get(CheckerBoardMem.PLAYER_TWO) - 1);
                 }
             }
         }
-        boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
+        boolean hasWon = obsBoard.checkPlayerWin(CheckerBoardMem.PLAYER_ONE);
         assertTrue(hasWon);
     }
 
     @Test
     public void test_checkPlayerWin_opponent_pieces_exist()
     {
-        ICheckerBoard testBoard = makeBoard();
-        boolean hasWon = testBoard.checkPlayerWin(CheckerBoardMem.PLAYER_ONE);
+        ICheckerBoard obsBoard = makeBoard();
+        boolean hasWon = obsBoard.checkPlayerWin(CheckerBoardMem.PLAYER_ONE);
         assertFalse(hasWon);
     }
 
     @Test
     public void test_crownPiece_playerx_on_opposing_side()
     {
+        ICheckerBoard obsBoard = makeBoard();
+        BoardPosition targetPos = new BoardPosition(7, 1);
+        obsBoard.placePiece(targetPos, CheckerBoardMem.PLAYER_ONE);
+
         char playerOne = CheckerBoardMem.PLAYER_ONE;
         char playerTwo = CheckerBoardMem.PLAYER_TWO;
-        char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
-
-        ICheckerBoard testBoard = makeBoard();
-        BoardPosition targetPos = new BoardPosition(7,1);
-        testBoard.placePiece(targetPos, playerOne);
+        char playerOneCrowned = Character.toUpperCase(playerOne);
 
         //Removing pieces from board
-        testBoard.placePiece(new BoardPosition(6, 0), CheckerBoardMem.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(6, 2), CheckerBoardMem.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(5, 1), CheckerBoardMem.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(6, 0), CheckerBoardMem.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(6, 2), CheckerBoardMem.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(5, 1), CheckerBoardMem.EMPTY_POS);
 
         //Moving pieces on board
-        testBoard.placePiece(new BoardPosition(4, 4), playerTwo);
-        testBoard.placePiece(new BoardPosition(4, 6), playerTwo);
+        obsBoard.placePiece(new BoardPosition(4, 4), playerTwo);
+        obsBoard.placePiece(new BoardPosition(4, 6), playerTwo);
 
-        testBoard.crownPiece(targetPos);
-        char obsChar = testBoard.whatsAtPos(targetPos);
+        obsBoard.crownPiece(targetPos);
+        char obsChar = obsBoard.whatsAtPos(targetPos);
         assertEquals(obsChar, playerOneCrowned);
     }
 
     @Test
     public void test_crownPiece_playerx_on_player_side()
     {
-        ICheckerBoard testBoard = makeBoard();
+        ICheckerBoard obsBoard = makeBoard();
         char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
         BoardPosition targetPos = new BoardPosition(0,0);
-        testBoard.crownPiece(targetPos);
-        char obsChar = testBoard.whatsAtPos(targetPos);
+        obsBoard.crownPiece(targetPos);
+        char obsChar = obsBoard.whatsAtPos(targetPos);
         assertEquals(obsChar, playerOneCrowned);
     }
 
     @Test
     public void test_crownPiece_playerx_already_crowned()
     {
-        ICheckerBoard testBoard = makeBoard();
-        testBoard.placePiece(new BoardPosition(2, 0), CheckerBoardMem.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(5, 7), CheckerBoardMem.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(4, 6), CheckerBoardMem.PLAYER_TWO);
+        ICheckerBoard obsBoard = makeBoard();
+        obsBoard.placePiece(new BoardPosition(2, 0), CheckerBoardMem.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(5, 7), CheckerBoardMem.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(4, 6), CheckerBoardMem.PLAYER_TWO);
 
         char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
 
         BoardPosition targetPos = new BoardPosition(4,0);
-        testBoard.placePiece(targetPos, playerOneCrowned);
-        testBoard.crownPiece(targetPos);
-        char obsChar = testBoard.whatsAtPos(targetPos);
+        obsBoard.placePiece(targetPos, playerOneCrowned);
+        obsBoard.crownPiece(targetPos);
+        char obsChar = obsBoard.whatsAtPos(targetPos);
 
         assertEquals(obsChar, playerOneCrowned);
     }
@@ -342,7 +330,7 @@ public class TestCheckerBoardMem {
         BoardPosition startPos = new BoardPosition(2, 0);
         BoardPosition endPos = obsBoard.movePiece(startPos, DirectionEnum.SE);
 
-        char[][] exp = {
+        char[][] expBoard = {
                 {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
                 {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
                 {' ', '*', 'x', '*', 'x', '*', 'x', '*'},
@@ -353,7 +341,7 @@ public class TestCheckerBoardMem {
                 {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
 
         String obs = obsBoard.toString();
-        String expBoard = toStringForTest(exp);
+        String exp = toStringForTest(expBoard);
 
         assertEquals('x', obsBoard.whatsAtPos(endPos));
         assertEquals(exp, obs);
@@ -369,8 +357,8 @@ public class TestCheckerBoardMem {
 
         BoardPosition startPosx = new BoardPosition(3, 1);
         BoardPosition startPoso = new BoardPosition(4, 0);
-        obsBoard.placePiece(startPosx, CheckerBoard.PLAYER_ONE);
-        obsBoard.placePiece(startPoso, CheckerBoard.PLAYER_TWO);
+        obsBoard.placePiece(startPosx, CheckerBoardMem.PLAYER_ONE);
+        obsBoard.placePiece(startPoso, CheckerBoardMem.PLAYER_TWO);
 
         BoardPosition obsPos = obsBoard.movePiece(startPosx, DirectionEnum.SW);
         BoardPosition expPos = new BoardPosition(4, 0);
@@ -419,23 +407,23 @@ public class TestCheckerBoardMem {
     @Test
     public void test_jumpPiece_SEjump()
     {
-        ICheckerBoard testBoard = makeBoard();
+        ICheckerBoard obsBoard = makeBoard();
 
         // Empty the board
-        for (int row = 0; row < testBoard.getRowNum(); row++) {
-            for (int col = 0; col < testBoard.getColNum(); col++) {
+        for (int row = 0; row < obsBoard.getRowNum(); row++) {
+            for (int col = 0; col < obsBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                    obsBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
                 }
             }
         }
         //Manually place the pieces
-        testBoard.placePiece(new BoardPosition(4,4), 'x');
-        testBoard.placePiece(new BoardPosition(5,5), 'o');
+        obsBoard.placePiece(new BoardPosition(4,4), 'x');
+        obsBoard.placePiece(new BoardPosition(5,5), 'o');
 
         BoardPosition startingPos = new BoardPosition(4,4);
         DirectionEnum dir = DirectionEnum.SE;
-        BoardPosition obsPos = testBoard.jumpPiece(startingPos, dir);
+        BoardPosition obsPos = obsBoard.jumpPiece(startingPos, dir);
 
         assertEquals(new BoardPosition(6,6), obsPos);
     }
@@ -443,24 +431,24 @@ public class TestCheckerBoardMem {
     @Test
     public void test_jumpPiece_SWjump()
     {
-        ICheckerBoard testBoard = makeBoard();
+        ICheckerBoard obsBoard = makeBoard();
 
         //Empty the board
-        for (int row = 0; row < testBoard.getRowNum(); row++) {
-            for (int col = 0; col < testBoard.getColNum(); col++) {
+        for (int row = 0; row < obsBoard.getRowNum(); row++) {
+            for (int col = 0; col < obsBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                    obsBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
                 }
             }
         }
 
         //Manually place the pieces
-        testBoard.placePiece(new BoardPosition(2,2), 'x');
-        testBoard.placePiece(new BoardPosition(3,1), 'o');
+        obsBoard.placePiece(new BoardPosition(2,2),  CheckerBoardMem.PLAYER_ONE);
+        obsBoard.placePiece(new BoardPosition(3,1), CheckerBoardMem.PLAYER_TWO);
 
         BoardPosition startingPos = new BoardPosition(2,2);
         DirectionEnum dir = DirectionEnum.SW;
-        BoardPosition obsPos = testBoard.jumpPiece(startingPos, dir);
+        BoardPosition obsPos = obsBoard.jumpPiece(startingPos, dir);
 
         assertEquals(new BoardPosition(4,0), obsPos);
     }
@@ -622,6 +610,7 @@ public class TestCheckerBoardMem {
                 arrayString.append(array[i][j]).append(" |");
             }
         }
+        arrayString.append("\n");
         return arrayString.toString();
     }
 
