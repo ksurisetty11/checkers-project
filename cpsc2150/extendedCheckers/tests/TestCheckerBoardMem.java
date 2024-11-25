@@ -356,7 +356,6 @@ public class TestCheckerBoardMem {
         String expBoard = toStringForTest(exp);
 
         assertEquals('x', obsBoard.whatsAtPos(endPos));
-        assertEquals(obsBoard, expBoard);
         assertEquals(exp, obs);
     }
 
@@ -389,7 +388,7 @@ public class TestCheckerBoardMem {
                 {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
 
         String exp = toStringForTest(expBoard);
-        assertEquals(exp, obsBoard);
+        assertEquals(obs, exp);
         assertEquals(obsPos, expPos);
     }
 
