@@ -23,12 +23,17 @@ public class CheckersFE {
     private static char playerTwo = 'o';
 
     public static void main(String[] args) {
-        ICheckerBoard gameBoard = new CheckerBoard(8);
         Scanner readInInput = new Scanner(System.in);
-        boolean gameOn = true;
-        //Game starts with player x
-        char whichPlayer = CheckerBoard.PLAYER_ONE;
 
+        System.out.println("Player 1, enter your piece:");
+        String inputPlayerPiece = readInInput.next();
+        //add while loop to check
+        playerOne = inputPlayerPiece.charAt(0);
+        ICheckerBoard gameBoard = new CheckerBoard(8);
+
+        //Game starts with player one
+        char whichPlayer = CheckerBoard.PLAYER_ONE;
+        boolean gameOn = true;
         //Loop that switches control of each player each iteration
         while (gameOn) {
             //Current State of the board
