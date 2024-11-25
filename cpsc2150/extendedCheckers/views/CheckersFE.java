@@ -38,12 +38,8 @@ public class CheckersFE {
         //Game asks player two what piece they want to use
         System.out.println("Player 2, enter your piece:");
         inputPlayerPiece = readInInput.next();
-        while(inputPlayerPiece.length() != 1 || Character.isUpperCase(inputPlayerPiece.charAt(0))){
+        while(inputPlayerPiece.length() != 1 || Character.isUpperCase(inputPlayerPiece.charAt(0)) || inputPlayerPiece.charAt(0) == playerOne){
             System.out.println("Please enter only a single lowercase character");
-            inputPlayerPiece = readInInput.next();
-        }
-        while(inputPlayerPiece.charAt(0) == playerOne){
-            System.out.println("Please enter a single lowercase character that is different from Player 1's piece");
             inputPlayerPiece = readInInput.next();
         }
         playerTwo = inputPlayerPiece.charAt(0);
