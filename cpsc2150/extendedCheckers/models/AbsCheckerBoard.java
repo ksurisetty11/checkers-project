@@ -19,26 +19,31 @@ public abstract class AbsCheckerBoard implements ICheckerBoard {
     public String toString() {
         {
             StringBuilder stringBoard = new StringBuilder("|  ");
-            for(int columnGuide = 0; columnGuide < BOARD_DIMENSIONS; columnGuide++){
-                stringBoard.append("| ").append(columnGuide);
+            for(int columnGuide = 0; columnGuide < getColNum(); columnGuide++){
+                if (columnGuide < 10) {
+                    stringBoard.append("| ").append(columnGuide);
+                }
+                else {
+                    stringBoard.append("|").append(columnGuide);
+                }
             }
             stringBoard.append("|");
-            for(int row = 0; row < BOARD_DIMENSIONS; row++){
-                stringBoard.append("\n|").append(row).append(" |");
-                for(int col = 0; col < BOARD_DIMENSIONS; col++) {
+            for(int row = 0; row < getRowNum(); row++){
+                if (row < 10) {
+                    stringBoard.append("\n|").append(row).append(" |");
+                }
+                else {
+                    stringBoard.append("\n|").append(row).append("|");
+                }
+                for(int col = 0; col < getColNum(); col++) {
                     BoardPosition posOnBoard = new BoardPosition(row,col);
                     char positionPiece = whatsAtPos(posOnBoard);
                     if (positionPiece != '\0') {
                         stringBoard.append(positionPiece).append(" |");
                     }
-                    else if ((row + col) % 2 == 1) {
-                        stringBoard.append('*').append(" |");
-                    }
-                    else {
-                        stringBoard.append(' ').append(" |");
-                    }
                 }
             }
+            stringBoard.append("\n");
             return stringBoard.toString();
         }
     }
