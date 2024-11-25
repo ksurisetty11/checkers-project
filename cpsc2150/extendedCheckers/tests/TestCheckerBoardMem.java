@@ -1,15 +1,19 @@
 package cpsc2150.extendedCheckers.tests;
 
 import cpsc2150.extendedCheckers.models.BoardPosition;
+import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.models.CheckerBoardMem;
 import cpsc2150.extendedCheckers.models.ICheckerBoard;
+import cpsc2150.extendedCheckers.util.DirectionEnum;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TestCheckerBoardMem {
     private ICheckerBoard makeBoard() {
@@ -239,6 +243,55 @@ public class TestCheckerBoardMem {
 
         String exp = toStringForTest(expCb, 8);
         assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_getPieceCounts_x12_o12()
+    {
+        Map<Character, Integer> exp = new HashMap<>();
+
+        char playerOne = CheckerBoardMem.PLAYER_ONE;
+        char playerTwo = CheckerBoardMem.PLAYER_TWO;
+
+        exp.put(playerOne, 12);
+        exp.put(playerTwo, 12);
+        ICheckerBoard board = makeBoard();
+        Map<Character, Integer> obs = board.getPieceCounts();
+        assertEquals(exp, obs);
+    }
+
+    @Test
+    public void test_getViableDirections_8x8board()
+    {
+        ICheckerBoard board = makeBoard();
+        Map<Character, ArrayList<DirectionEnum>> actual = board.getViableDirections();
+        Map<Character, ArrayList<DirectionEnum>> expected = new HashMap<>();
+
+        ArrayList<DirectionEnum> xDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> oDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> crownedDirections = new ArrayList<>();
+
+        char playerOne = CheckerBoardMem.PLAYER_ONE;
+        char playerTwo = CheckerBoardMem.PLAYER_TWO;
+        char playerOneCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_ONE);
+        char playerTwoCrowned = Character.toUpperCase(CheckerBoardMem.PLAYER_TWO);
+
+        xDirections.add(DirectionEnum.SE);
+        xDirections.add(DirectionEnum.SW);
+        oDirections.add(DirectionEnum.NE);
+        oDirections.add(DirectionEnum.NW);
+
+        crownedDirections.add(DirectionEnum.SE);
+        crownedDirections.add(DirectionEnum.SW);
+        crownedDirections.add(DirectionEnum.NE);
+        crownedDirections.add(DirectionEnum.NW);
+
+        expected.put(playerOne, xDirections);
+        expected.put(playerTwo, oDirections);
+        expected.put(playerOneCrowned, crownedDirections);
+        expected.put(playerTwoCrowned, crownedDirections);
+
+        assertEquals(expected, actual);
     }
 
     //ToString function for expected boards
