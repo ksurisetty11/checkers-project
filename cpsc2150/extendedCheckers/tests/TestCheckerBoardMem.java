@@ -24,29 +24,16 @@ public class TestCheckerBoardMem {
     public void test_CheckerBoard_Constructor() {
         ICheckerBoard obsCb = makeBoard();
         String obs = obsCb.toString();
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)
-        ));
-        expCb.put(Character.toUpperCase(CheckerBoardMem.PLAYER_ONE), List.of());
-        expCb.put(Character.toUpperCase(CheckerBoardMem.PLAYER_TWO), List.of());
-
-        String exp = toStringForTest(expCb, 8);
-
+        char[][] expBoard = {{'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
+        String exp = toStringForTest(expBoard);
         assertEquals(exp, obs);
-
     }
 
     @Test
@@ -105,23 +92,19 @@ public class TestCheckerBoardMem {
         String obs = obsCb.toString();
         Map<Character, List<BoardPosition>> expCb = new HashMap<>();
 
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6), new BoardPosition(3,3)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)
-        ));
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', 'x', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, obs);
 
     }
 
@@ -134,23 +117,19 @@ public class TestCheckerBoardMem {
         obsCb.placePiece(input, inputPlayer);
 
         String obs = obsCb.toString();
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6), new BoardPosition(7,7)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5)));
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'x'}
+        };
 
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, obs);
     }
 
     @Test
@@ -163,25 +142,19 @@ public class TestCheckerBoardMem {
 
         String obs = obsCb.toString();
 
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6), new BoardPosition(3,0)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)
-        ));
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'x', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
 
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, obs);
     }
 
     @Test
@@ -194,24 +167,19 @@ public class TestCheckerBoardMem {
 
         String obs= obsCb.toString();
 
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 6)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7), new BoardPosition (2,4)
-        ));
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'o', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
 
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, obs);
     }
 
     @Test
@@ -224,24 +192,19 @@ public class TestCheckerBoardMem {
 
         String obs = obsCb.toString();
 
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(inputPlayer, List.of(new BoardPosition(0,0)));
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)));
+        char[][] expBoard = {
+                {'X', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
 
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        String expected = toStringForTest(expBoard);
+        assertEquals(expected, obs);
     }
 
     @Test
@@ -379,27 +342,22 @@ public class TestCheckerBoardMem {
         BoardPosition startPos = new BoardPosition(2, 0);
         BoardPosition endPos = obsBoard.movePiece(startPos, DirectionEnum.SE);
 
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6), new BoardPosition(3,1)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)
-        ));
+        char[][] exp = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {' ', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
+
         String obs = obsBoard.toString();
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        String expBoard = toStringForTest(exp);
+
         assertEquals('x', obsBoard.whatsAtPos(endPos));
-        assertEquals(obs, exp);
+        assertEquals(obsBoard, expBoard);
+        assertEquals(exp, obs);
     }
 
     @Test
@@ -420,25 +378,18 @@ public class TestCheckerBoardMem {
 
         String obs = obsBoard.toString();
 
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6), new BoardPosition(4,0)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)
-        ));
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {' ', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {'x', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', ' ', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}};
 
-        String exp = toStringForTest(expCb, 8);
-        assertEquals(exp, obs);
+        String exp = toStringForTest(expBoard);
+        assertEquals(exp, obsBoard);
         assertEquals(obsPos, expPos);
     }
 
@@ -451,67 +402,35 @@ public class TestCheckerBoardMem {
         BoardPosition expPos = new BoardPosition(2, 0);
 
         String obs = obsBoard.toString();
-
-        Map<Character, List<BoardPosition>> expCb = new HashMap<>();
-        expCb.put(CheckerBoardMem.PLAYER_ONE, List.of(new BoardPosition(0, 0),
-                new BoardPosition(0, 2), new BoardPosition(0, 4),
-                new BoardPosition(0, 6), new BoardPosition(1, 1),
-                new BoardPosition(1, 3), new BoardPosition(1, 5),
-                new BoardPosition(1, 7), new BoardPosition(2, 0),
-                new BoardPosition(2, 2), new BoardPosition(2, 4),
-                new BoardPosition(2, 6)));
-        expCb.put(CheckerBoardMem.PLAYER_TWO, List.of(new BoardPosition(5, 1),
-                new BoardPosition(5, 3), new BoardPosition(5, 5),
-                new BoardPosition(5, 7), new BoardPosition(6, 0),
-                new BoardPosition(6, 2), new BoardPosition(6, 4),
-                new BoardPosition(6, 6), new BoardPosition(7, 1),
-                new BoardPosition(7, 3), new BoardPosition(7, 5),
-                new BoardPosition(7, 7)
-        ));
-
-        String exp = toStringForTest(expCb,8);
+        char[][] expBoard = {
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', 'x', '*', 'x', '*', 'x', '*', 'x'},
+                {'x', '*', 'x', '*', 'x', '*', 'x', '*'},
+                {'*', ' ', '*', ' ', '*', ' ', '*', ' '},
+                {' ', '*', ' ', '*', ' ', '*', ' ', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'},
+                {'o', '*', 'o', '*', 'o', '*', 'o', '*'},
+                {'*', 'o', '*', 'o', '*', 'o', '*', 'o'}
+        };
+        String exp = toStringForTest(expBoard);
         assertEquals(exp, obs);
         assertEquals(obsPos, expPos);
     }
 
-    //ToString function for expected boards
-    private String toStringForTest(Map<Character, List<BoardPosition>> memBoard, int size) {
-        StringBuilder mapString = new StringBuilder("|  ");
-
-        for (int i = 0; i < size; i++) {
-            mapString.append("| ").append(i);
+    private String toStringForTest(char[][] array) {
+        StringBuilder arrayString = new StringBuilder("|  ");
+        for (int i = 0; i < array.length; i++) {
+            arrayString.append("| ").append(i);
         }
-        mapString.append("|");
-        for (int i = 0; i < size; i++) {
-            mapString.append("\n|").append(i).append(" |");
-            for (int j = 0; j < size; j++) {
-                BoardPosition pos = new BoardPosition(i,j);
-                char positionPiece = whatsAtTestPos(memBoard, pos);
-                if (positionPiece != '\0') {
-                    mapString.append(positionPiece).append(" |");
-                }
-                else if ((i + j) % 2 == 1) {
-                    mapString.append('*').append(" |");
-                }
-                else {
-                    mapString.append(' ').append(" |");
-                }
+        arrayString.append("|");
+        for (int i = 0; i < array.length; i++) {
+            arrayString.append("\n|").append(i).append(" |");
+            for (int j = 0; j < array[i].length; j++) {
+                arrayString.append(array[i][j]).append(" |");
             }
         }
-        return mapString.toString();
+        return arrayString.toString();
     }
 
-    //Helper function to get the position character in Map<Character, List<BoardPosition>>
-    public char whatsAtTestPos(Map<Character, List<BoardPosition>> memBoard, BoardPosition pos) {
-        for (Character player : memBoard.keySet()) {
-            List<BoardPosition> positions = memBoard.get(player);
-            for (BoardPosition currentPos : positions) {
-                if (currentPos.equals(pos)) {
-                    return player;
-                }
-            }
-        }
-        return '\0';
-    }
 }
 
