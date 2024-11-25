@@ -38,7 +38,7 @@ public class CheckerBoard extends AbsCheckerBoard
      */
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
     public static final char PLAYER_ONE = CheckersFE.getPlayerOne();
-    public static final char PLAYER_TWO = 'o';
+    public static final char PLAYER_TWO = CheckersFE.getPlayerTwo();
     public static final char EMPTY_POS = ' ';
     public static final char BLACK_TILE = '*';
 

@@ -25,13 +25,28 @@ public class CheckersFE {
     public static void main(String[] args) {
         Scanner readInInput = new Scanner(System.in);
 
+        //Game asks player one what piece they want to use
         System.out.println("Player 1, enter your piece:");
         String inputPlayerPiece = readInInput.next();
-        while(inputPlayerPiece.length() != 1){
+        while(inputPlayerPiece.length() != 1 || Character.isUpperCase(inputPlayerPiece.charAt(0))){
             System.out.println("Please enter only a single lowercase character");
             inputPlayerPiece = readInInput.next();
         }
         playerOne = inputPlayerPiece.charAt(0);
+
+        //Game asks player two what piece they want to use
+        System.out.println("Player 2, enter your piece:");
+        inputPlayerPiece = readInInput.next();
+        while(inputPlayerPiece.length() != 1 || Character.isUpperCase(inputPlayerPiece.charAt(0))){
+            System.out.println("Please enter only a single lowercase character");
+            inputPlayerPiece = readInInput.next();
+        }
+        while(inputPlayerPiece.charAt(0) == playerOne){
+            System.out.println("Please enter a single lowercase character that is different from Player 1's piece");
+            inputPlayerPiece = readInInput.next();
+        }
+        playerTwo = inputPlayerPiece.charAt(0);
+
         ICheckerBoard gameBoard = new CheckerBoard(8);
 
         //Game starts with player one
