@@ -416,6 +416,200 @@ public class TestCheckerBoardMem {
         assertEquals(obsPos, expPos);
     }
 
+    @Test
+    public void test_jumpPiece_SEjump()
+    {
+        ICheckerBoard testBoard = makeBoard();
+
+        // Empty the board
+        for (int row = 0; row < testBoard.getRowNum(); row++) {
+            for (int col = 0; col < testBoard.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                }
+            }
+        }
+        //Manually place the pieces
+        testBoard.placePiece(new BoardPosition(4,4), 'x');
+        testBoard.placePiece(new BoardPosition(5,5), 'o');
+
+        BoardPosition startingPos = new BoardPosition(4,4);
+        DirectionEnum dir = DirectionEnum.SE;
+        BoardPosition obsPos = testBoard.jumpPiece(startingPos, dir);
+
+        assertEquals(new BoardPosition(6,6), obsPos);
+    }
+
+    @Test
+    public void test_jumpPiece_SWjump()
+    {
+        ICheckerBoard testBoard = makeBoard();
+
+        //Empty the board
+        for (int row = 0; row < testBoard.getRowNum(); row++) {
+            for (int col = 0; col < testBoard.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                }
+            }
+        }
+
+        //Manually place the pieces
+        testBoard.placePiece(new BoardPosition(2,2), 'x');
+        testBoard.placePiece(new BoardPosition(3,1), 'o');
+
+        BoardPosition startingPos = new BoardPosition(2,2);
+        DirectionEnum dir = DirectionEnum.SW;
+        BoardPosition obsPos = testBoard.jumpPiece(startingPos, dir);
+
+        assertEquals(new BoardPosition(4,0), obsPos);
+    }
+
+    @Test
+    public void test_jumpPiece_jumpBlankTile()
+    {
+        ICheckerBoard board = makeBoard();
+        HashMap<Character, Integer> playerPieceCount = board.getPieceCounts();
+
+        // Empty the board
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    BoardPosition coordinate = new BoardPosition(row,col);
+                    board.placePiece(coordinate, CheckerBoardMem.EMPTY_POS);
+                }
+            }
+        }
+        playerPieceCount.put(CheckerBoardMem.PLAYER_ONE, playerPieceCount.get(CheckerBoard.PLAYER_ONE) - 11);
+        playerPieceCount.put(CheckerBoardMem.PLAYER_TWO, playerPieceCount.get(CheckerBoard.PLAYER_TWO) - 12);
+
+        // Manually place the 'x' piece
+        board.placePiece(new BoardPosition(3, 3), 'x');
+
+        // Define starting position and jump direction
+        BoardPosition startingPos = new BoardPosition(3, 3);
+        DirectionEnum dir = DirectionEnum.SE;
+
+        // Attempt to jump in SE direction
+        board.jumpPiece(startingPos, dir);
+
+        // Getting the pieceCount of x and o
+        HashMap<Character, Integer> boardPieceCount = board.getPieceCounts();
+        int xNum = boardPieceCount.get('x');
+        int oNum = boardPieceCount.get('o');
+
+        // Check board to remain same
+        assertEquals(1, xNum);
+        assertEquals(0, oNum);
+    }
+
+    @Test
+    public void test_scanSurroundingPositions_validMoves() {
+        ICheckerBoard board = makeBoard();
+
+        // Empty the board
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        //Define starting position
+        BoardPosition startingPos = new BoardPosition(3, 3);
+
+        //Manually add
+        board.placePiece(new BoardPosition(2, 2), 'x');
+        board.placePiece(new BoardPosition(1, 1), 'o');
+
+        HashMap<DirectionEnum, Character> surroundingPos = board.scanSurroundingPositions(startingPos);
+
+        HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
+        expectedSurroundingPos.put(DirectionEnum.NW, 'x');
+        expectedSurroundingPos.put(DirectionEnum.SE, ' ');
+        expectedSurroundingPos.put(DirectionEnum.SW, ' ');
+        expectedSurroundingPos.put(DirectionEnum.NE, ' ');
+
+        assertEquals(expectedSurroundingPos, surroundingPos);
+    }
+
+    @Test
+    public void test_scanSurroundingPositions_oSurroundings() {
+        ICheckerBoard board = makeBoard();
+
+        // Empty the board
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        // Manually add pieces to the board
+        board.placePiece(new BoardPosition(4, 4), 'o');  // 'o' at (4,4)
+        board.placePiece(new BoardPosition(3, 5), 'x');  // 'x' at (3,5)
+        board.placePiece(new BoardPosition(5, 3), 'x');  // 'x' at (5,3)
+        board.placePiece(new BoardPosition(3, 3), 'x');  // 'x' at (3,3)
+
+        // Define the starting position
+        BoardPosition startingPos = new BoardPosition(4, 4);
+
+        // Scan the surrounding positions
+        HashMap<DirectionEnum, Character> surroundingPos = board.scanSurroundingPositions(startingPos);
+
+        // Expected positions and values
+        HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
+        expectedSurroundingPos.put(DirectionEnum.NW, 'x');
+        expectedSurroundingPos.put(DirectionEnum.SW, 'x');
+        expectedSurroundingPos.put(DirectionEnum.SE, ' ');
+        expectedSurroundingPos.put(DirectionEnum.NE, 'x');
+
+        // Assert that the surrounding positions match the expected ones
+        assertEquals(expectedSurroundingPos, surroundingPos);
+    }
+
+    @Test
+    public void test_scanSurroundingPositions_noValidMove() {
+        ICheckerBoard board = makeBoard();
+
+        // Empty the board
+        for (int row = 0; row < board.getRowNum(); row++) {
+            for (int col = 0; col < board.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                }
+            }
+        }
+
+        // Manually add one piece to the board at (0, 0)
+        board.placePiece(new BoardPosition(0, 0), 'x');
+
+        BoardPosition startingPosition = new BoardPosition(0, 0);
+
+        //Assuming board has one 'x' at (0,0)
+        HashMap<DirectionEnum, Character> surroundingPositions = board.scanSurroundingPositions(startingPosition);
+
+        // Expected positions and values
+        HashMap<DirectionEnum, Character> expectedSurroundingPos = new HashMap<>();
+        expectedSurroundingPos.put(DirectionEnum.SE, ' ');
+
+        assertEquals(expectedSurroundingPos, surroundingPositions);
+    }
+
+    @Test
+    public void test_getDirection_invalidDirection() {
+        ICheckerBoard board = makeBoard();
+        int expRow = 1;
+        int expCol = 1;
+        DirectionEnum dir = DirectionEnum.SE;
+        BoardPosition result = ICheckerBoard.getDirection(dir);
+
+        assertEquals(expRow, result.getRow());
+        assertEquals(expCol, result.getColumn());
+    }
+
     private String toStringForTest(char[][] array) {
         StringBuilder arrayString = new StringBuilder("|  ");
         for (int i = 0; i < array.length; i++) {
