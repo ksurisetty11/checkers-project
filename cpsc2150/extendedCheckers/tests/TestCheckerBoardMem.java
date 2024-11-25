@@ -12,8 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class TestCheckerBoardMem {
     private ICheckerBoard makeBoard() {
@@ -292,6 +291,32 @@ public class TestCheckerBoardMem {
         expected.put(playerTwoCrowned, crownedDirections);
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void test_checkPlayerWin_no_opponent_pieces_left()
+    {
+        ICheckerBoard testBoard = makeBoard();
+        //Eliminating o pieces
+        for (int row = 5; row < testBoard.getRowNum(); row++) {
+            for (int col = 0; col < testBoard.getColNum(); col++) {
+                if ((row + col) % 2 == 0) {
+                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                    HashMap<Character, Integer> playerPieceCount = testBoard.getPieceCounts();
+                    playerPieceCount.put(CheckerBoardMem.PLAYER_TWO, playerPieceCount.get(CheckerBoardMem.PLAYER_TWO) - 1);
+                }
+            }
+        }
+        boolean hasWon = testBoard.checkPlayerWin(CheckerBoard.PLAYER_ONE);
+        assertTrue(hasWon);
+    }
+
+    @Test
+    public void test_checkPlayerWin_opponent_pieces_exist()
+    {
+        ICheckerBoard testBoard = makeBoard();
+        boolean hasWon = testBoard.checkPlayerWin(CheckerBoardMem.PLAYER_ONE);
+        assertFalse(hasWon);
     }
 
     //ToString function for expected boards
