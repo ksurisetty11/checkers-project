@@ -27,7 +27,10 @@ public class CheckersFE {
 
         System.out.println("Player 1, enter your piece:");
         String inputPlayerPiece = readInInput.next();
-        //add while loop to check
+        while(inputPlayerPiece.length() != 1){
+            System.out.println("Please enter only a single lowercase character");
+            inputPlayerPiece = readInInput.next();
+        }
         playerOne = inputPlayerPiece.charAt(0);
         ICheckerBoard gameBoard = new CheckerBoard(8);
 
