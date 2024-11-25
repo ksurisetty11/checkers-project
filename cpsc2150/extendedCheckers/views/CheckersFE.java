@@ -1,6 +1,7 @@
 package cpsc2150.extendedCheckers.views;
 import cpsc2150.extendedCheckers.models.BoardPosition;
 import cpsc2150.extendedCheckers.models.CheckerBoard;
+import cpsc2150.extendedCheckers.models.CheckerBoardMem;
 import cpsc2150.extendedCheckers.models.ICheckerBoard;
 import cpsc2150.extendedCheckers.util.DirectionEnum;
 
@@ -47,7 +48,18 @@ public class CheckersFE {
         }
         playerTwo = inputPlayerPiece.charAt(0);
 
+        //Game asks players if they want fast game or memory efficient game
+        System.out.println("Do you want a fast game (F/f) or a memory efficient game (M/m)?");
+        String gameType = readInInput.next();
         ICheckerBoard gameBoard = new CheckerBoard(8);
+        while(!gameType.equals("M") && !gameType.equals("m") && !gameType.equals("F") && !gameType.equals("f")){
+            System.out.println("Please enter a character for fast game (F/f) or a memory efficient game (M/m)");
+            gameType = readInInput.next();
+        }
+        //If players want a memory efficient game, gameBoard changes it's dynamic type to CheckerBoardMem
+        if(gameType.equals("M") || gameType.equals("m")){
+            gameBoard = new CheckerBoardMem(8);
+        }
 
         //Game starts with player one
         char whichPlayer = CheckerBoard.PLAYER_ONE;
