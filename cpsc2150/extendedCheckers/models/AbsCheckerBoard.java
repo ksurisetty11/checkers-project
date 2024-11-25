@@ -18,7 +18,6 @@ public abstract class AbsCheckerBoard implements ICheckerBoard {
     @Override
     public String toString() {
         {
-            ///absBoard = getBoard
             StringBuilder stringBoard = new StringBuilder("|  ");
             for(int columnGuide = 0; columnGuide < BOARD_DIMENSIONS; columnGuide++){
                 stringBoard.append("| ").append(columnGuide);
@@ -29,7 +28,15 @@ public abstract class AbsCheckerBoard implements ICheckerBoard {
                 for(int col = 0; col < BOARD_DIMENSIONS; col++) {
                     BoardPosition posOnBoard = new BoardPosition(row,col);
                     char positionPiece = whatsAtPos(posOnBoard);
-                    stringBoard.append(positionPiece).append(" |");
+                    if (positionPiece != '\0') {
+                        stringBoard.append(positionPiece).append(" |");
+                    }
+                    else if ((row + col) % 2 == 1) {
+                        stringBoard.append('*').append(" |");
+                    }
+                    else {
+                        stringBoard.append(' ').append(" |");
+                    }
                 }
             }
             return stringBoard.toString();
