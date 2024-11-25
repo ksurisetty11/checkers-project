@@ -376,6 +376,7 @@ public class TestCheckerBoardMem {
     //ToString function for expected boards
     private String toStringForTest(Map<Character, List<BoardPosition>> memBoard, int size) {
         StringBuilder mapString = new StringBuilder("|  ");
+
         for (int i = 0; i < size; i++) {
             mapString.append("| ").append(i);
         }
@@ -385,7 +386,15 @@ public class TestCheckerBoardMem {
             for (int j = 0; j < size; j++) {
                 BoardPosition pos = new BoardPosition(i,j);
                 char positionPiece = whatsAtTestPos(memBoard, pos);
-                mapString.append(positionPiece).append(" |");
+                if (positionPiece != '\0') {
+                    mapString.append(positionPiece).append(" |");
+                }
+                else if ((i + j) % 2 == 1) {
+                    mapString.append('*').append(" |");
+                }
+                else {
+                    mapString.append(' ').append(" |");
+                }
             }
         }
         return mapString.toString();
