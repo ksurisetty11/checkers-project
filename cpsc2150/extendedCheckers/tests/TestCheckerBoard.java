@@ -621,6 +621,7 @@ public class TestCheckerBoard {
                 arrayString.append(array[i][j]).append(" |");
             }
         }
+        arrayString.append("\n");
         return arrayString.toString();
     }
 }
