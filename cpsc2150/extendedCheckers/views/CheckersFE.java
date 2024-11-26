@@ -20,6 +20,10 @@ import static cpsc2150.extendedCheckers.models.ICheckerBoard.getDirection;
  */
 public class CheckersFE {
     public static final Scanner readInInput = new Scanner(System.in);
+
+    /**
+     * Both the players pieces. Both players start with the default chars 'x' and 'o'
+     */
     private static char playerOne = 'x';
     private static char playerTwo = 'o';
 
@@ -38,7 +42,8 @@ public class CheckersFE {
         //Game asks player two what piece they want to use
         System.out.println("Player 2, enter your piece:");
         inputPlayerPiece = readInInput.next();
-        while(inputPlayerPiece.length() != 1 || Character.isUpperCase(inputPlayerPiece.charAt(0)) || inputPlayerPiece.charAt(0) == playerOne){
+        while(inputPlayerPiece.length() != 1 || Character.isUpperCase(inputPlayerPiece.charAt(0))
+                || inputPlayerPiece.charAt(0) == playerOne){
             System.out.println("Please enter only a single lowercase character");
             inputPlayerPiece = readInInput.next();
         }
@@ -47,19 +52,41 @@ public class CheckersFE {
         //Game asks players if they want fast game or memory efficient game
         System.out.println("Do you want a fast game (F/f) or a memory efficient game (M/m)?");
         String gameType = readInInput.next();
-        ICheckerBoard gameBoard = new CheckerBoard(8);
+        //ICheckerBoard gameBoard = new CheckerBoard(8);
         while(!gameType.equals("M") && !gameType.equals("m") && !gameType.equals("F") && !gameType.equals("f")){
             System.out.println("Please enter a character for fast game (F/f) or a memory efficient game (M/m)");
             gameType = readInInput.next();
         }
+
+        //Scanner sizeOfBoard = new Scanner(System.in);
+        boolean validBoardSize = false;
+        int sizeOfBoard = 0;
+        while (!validBoardSize) {
+            System.out.println("How big should the Board be? It can be 8x8, 10x10, 12x12, 14x14, or 16x16." +
+                    "Enter one number:");
+            if (readInInput.hasNextInt()) {
+                sizeOfBoard = readInInput.nextInt();
+
+                if (sizeOfBoard == 8 || sizeOfBoard == 10 || sizeOfBoard == 12 ||
+                        sizeOfBoard == 14 || sizeOfBoard == 16) {
+                    validBoardSize = true;
+                }
+            }
+        }
+
+        ICheckerBoard gameBoard = new CheckerBoard(8);
+        if (gameType.equals("F") || gameType.equals("f")) {
+            gameBoard = new CheckerBoard(sizeOfBoard);
+        }
         //If players want a memory efficient game, gameBoard changes it's dynamic type to CheckerBoardMem
         if(gameType.equals("M") || gameType.equals("m")){
-            gameBoard = new CheckerBoardMem(8);
+            gameBoard = new CheckerBoardMem(sizeOfBoard);
         }
 
         //Game starts with player one
         char whichPlayer = CheckerBoard.PLAYER_ONE;
         boolean gameOn = true;
+
         //Loop that switches control of each player each iteration
         while (gameOn) {
             //Current State of the board
@@ -68,8 +95,7 @@ public class CheckersFE {
 
             //Validation for the correct piece chosen
             BoardPosition startPos = getPieceCoordinates(whichPlayer, gameBoard);
-            DirectionEnum intendedDir = getValidPieceDirections(gameBoard, startPos);
-
+            DirectionEnum intendedDir = getValidPieceDirections(gameBoard, startPos, whichPlayer);
 
             //Validation for getting the allowed directions
             movePieceOnBoard(startPos, gameBoard, intendedDir);
@@ -90,34 +116,27 @@ public class CheckersFE {
 
                 if (keepPlaying)
                 {
-                    gameBoard = new CheckerBoard(8);
-                    whichPlayer = CheckerBoard.PLAYER_ONE;
+                    gameBoard = new CheckerBoard(sizeOfBoard);
+                    whichPlayer = playerOne;
                 }
                 else
                 {
                     gameOn = false;
                 }
-
             }
             //If the game hasn't ended yet, it is the other players turn to move a piece
-            if (whichPlayer == CheckerBoard.PLAYER_ONE) {
-                whichPlayer = CheckerBoard.PLAYER_TWO;
+            if (whichPlayer == playerOne) {
+                whichPlayer = playerTwo;
             }
             else {
-                whichPlayer = CheckerBoard.PLAYER_ONE;
+                whichPlayer = playerOne;
             }
         }
     }
 
     /**
-     * Prompts the player to select a piece to move
+     * Prompts the player to select their piece to move
      * The method repeatedly asks the player to choose valid coordinates to move their pieces.
-     *
-     * @param whichPlayer The character that represents the player 'x' or 'o'
-     * @param gameBoard   The checkerboard that implements the interface
-     * @return a BoardPosition object representing the coordinates of the selected piece
-     * @pre whichPlayer needs to be 'x', 'X', 'o', 'O'
-     * @post getPieceCoordinates = BoardPosition [BoardPosition that was chosen by users]
      */
     private static BoardPosition getPieceCoordinates(char whichPlayer, ICheckerBoard gameBoard) {
         int inputRow, inputCol;
@@ -128,8 +147,8 @@ public class CheckersFE {
             inputRow = readInInput.nextInt();
             inputCol = readInInput.nextInt();
 
-            boolean withinBounds = (inputRow >= 0 && inputRow < gameBoard.getRowNum()) &&
-                    (inputCol >= 0 && inputCol < gameBoard.getColNum());
+            boolean withinBounds = (inputRow >= 0 && inputRow < gameBoard.getRowNum())
+                    && (inputCol >= 0 && inputCol < gameBoard.getColNum());
             if (!withinBounds) {
                 System.out.println("Out of bounds! Choose a different coordinate.");
                 continue;
@@ -142,10 +161,14 @@ public class CheckersFE {
                 System.out.println("Player " + whichPlayer + ", that isn't your piece. Pick one of your pieces.");
             }
         } while (!isValidPiece);
+
         return new BoardPosition(inputRow, inputCol);
     }
 
-    private static DirectionEnum getValidPieceDirections(ICheckerBoard gameBoard, BoardPosition startPos) {
+    /**
+     * Prompts the player to choose a direction for their chosen piece to move.
+     */
+    private static DirectionEnum getValidPieceDirections(ICheckerBoard gameBoard, BoardPosition startPos, char currPlayer) {
         //Input validation for getting the direction
         boolean isValidDirection = true;
         DirectionEnum intendedDir = null;
@@ -156,27 +179,40 @@ public class CheckersFE {
         ArrayList<DirectionEnum> possibleMoves = gameBoard.getViableDirections().get(checkPosition);
 
         if (possibleMoves != null) {
+            //Going through all possible moves
             for (DirectionEnum direction : possibleMoves) {
+                //If the possible move contains an empty position, add it to optional player moves
                 if ((availableMoves.containsKey(direction)) && (availableMoves.get(direction) == ' ')) {
                     officialAvailableMoves.add(direction);
                 }
+                //Checking if it's possible to jump a piece.
                 else if (availableMoves.containsKey(direction) && availableMoves.get(direction) != ' ') {
                     BoardPosition testDirection = getDirection(direction);
 
+                    //Locate the piece being jumped and the ending position after the jump
+                    BoardPosition jumpedPiecePosition = new BoardPosition(startPos.getRow()
+                            + testDirection.getRow(), startPos.getColumn() + testDirection.getColumn());
                     BoardPosition endedJumpPosition = new BoardPosition(startPos.getRow() +
                             (2 * testDirection.getRow()), startPos.getColumn() + (2 * testDirection.getColumn()));
-                    boolean withinRowBoundaries = ((endedJumpPosition.getRow() >= 0) &&
-                            (endedJumpPosition.getRow() < gameBoard.getRowNum()));
-                    boolean withinColBoundaries = ((endedJumpPosition.getColumn() < gameBoard.getColNum())
-                            && (endedJumpPosition.getColumn() >= 0));
+                    boolean withinRowBoundaries = ((endedJumpPosition.getRow() >= 0)
+                            && (endedJumpPosition.getRow() < gameBoard.getRowNum()));
+                    boolean withinColBoundaries = ((endedJumpPosition.getColumn()
+                            < gameBoard.getColNum()) && (endedJumpPosition.getColumn() >= 0));
 
-                    if (withinRowBoundaries && withinColBoundaries && (gameBoard.whatsAtPos(endedJumpPosition) == ' ')) {
+                    //Checking the potential jumped piece is the opposite player's piece
+                    char jumpedPieceChar = gameBoard.whatsAtPos(jumpedPiecePosition);
+                    boolean isOpponentPiece = ((currPlayer == getPlayerOne() && jumpedPieceChar == getPlayerTwo()) ||
+                            (currPlayer == getPlayerTwo() && jumpedPieceChar == getPlayerOne()));
+
+                    //Adding the direction to the player optional moves if it is a valid move
+                    if (withinRowBoundaries && withinColBoundaries && isOpponentPiece &&
+                            (gameBoard.whatsAtPos(endedJumpPosition) == ' ')) {
                         officialAvailableMoves.add(direction);
                     }
                 }
             }
         }
-
+        //Printing the players available moves
         if (!officialAvailableMoves.isEmpty()) {
             do {
                 System.out.println("In which direction do you wish to move the piece? " +
@@ -195,7 +231,7 @@ public class CheckersFE {
                     }
                 }
 
-                //intendedDir = DirectionEnum.valueOf(directionToMove);
+                //Input validation for the players chosen direction
                 if (checkingValidPlayerDir && officialAvailableMoves.contains(intendedDir)) {
                     isValidDirection = true;
                 } else {
@@ -207,7 +243,9 @@ public class CheckersFE {
         return intendedDir;
     }
 
-
+    /**
+     * Moving the chosen piece in startPos to a different position on the board according to the direction.
+     */
     private static void movePieceOnBoard(BoardPosition startPos, ICheckerBoard gameBoard, DirectionEnum dir)
     {
         //Direction the piece will be going
@@ -217,12 +255,13 @@ public class CheckersFE {
         BoardPosition moveToPos = new BoardPosition(startPos.getRow() +
                 intendedDirCoord.getRow(),startPos.getColumn() + intendedDirCoord.getColumn());
 
-        //Validation to move the piece
+        //Moving the piece if the position adjacent to the chosen direction is empty
         if (gameBoard.whatsAtPos(moveToPos) == CheckerBoard.EMPTY_POS) {
             BoardPosition endPos = gameBoard.movePiece(new BoardPosition(startPos.getRow(),
                     startPos.getColumn()), dir);
             canBeCrowned(endPos, gameBoard);
         }
+        //Jumping the piece if the piece can't be moved
         else
         {
             BoardPosition endPos = gameBoard.jumpPiece(new BoardPosition(startPos.getRow(),
@@ -231,22 +270,25 @@ public class CheckersFE {
         }
     }
 
-
+    /**
+     * Determining if the piece at pos can be crowned. If it can be crowned, call the
+     * crownPiece method.
+     */
     private static void canBeCrowned(BoardPosition pos, ICheckerBoard gameBoard)
-    {   //if piece == player 1
-        if (gameBoard.whatsAtPos(pos) == CheckerBoard.PLAYER_ONE) {
+    {
+        //Checking if the piece can be crowned if it is PLAYER_ONE
+        if (gameBoard.whatsAtPos(pos) == playerOne) {
             if (pos.getRow() == gameBoard.getRowNum() - 1) {
                 gameBoard.crownPiece(pos);
             }
         }
-        //if piece == player 2
-        if (gameBoard.whatsAtPos(pos) == CheckerBoard.PLAYER_TWO) {
+        //Checking if the piece can be crowned if it is PLAYER_ONE
+        if (gameBoard.whatsAtPos(pos) == playerTwo) {
             if (pos.getRow() == 0) {
                 gameBoard.crownPiece(pos);
             }
         }
     }
-
 
     /**
      *Standard getter for playerOne
@@ -259,7 +301,6 @@ public class CheckersFE {
     {
         return playerOne;
     }
-
 
     /**
      *Standard getter for playerTwo
