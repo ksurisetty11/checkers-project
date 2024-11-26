@@ -41,8 +41,6 @@ public class CheckerBoard extends AbsCheckerBoard
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
     public static final char PLAYER_ONE = CheckersFE.getPlayerOne();
     public static final char PLAYER_TWO = CheckersFE.getPlayerTwo();
-    public static final char EMPTY_POS = ' ';
-    public static final char BLACK_TILE = '*';
 
     /**
      * Standard checkers rows and columns. The rows and columns must match in size
@@ -87,20 +85,21 @@ public class CheckerBoard extends AbsCheckerBoard
 
         //Initializing pieceCount contain player one and two's number of pieces
         pieceCount = new HashMap<>();
-        pieceCount.put(PLAYER_ONE, startingCount);
-        pieceCount.put(PLAYER_TWO, startingCount);
+        int totalPieces = (((ROW_NUM / 2) - 1) * (COL_NUM / 2));
+        pieceCount.put(PLAYER_ONE, totalPieces);
+        pieceCount.put(PLAYER_TWO, totalPieces);
 
         //Initializing viable directions for player one and two
         viableDirections = new HashMap<>();
-        ArrayList<DirectionEnum> xPlayerDirections = new ArrayList<>();
-        ArrayList<DirectionEnum> oPlayerDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> player1Directions = new ArrayList<>();
+        ArrayList<DirectionEnum> player2Directions = new ArrayList<>();
 
         ArrayList<DirectionEnum> allDirections = new ArrayList<>();
 
-        xPlayerDirections.add(DirectionEnum.SE);
-        xPlayerDirections.add(DirectionEnum.SW);
-        oPlayerDirections.add(DirectionEnum.NE);
-        oPlayerDirections.add(DirectionEnum.NW);
+        player1Directions.add(DirectionEnum.SE);
+        player1Directions.add(DirectionEnum.SW);
+        player2Directions.add(DirectionEnum.NE);
+        player2Directions.add(DirectionEnum.NW);
 
         allDirections.add(DirectionEnum.SE);
         allDirections.add(DirectionEnum.SW);
@@ -109,8 +108,8 @@ public class CheckerBoard extends AbsCheckerBoard
 
         viableDirections.put(Character.toUpperCase(PLAYER_ONE), allDirections);
         viableDirections.put(Character.toUpperCase(PLAYER_TWO), allDirections);
-        viableDirections.put(PLAYER_ONE, xPlayerDirections);
-        viableDirections.put(PLAYER_TWO, oPlayerDirections);
+        viableDirections.put(PLAYER_ONE, player1Directions);
+        viableDirections.put(PLAYER_TWO, player2Directions);
     }
 
     /**
