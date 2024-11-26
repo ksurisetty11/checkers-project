@@ -9,9 +9,11 @@ import java.util.HashMap;
 public class CheckerBoard extends AbsCheckerBoard
 {
     /**
-     * @invariant [board has 8 rows and 8 col] AND [all boards indices have either 'x', 'o', 'X', 'O', '*', OR ' ']
-     * AND 0 <= pieceCount.get('x') <= 12 AND 0 <= pieceCount.get('o') <= 12
-     * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
+     * @invariant [board dimensions are even and minimum 8 x 8] AND [all boards indices have either
+     * PLAYER_ONE, PLAYER_TWO, crowned PLAYER_ONE, crowned PLAYER_TWO, '*', OR ' ']
+     * AND 0 <= pieceCount.get(PLAYER_ONE) <= 12 AND 0 <= pieceCount.get(PLAYER_TWO) <= 12
+     * AND [viableDirections has PLAYER_ONE map to an ArrayList with SE and SW AND PLAYER_ONE map
+     * to an ArrayList with NE and NW]
      *
      * @corresponds
      *      self: board
@@ -42,8 +44,8 @@ public class CheckerBoard extends AbsCheckerBoard
     public static final char EMPTY_POS = ' ';
     public static final char BLACK_TILE = '*';
 
-    /*
-    Standard Checkers starts with 8 rows and 8 columns. Both players begin with 12 pieces each.
+    /**
+     * Standard checkers rows and columns. The rows and columns must match in size
      */
     public final int ROW_NUM;
     public final int COL_NUM;
@@ -52,9 +54,10 @@ public class CheckerBoard extends AbsCheckerBoard
      * A constructor for CheckerBoard, initializes instance variables
      *
      * @pre none
-     * @post pieceCount.put('x', 12) AND pieceCount.put('o', 12)
-     * AND [viableDirections has 'x' map to an ArrayList with SE and SW AND 'o' map to an ArrayList with NE and NW]
-     * AND [initializes all indices in board, 'x' at the top, 'o' at the bottom, '*' for non-playable, ' 'for open space
+     * @post pieceCount.put(PLAYER_ONE, startingCount) AND pieceCount.put(PLAYER_TWO, startingCount)
+     * AND [viableDirections has PLAYER_ONE map to an ArrayList with SE and SW AND PLAYER_TWO map
+     * to an ArrayList with NE and NW] AND [initializes all indices in board, PLAYER_ONE at the top,
+     * PLAYER_TWO at the bottom, '*' for non-playable, ' ' for open space
      */
     public CheckerBoard(int aDimensions) {
         ROW_NUM = aDimensions;
