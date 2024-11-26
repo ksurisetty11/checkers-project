@@ -352,8 +352,8 @@ public class TestCheckerBoardMem {
         //Moving pieces to match the initial state
         ICheckerBoard obsBoard = makeBoard();
 
-        obsBoard.placePiece(new BoardPosition(2, 0), CheckerBoard.EMPTY_POS);
-        obsBoard.placePiece(new BoardPosition(5, 1), CheckerBoard.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(2, 0), CheckerBoardMem.EMPTY_POS);
+        obsBoard.placePiece(new BoardPosition(5, 1), CheckerBoardMem.EMPTY_POS);
 
         BoardPosition startPosx = new BoardPosition(3, 1);
         BoardPosition startPoso = new BoardPosition(4, 0);
@@ -413,7 +413,7 @@ public class TestCheckerBoardMem {
         for (int row = 0; row < obsBoard.getRowNum(); row++) {
             for (int col = 0; col < obsBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    obsBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                    obsBoard.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -437,7 +437,7 @@ public class TestCheckerBoardMem {
         for (int row = 0; row < obsBoard.getRowNum(); row++) {
             for (int col = 0; col < obsBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    obsBoard.placePiece(new BoardPosition(row, col), CheckerBoardMem.EMPTY_POS);
+                    obsBoard.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -464,12 +464,12 @@ public class TestCheckerBoardMem {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     BoardPosition coordinate = new BoardPosition(row,col);
-                    board.placePiece(coordinate, CheckerBoardMem.EMPTY_POS);
+                    board.placePiece(coordinate, ' ');
                 }
             }
         }
-        playerPieceCount.put(CheckerBoardMem.PLAYER_ONE, playerPieceCount.get(CheckerBoard.PLAYER_ONE) - 11);
-        playerPieceCount.put(CheckerBoardMem.PLAYER_TWO, playerPieceCount.get(CheckerBoard.PLAYER_TWO) - 12);
+        playerPieceCount.put(CheckerBoardMem.PLAYER_ONE, playerPieceCount.get(CheckerBoardMem.PLAYER_ONE) - 11);
+        playerPieceCount.put(CheckerBoardMem.PLAYER_TWO, playerPieceCount.get(CheckerBoardMem.PLAYER_TWO) - 12);
 
         // Manually place the 'x' piece
         board.placePiece(new BoardPosition(3, 3), 'x');
@@ -499,7 +499,7 @@ public class TestCheckerBoardMem {
         for (int row = 0; row < board.getRowNum(); row++) {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    board.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -530,7 +530,7 @@ public class TestCheckerBoardMem {
         for (int row = 0; row < board.getRowNum(); row++) {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    board.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -566,7 +566,7 @@ public class TestCheckerBoardMem {
         for (int row = 0; row < board.getRowNum(); row++) {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    board.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -588,7 +588,6 @@ public class TestCheckerBoardMem {
 
     @Test
     public void test_getDirection_invalidDirection() {
-        ICheckerBoard board = makeBoard();
         int expRow = 1;
         int expCol = 1;
         DirectionEnum dir = DirectionEnum.SE;
