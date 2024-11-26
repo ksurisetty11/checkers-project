@@ -6,6 +6,8 @@ import cpsc2150.extendedCheckers.views.CheckersFE;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static cpsc2150.extendedCheckers.models.AbsCheckerBoard.EMPTY_POS;
+
 /**
  * ICheckerBoard is an interface that contains methods for managing and run the game checkers.
  * It manages how the pieces interact with each other and move around the board. This interface contains
@@ -141,7 +143,7 @@ public interface ICheckerBoard {
 
         if (withinRowBoundaries && withinColBoundaries)
         {
-                placePiece(startingPos, CheckerBoard.EMPTY_POS);
+                placePiece(startingPos, EMPTY_POS);
                 placePiece(endingPos, playerPiece);
                 return endingPos;
         }
@@ -166,8 +168,8 @@ public interface ICheckerBoard {
 
         char jumpedPiece = whatsAtPos(jumpedPos);
 
-        placePiece(startingPos, ' ');
-        placePiece(jumpedPos, ' ');
+        placePiece(startingPos, EMPTY_POS);
+        placePiece(jumpedPos, EMPTY_POS);
         placePiece(moveTo, piece);
 
         HashMap<Character, Integer> playerPieceCount = getPieceCounts();
@@ -175,7 +177,7 @@ public interface ICheckerBoard {
         playerPieceCount.put(piece, totalPieces);
 
         //Subtracting 1 from the total number of opposing pieces
-        if ((jumpedPiece != ' ') && (jumpedPiece != '\0')) {
+        if ((jumpedPiece != EMPTY_POS) && (jumpedPiece != '\0')) {
             playerPieceCount.put(jumpedPiece, playerPieceCount.get(jumpedPiece) - 1);
         }
         
@@ -215,6 +217,12 @@ public interface ICheckerBoard {
         return charAtDirection;
     }
 
+    /**
+     * This function turns dir into a corresponding board position
+     *
+     * @param dir a direction that a piece can be moved
+     * @return a board representation of the corresponding direction
+     */
     public static BoardPosition getDirection(DirectionEnum dir) {
         int tempRow = 0;
         int tempCol = 0;
