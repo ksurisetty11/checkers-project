@@ -12,14 +12,14 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
     /**
      *Tracks the number of pieces for each player 
-     *Key: Player character 'X', 'x', 'O', 'o'
+     *Key: Player character PLAYER_ONE,[crowned PLAYER_ONE], PLAYER_TWO, [crowned PLAYER_TWO]
      *Value: Number of pieces on the board 
      */
     private HashMap<Character, Integer> pieceCount;
 
     /**
      *Tracks the viable move directions for each player
-     *Key: Player character 'X', 'x', 'O', 'o'
+     *Key: Player character PLAYER_ONE,[crowned PLAYER_ONE], PLAYER_TWO, [crowned PLAYER_TWO]
      *Value: List of allowed move directions
      */
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
@@ -40,7 +40,7 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
     /**
      *Tracks the state of the board
-     *Key: Player character 'X', 'x', 'O', 'o'
+     *Key: Player character PLAYER_ONE,[crowned PLAYER_ONE], PLAYER_TWO, [crowned PLAYER_TWO]
      *Value: List of positions occupied by pieces
      */
     private Map<Character, List<BoardPosition>> memBoard;
@@ -118,9 +118,32 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     }
 
     /**
+     * Returns the number of rows on the board
+     *
+     * @return the number of rows
+     * @post getRowNum() == ROW_NUM AND viableDirections = #viableDirections
+     * AND memBoard = #memBoard AND pieceCount = #pieceCount
+     */
+    public int getRowNum() {
+        return ROW_NUM;
+    }
+
+    /**
+     * Returns the number of rows on the board
+     *
+     * @return the number of rows
+     * @post getColNum() == COL_NUM AND viableDirections = #viableDirections
+     * AND memBoard = #memBoard AND pieceCount = #pieceCount
+     */
+    public int getColNum() {
+        return COL_NUM;
+    }
+
+    /**
      * Returns the viable directions for each player
      * @return a map of player characters to their allowed move directions
-     * @post getViableDirections() == viableDirections
+     * @post getViableDirections() == viableDirections AND viableDirections = #viableDirections
+     * AND memBoard = #memBoard AND pieceCount = #pieceCount
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections() {
         return viableDirections;
@@ -129,40 +152,21 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     /**
      * Returns the current piece counts for each player
      * @return a map of player characters to their piece counts 
-     * @post getPieceCounts() == pieceCount
+     * @post getPieceCounts() == pieceCount AND viableDirections = #viableDirections
+     * AND memBoard = #memBoard AND pieceCount = #pieceCount
      */
     public HashMap<Character, Integer> getPieceCounts() {
         return pieceCount;
     }
 
     /**
-     * Returns the number of rows on the board
-     * 
-     * @return the number of rows
-     * @post getRowNum() == ROW_NUM
-     */
-    public int getRowNum() {
-        return ROW_NUM;
-    }
-
-    /**
-     * Returns the number of rows on the board
-     * 
-     * @return the number of rows
-     * @post getColNum() == COL_NUM
-     */
-    public int getColNum() {
-        return COL_NUM;
-    }
-
-    /**
      * Places a piece on the board for a given player
      * @param pos the position to place the piece 
-     * @param player the player characters 'X', 'x', 'O', 'o'
+     * @param player the player char to be placed in memBoard
      * @pre memBoard.containsKey(player) && pos != null
-     * @post memBoard.get(player).contains(pos)
+     * @post memBoard = memBoard.put(player,pos) AND viableDirections =#viableDirections
+     * AND pieceCount = #pieceCount
      */
-    //assuming the player char is one that is already in the map
     public void placePiece(BoardPosition pos, char player) {
         //Look at all the positions on memBoard to check if the position is occupied
         for (Map.Entry<Character, List<BoardPosition>> allPositions: memBoard.entrySet()) {
@@ -191,11 +195,11 @@ public class CheckerBoardMem extends AbsCheckerBoard {
     /**
      * Checks what is at a given position on the board
      * @param pos the position to check 
-     * @return the character of the player at teh position, or '\0' if empty
+     * @return the character of the player at the position, '*' if row + col % 2 == 1 or ' '
      * @pre pos != null
-     * @post whatsAtPos(pos) == the character at pos or 0 
+     * @post whatsAtPos(pos) == the character at pos or [black tile] or [empty position] AND
+     * viableDirections = #viableDirections AND memBoard = #memBoard AND pieceCount = #pieceCount
      */
-    //assuming pos is in memBoard
     public char whatsAtPos(BoardPosition pos) {
         int row = pos.getRow();
         int col = pos.getColumn();
