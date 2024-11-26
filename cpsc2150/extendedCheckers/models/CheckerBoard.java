@@ -11,15 +11,16 @@ public class CheckerBoard extends AbsCheckerBoard
     /**
      * @invariant [board dimensions are even and minimum 8 x 8] AND [all boards indices have either
      * PLAYER_ONE, PLAYER_TWO, crowned PLAYER_ONE, crowned PLAYER_TWO, '*', OR ' ']
-     * AND 0 <= pieceCount.get(PLAYER_ONE) <= 12 AND 0 <= pieceCount.get(PLAYER_TWO) <= 12
+     * AND 0 <= pieceCount.get(PLAYER_ONE) <= [(Total rows / 2 - 1) * (Total columns / 2)]
+     * AND 0 <= pieceCount.get(PLAYER_TWO) <= [(Total rows / 2 - 1) * (Total columns / 2)]
      * AND [viableDirections has PLAYER_ONE map to an ArrayList with SE and SW AND PLAYER_ONE map
      * to an ArrayList with NE and NW]
      *
      * @corresponds
      *      self: board
-     *      numberOfPiece: pieceCounts
+     *      numberOfPieces: pieceCount
      *      directions: getViableDirections
-     * /
+     */
 
     /**
      * A 2D array of characters used to represent our checkerboard.
