@@ -47,8 +47,18 @@ public interface ICheckerBoard {
      */
     public HashMap<Character, Integer> getPieceCounts();
 
+    /**
+     * Retrieves the number of rows
+     *
+     * @return An int that represents the number of rows on the game board
+     */
     public int getRowNum();
 
+    /**
+     * Retrieves the number of columns
+     *
+     * @return An int that represents the number of columns  on the game board
+     */
     public int getColNum();
 
     /**
