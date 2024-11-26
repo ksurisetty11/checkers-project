@@ -26,7 +26,6 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
     public static final char PLAYER_ONE = CheckersFE.getPlayerOne();
     public static final char PLAYER_TWO = CheckersFE.getPlayerTwo();
-    public static final char EMPTY_POS = ' ';
 
     /**
      * Number of rows on the board
@@ -96,15 +95,15 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
         //Initializing viable directions for player one and two
         viableDirections = new HashMap<>();
-        ArrayList<DirectionEnum> xPlayerDirections = new ArrayList<>();
-        ArrayList<DirectionEnum> oPlayerDirections = new ArrayList<>();
+        ArrayList<DirectionEnum> player1Positions = new ArrayList<>();
+        ArrayList<DirectionEnum> player2Positions = new ArrayList<>();
 
         ArrayList<DirectionEnum> allDirections = new ArrayList<>();
 
-        xPlayerDirections.add(DirectionEnum.SE);
-        xPlayerDirections.add(DirectionEnum.SW);
-        oPlayerDirections.add(DirectionEnum.NE);
-        oPlayerDirections.add(DirectionEnum.NW);
+        player1Positions.add(DirectionEnum.SE);
+        player1Positions.add(DirectionEnum.SW);
+        player2Positions.add(DirectionEnum.NE);
+        player2Positions.add(DirectionEnum.NW);
 
         allDirections.add(DirectionEnum.SE);
         allDirections.add(DirectionEnum.SW);
@@ -113,8 +112,8 @@ public class CheckerBoardMem extends AbsCheckerBoard {
 
         viableDirections.put(Character.toUpperCase(PLAYER_ONE), allDirections);
         viableDirections.put(Character.toUpperCase(PLAYER_TWO), allDirections);
-        viableDirections.put(PLAYER_ONE, xPlayerDirections);
-        viableDirections.put(PLAYER_TWO, oPlayerDirections);
+        viableDirections.put(PLAYER_ONE, player1Positions);
+        viableDirections.put(PLAYER_TWO, player2Positions);
     }
 
     /**
