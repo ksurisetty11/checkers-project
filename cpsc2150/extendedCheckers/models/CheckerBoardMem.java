@@ -9,6 +9,19 @@ import java.util.List;
 import java.util.Map;
 
 public class CheckerBoardMem extends AbsCheckerBoard {
+    /**
+     * @invariant [board dimensions are even and minimum 8 x 8] AND [all boards indices have either
+     * PLAYER_ONE, PLAYER_TWO, crowned PLAYER_ONE, or crowned PLAYER_TWO]
+     * AND 0 <= pieceCount.get(PLAYER_ONE) <= [(Total rows / 2 - 1) * (Total columns / 2)]
+     * AND 0 <= pieceCount.get(PLAYER_TWO) <= [(Total rows / 2 - 1) * (Total columns / 2)]
+     * AND [viableDirections has PLAYER_ONE map to an ArrayList with SE and SW AND PLAYER_ONE map
+     * to an ArrayList with NE and NW]
+     *
+     * @corresponds
+     *      self: memBoard
+     *      numberOfPieces: pieceCount
+     *      directions: getViableDirections
+     */
 
     /**
      *Tracks the number of pieces for each player 
@@ -120,7 +133,7 @@ public class CheckerBoardMem extends AbsCheckerBoard {
      * Returns the number of rows on the board
      *
      * @return the number of rows
-     * @post getRowNum() == ROW_NUM AND viableDirections = #viableDirections
+     * @post getRowNum() = ROW_NUM AND viableDirections = #viableDirections
      * AND memBoard = #memBoard AND pieceCount = #pieceCount
      */
     public int getRowNum() {
@@ -131,7 +144,7 @@ public class CheckerBoardMem extends AbsCheckerBoard {
      * Returns the number of rows on the board
      *
      * @return the number of rows
-     * @post getColNum() == COL_NUM AND viableDirections = #viableDirections
+     * @post getColNum() = COL_NUM AND viableDirections = #viableDirections
      * AND memBoard = #memBoard AND pieceCount = #pieceCount
      */
     public int getColNum() {
@@ -184,7 +197,7 @@ public class CheckerBoardMem extends AbsCheckerBoard {
         }
 
         //if player isn't ' ' add the piece to the board
-        if (player != ' ') {
+        if (player != EMPTY_POS) {
             List<BoardPosition> locationToPlace = memBoard.get(player);
             locationToPlace.add(pos);
             memBoard.put(player, locationToPlace);
@@ -211,8 +224,8 @@ public class CheckerBoardMem extends AbsCheckerBoard {
             }
         }
         if ((col % 2 == 0 && row % 2 == 1) || (col % 2 == 1 && row % 2 == 0)) {
-            return '*';
+            return BLACK_TILE;
         }
-        return ' ';
+        return EMPTY_POS;
     }
 }
