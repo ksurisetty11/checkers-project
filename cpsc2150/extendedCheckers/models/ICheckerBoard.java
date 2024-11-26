@@ -1,6 +1,7 @@
 package cpsc2150.extendedCheckers.models;
 
 import cpsc2150.extendedCheckers.util.DirectionEnum;
+import cpsc2150.extendedCheckers.views.CheckersFE;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -33,8 +34,8 @@ public interface ICheckerBoard {
     /**
      * Retrieves a mapping of pieces to their viable movement direction
      *
-     * @return A hashmap where the key is a character representing a piece type 'X' or 'O' and the value is a list of
-     *          possible directions that the piece can move
+     * @return A hashmap where the key is a character representing a piece type [Player One] or [Player Two]
+     *          and the value is a list of possible directions that the piece can move
      */
     public HashMap<Character, ArrayList<DirectionEnum>> getViableDirections();
 
@@ -71,8 +72,8 @@ public interface ICheckerBoard {
      * Checks if the specified player has won the game. A player only wins if the opponent has no
      * remaining pieces on the board.
      *
-     * @param player, The player character ('x' or 'o') whose win status is to be checked.
-     *                'x' represents one player and ;i; represents the opponent
+     * @param player, The player character [PLAYER_ONE or PLAYER_TWO] whose win status is to be checked.
+     *                PLAYER_ONE represents one player and PLAYER_TWO represents the opponent
      * @return true if the specified player has won otherwise it is false
      */
     default public boolean checkPlayerWin(Character player) {
@@ -82,13 +83,13 @@ public interface ICheckerBoard {
         {
             return false;
         }
-        else if(player == CheckerBoard.PLAYER_ONE)
+        else if(player == CheckersFE.getPlayerOne())
         {
-            return pieceCounts.get(CheckerBoard.PLAYER_TWO) == 0;
+            return pieceCounts.get(CheckersFE.getPlayerTwo()) == 0;
         }
         else
         {
-            return pieceCounts.get(CheckerBoard.PLAYER_ONE) == 0;
+            return pieceCounts.get(CheckersFE.getPlayerOne()) == 0;
         }
     }
 
@@ -101,8 +102,8 @@ public interface ICheckerBoard {
      */
     default public void crownPiece(BoardPosition posOfPlayer) {
         char player = whatsAtPos(posOfPlayer);
-        boolean xAcross = (player == CheckerBoard.PLAYER_ONE);
-        boolean oAcross = (player == CheckerBoard.PLAYER_TWO);
+        boolean xAcross = (player == CheckersFE.getPlayerOne());
+        boolean oAcross = (player == CheckersFE.getPlayerTwo());
         if (xAcross || oAcross)
         {
             char newCrownedPiece = Character.toUpperCase(whatsAtPos(posOfPlayer));
