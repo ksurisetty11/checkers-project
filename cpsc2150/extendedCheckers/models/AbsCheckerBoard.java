@@ -7,6 +7,9 @@ package cpsc2150.extendedCheckers.models;
 public abstract class AbsCheckerBoard implements ICheckerBoard {
     private int dimensionCheck;
 
+    public static final char EMPTY_POS = ' ';
+    public static final char BLACK_TILE = '*';
+
     @Override
     public String toString() {
         {
