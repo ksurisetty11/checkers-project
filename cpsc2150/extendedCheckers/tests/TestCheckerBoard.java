@@ -263,7 +263,7 @@ public class TestCheckerBoard {
         for (int row = 5; row < testBoard.getRowNum(); row++) {
             for (int col = 0; col < testBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    testBoard.placePiece(new BoardPosition(row, col), ' ');
                     HashMap<Character, Integer> playerPieceCount = testBoard.getPieceCounts();
                     playerPieceCount.put(CheckerBoard.PLAYER_TWO, playerPieceCount.get(CheckerBoard.PLAYER_TWO) - 1);
                 }
@@ -289,9 +289,9 @@ public class TestCheckerBoard {
         testBoard.placePiece(targetPos, 'x');
 
         //Removing pieces from board
-        testBoard.placePiece(new BoardPosition(6, 0), CheckerBoard.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(6, 2), CheckerBoard.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(5, 1), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(6, 0), ' ');
+        testBoard.placePiece(new BoardPosition(6, 2), ' ');
+        testBoard.placePiece(new BoardPosition(5, 1), ' ');
 
         //Moving pieces on board
         testBoard.placePiece(new BoardPosition(4, 4), CheckerBoard.PLAYER_TWO);
@@ -316,8 +316,8 @@ public class TestCheckerBoard {
     public void test_crownPiece_playerx_already_crowned()
     {
        ICheckerBoard testBoard = makeBoard();
-        testBoard.placePiece(new BoardPosition(2, 0), CheckerBoard.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(5, 7), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(2, 0), ' ');
+        testBoard.placePiece(new BoardPosition(5, 7), ' ');
         testBoard.placePiece(new BoardPosition(4, 6), CheckerBoard.PLAYER_TWO);
 
         BoardPosition targetPos = new BoardPosition(4,0);
@@ -358,8 +358,8 @@ public class TestCheckerBoard {
         //Moving pieces to match the initial state
        ICheckerBoard testBoard = makeBoard();
 
-        testBoard.placePiece(new BoardPosition(2,0), CheckerBoard.EMPTY_POS);
-        testBoard.placePiece(new BoardPosition(5,1), CheckerBoard.EMPTY_POS);
+        testBoard.placePiece(new BoardPosition(2,0), ' ');
+        testBoard.placePiece(new BoardPosition(5,1), ' ');
 
         BoardPosition startPosx = new BoardPosition(3,1);
         BoardPosition startPoso = new BoardPosition(4,0);
@@ -420,7 +420,7 @@ public class TestCheckerBoard {
         for (int row = 0; row < testBoard.getRowNum(); row++) {
             for (int col = 0; col < testBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    testBoard.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -444,7 +444,7 @@ public class TestCheckerBoard {
         for (int row = 0; row < testBoard.getRowNum(); row++) {
             for (int col = 0; col < testBoard.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    testBoard.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    testBoard.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -471,7 +471,7 @@ public class TestCheckerBoard {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
                     BoardPosition coordinate = new BoardPosition(row,col);
-                    board.placePiece(coordinate, CheckerBoard.EMPTY_POS);
+                    board.placePiece(coordinate, ' ');
                 }
             }
         }
@@ -507,7 +507,7 @@ public class TestCheckerBoard {
         for (int row = 0; row < board.getRowNum(); row++) {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    board.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -538,7 +538,7 @@ public class TestCheckerBoard {
         for (int row = 0; row < board.getRowNum(); row++) {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    board.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
@@ -575,7 +575,7 @@ public class TestCheckerBoard {
         for (int row = 0; row < board.getRowNum(); row++) {
             for (int col = 0; col < board.getColNum(); col++) {
                 if ((row + col) % 2 == 0) {
-                    board.placePiece(new BoardPosition(row, col), CheckerBoard.EMPTY_POS);
+                    board.placePiece(new BoardPosition(row, col), ' ');
                 }
             }
         }
