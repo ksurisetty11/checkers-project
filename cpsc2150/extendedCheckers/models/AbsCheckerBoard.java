@@ -10,6 +10,12 @@ public abstract class AbsCheckerBoard implements ICheckerBoard {
     public static final char EMPTY_POS = ' ';
     public static final char BLACK_TILE = '*';
 
+    /**
+     * Converts a board into a string representation
+     *
+     * @return A string representing a board in its current state
+     * @post toString = [string that represents a board]
+     */
     @Override
     public String toString() {
         {
