@@ -80,6 +80,9 @@ public class CheckersFE {
                 }
             }
         }
+        //Monitoring if the user choose the memory efficient board in order
+        //to correctly reset the board at the end of the game
+        boolean choseMemBoard = false;
 
         ICheckerBoard gameBoard = new CheckerBoard(defaultSize);
         if (gameType.equals("F") || gameType.equals("f")) {
@@ -87,6 +90,7 @@ public class CheckersFE {
         }
         //If players want a memory efficient game, gameBoard changes it's dynamic type to CheckerBoardMem
         if(gameType.equals("M") || gameType.equals("m")){
+            choseMemBoard = true;
             gameBoard = new CheckerBoardMem(sizeOfBoard);
         }
 
@@ -123,7 +127,12 @@ public class CheckersFE {
 
                 if (keepPlaying)
                 {
-                    gameBoard = new CheckerBoard(sizeOfBoard);
+                    if (!choseMemBoard) {
+                        gameBoard = new CheckerBoard(sizeOfBoard);
+                    }
+                    else {
+                        gameBoard = new CheckerBoardMem(sizeOfBoard);
+                    }
                     whichPlayer = playerOne;
                 }
                 else
