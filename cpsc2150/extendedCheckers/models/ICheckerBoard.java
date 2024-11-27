@@ -218,7 +218,7 @@ public interface ICheckerBoard {
     }
 
     /**
-     * This function turns dir into a corresponding board position
+     * Turns dir into a corresponding board position
      *
      * @param dir a direction that a piece can be moved
      * @return a board representation of the corresponding direction
