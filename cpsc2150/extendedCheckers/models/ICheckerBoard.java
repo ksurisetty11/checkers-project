@@ -163,8 +163,9 @@ public interface ICheckerBoard {
 
         BoardPosition jumpedPos = new BoardPosition(startingPos.getRow() + direction.getRow(),
                                  startingPos.getColumn() + direction.getColumn());
-        BoardPosition moveTo = new BoardPosition(startingPos.getRow() + (2 * direction.getRow()),
-                              startingPos.getColumn() + (2 * direction.getColumn()));
+        int timesToMove = 2;
+        BoardPosition moveTo = new BoardPosition(startingPos.getRow() + (timesToMove * direction.getRow()),
+                              startingPos.getColumn() + (timesToMove * direction.getColumn()));
 
         char jumpedPiece = whatsAtPos(jumpedPos);
 
