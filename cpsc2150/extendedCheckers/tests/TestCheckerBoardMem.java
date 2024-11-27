@@ -1,7 +1,6 @@
 package cpsc2150.extendedCheckers.tests;
 
 import cpsc2150.extendedCheckers.models.BoardPosition;
-import cpsc2150.extendedCheckers.models.CheckerBoard;
 import cpsc2150.extendedCheckers.models.CheckerBoardMem;
 import cpsc2150.extendedCheckers.models.ICheckerBoard;
 import cpsc2150.extendedCheckers.util.DirectionEnum;

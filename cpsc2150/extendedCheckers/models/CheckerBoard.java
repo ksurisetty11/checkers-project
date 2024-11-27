@@ -10,7 +10,7 @@ public class CheckerBoard extends AbsCheckerBoard
 {
     /**
      * @invariant [board dimensions are even and minimum 8 x 8] AND [all boards indices have either
-     * PLAYER_ONE, PLAYER_TWO, crowned PLAYER_ONE, crowned PLAYER_TWO, '*', OR ' ']
+     * PLAYER_ONE, PLAYER_TWO, crowned PLAYER_ONE, crowned PLAYER_TWO, '*', OR ' ' ]
      * AND 0 <= pieceCount.get(PLAYER_ONE) <= [(Total rows / 2 - 1) * (Total columns / 2)]
      * AND 0 <= pieceCount.get(PLAYER_TWO) <= [(Total rows / 2 - 1) * (Total columns / 2)]
      * AND [viableDirections has PLAYER_ONE map to an ArrayList with SE and SW AND PLAYER_ONE map
@@ -35,8 +35,8 @@ public class CheckerBoard extends AbsCheckerBoard
 
     /**
      * A HashMap, with a Character key and an ArrayList of DirectionEnums value, used to map a player (and its king
-     * representation) to the directions that player can viably move in. A non-kinged (standard) piece can only move
-     * in the diagonal directions away from its starting position. A kinged piece can move in the same directions the
+     * representation) to the directions that player can viably move in. A non-crowned (standard) piece can only move
+     * in the diagonal directions away from its starting position. A crowned piece can move in the same directions the
      * standard piece can move in plus the opposite directions the standard piece can move in.
      */
     private HashMap<Character, ArrayList<DirectionEnum>> viableDirections;
@@ -61,7 +61,6 @@ public class CheckerBoard extends AbsCheckerBoard
     public CheckerBoard(int aDimensions) {
         ROW_NUM = aDimensions;
         COL_NUM = aDimensions;
-        int startingCount = (((ROW_NUM / 2) - 1) * (COL_NUM / 2));
 
         //Adding all pieces, blank spaces, and black tiles into the board
         board = new char[ROW_NUM][COL_NUM];
