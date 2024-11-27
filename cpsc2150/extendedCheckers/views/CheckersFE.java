@@ -22,6 +22,10 @@ public class CheckersFE {
     public static final Scanner readInInput = new Scanner(System.in);
 
     /**
+     * The board sizes that hte player is allowed to choose from
+     */
+    public static final int[] allowedBoardSizes = {8, 10, 12, 14, 16};
+    /**
      * Both the players pieces. Both players start with the default chars 'x' and 'o'
      */
     private static char playerOne = 'x';
@@ -61,20 +65,24 @@ public class CheckersFE {
         //Scanner sizeOfBoard = new Scanner(System.in);
         boolean validBoardSize = false;
         int sizeOfBoard = 0;
+        int defaultSize = allowedBoardSizes[0];
         while (!validBoardSize) {
             System.out.println("How big should the Board be? It can be 8x8, 10x10, 12x12, 14x14, or 16x16." +
                     "Enter one number:");
             if (readInInput.hasNextInt()) {
                 sizeOfBoard = readInInput.nextInt();
 
-                if (sizeOfBoard == 8 || sizeOfBoard == 10 || sizeOfBoard == 12 ||
-                        sizeOfBoard == 14 || sizeOfBoard == 16) {
-                    validBoardSize = true;
+                //Checking if the size chosen by the user is within the allowed range
+                for (int i: allowedBoardSizes) {
+                    if (sizeOfBoard == i) {
+                        validBoardSize = true;
+                        break;
+                    }
                 }
             }
         }
 
-        ICheckerBoard gameBoard = new CheckerBoard(8);
+        ICheckerBoard gameBoard = new CheckerBoard(defaultSize);
         if (gameType.equals("F") || gameType.equals("f")) {
             gameBoard = new CheckerBoard(sizeOfBoard);
         }
@@ -189,11 +197,14 @@ public class CheckersFE {
                 else if (availableMoves.containsKey(direction) && availableMoves.get(direction) != ' ') {
                     BoardPosition testDirection = getDirection(direction);
 
+                    int timesPiecesMove = 2;
                     //Locate the piece being jumped and the ending position after the jump
                     BoardPosition jumpedPiecePosition = new BoardPosition(startPos.getRow()
                             + testDirection.getRow(), startPos.getColumn() + testDirection.getColumn());
                     BoardPosition endedJumpPosition = new BoardPosition(startPos.getRow() +
-                            (2 * testDirection.getRow()), startPos.getColumn() + (2 * testDirection.getColumn()));
+                            (timesPiecesMove * testDirection.getRow()), startPos.getColumn() +
+                            (timesPiecesMove * testDirection.getColumn()));
+
                     boolean withinRowBoundaries = ((endedJumpPosition.getRow() >= 0)
                             && (endedJumpPosition.getRow() < gameBoard.getRowNum()));
                     boolean withinColBoundaries = ((endedJumpPosition.getColumn()
