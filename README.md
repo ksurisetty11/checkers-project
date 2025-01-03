@@ -15,6 +15,6 @@ Laura Castro Rosales - lcastro58
 
 This project should be runnable with JDK17 and Junit 4.
 
-You should create your own README. This is the place to give a low-level rundown of what your program does and how someone who isn't a developer could go about using it. If you have any known bugs in the program, this is also a good place to mention those things before your TAs and I find them while grading.
+This project was developed as part of the CPSC 2150 Software Development course and focused on creating a command-line version of the classic game of checkers. The game allows two players, represented by 'x' and 'o', to take turns moving their pieces across an 8x8 board. Players can capture their opponent's pieces and promote their own when they reach the opposite end of the board. The game board updates dynamically to reflect each player's actions at the end of every round, ensuring an engaging and interactive gameplay experience.
 
 --------------------------------------------------------
